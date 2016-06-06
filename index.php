@@ -18,6 +18,7 @@ endif;
 		<title>Couch Inn</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/jumbotron.css" rel="stylesheet">
+		<link href="css/carousel.css" rel="stylesheet">
 		<link href="css/sticky-footer-navbar.css" rel="stylesheet">
 		<link href="css/font-awesome.min.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
@@ -55,6 +56,12 @@ endif;
 				</form>
 			</div>
 
+			<!-- RESULT -->
+			<div class="container marketing">
+				<div id="couches-list" class="row"></div>
+				<div id="arrows" class="row"></div>
+			</div>
+
 		<!-- FOOTER -->
 		<?php include 'resources/templates/footer.php' ?>
 
@@ -63,6 +70,7 @@ endif;
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="resources/library/jquery.min.js"></script>
 		<script src="resources/library/bootstrap.min.js"></script>
+		<script src="js/couches-list.js"></script>
 		<script src="resources/library/moment-with-locales.min.js"></script>
 		<script src="resources/library/validator.min.js"></script>
 		<script src="js/fix-modal-navbar.js"></script>
