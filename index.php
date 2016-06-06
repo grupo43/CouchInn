@@ -4,6 +4,10 @@ require_once 'resources/library/functions.php';
 session_start();
 if (isset($_SESSION['user'])):
 	$email = $_SESSION['user'];
+	$isPremium = isPremium($email);
+	if (!$isPremium):
+		include 'resources/templates/premium_payment.php';
+	endif;
 endif;
 ?>
 
@@ -78,6 +82,9 @@ endif;
 		if (!isset($email)):
 			echo '<script src="js/login.js"></script>';
 			echo '<script src="js/signup.js"></script>';
+		else:
+			echo '<script src="resources/library/jquery.payment.min.js"></script>';
+			echo '<script src="js/payment.js"></script>';
 		endif;
 		?>
 	</body>

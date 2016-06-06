@@ -5,4 +5,11 @@ function connect ($host = 'localhost', $user = 'root', $pass = '', $db_name = 'c
         die('Connect Error (' . $db->connect_errno . ') '. $db->connect_error);
     return $db;
 }
+
+function isPremium ($user) {
+	$db = connect();
+	$sql = "SELECT * FROM payment
+			WHERE user = '$user'";
+	return $db->query($sql)->num_rows;
+}
 ?>
