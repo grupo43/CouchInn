@@ -1,3 +1,12 @@
+<?php
+require_once 'resources/library/functions.php';
+
+session_start();
+if (isset($_SESSION['user'])):
+	$email = $_SESSION['user'];
+endif;
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 	<head>
@@ -23,7 +32,11 @@
 		<?php include 'resources/templates/header_user.php'; ?>
 
 		<!-- JUMBOTRON -->
-		<?php include 'resources/templates/jumbotron.php'; ?>
+		<?php
+		if (!isset($email)):
+			include 'resources/templates/jumbotron.php';
+		endif;
+		?>
 
 		<!-- COUCHES -->
 		<h1 class="text-center text-capitalize">Encuentre dónde hospedarse</h1>
@@ -49,5 +62,10 @@
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="resources/library/jquery.min.js"></script>
 		<script src="resources/library/bootstrap.min.js"></script>
+		<?php
+		if (!isset($email)):
+			echo '<script src="js/login.js"></script>';
+		endif;
+		?>
 	</body>
 </html>

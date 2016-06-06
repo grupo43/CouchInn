@@ -3,6 +3,12 @@
 		<div class="navbar-header">
 			<a href="/"><img src="img/logo/couchinn_logo_tiny.png" /></a>
 		</div>
-		<?php include 'resources/templates/navbar_user.php'; ?>
+		<?php
+		if (isset($email)):
+			include 'resources/templates/navbar_logged_user.php';
+		else:
+			include 'resources/templates/navbar_user.php';
+		endif;
+		?>
 	</div>
 </nav>

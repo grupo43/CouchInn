@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (isset($_SESSION['admin'])):
+    header("Location: admin.php");
+endif;
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 	<head>
@@ -30,5 +37,6 @@
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="resources/library/jquery.min.js"></script>
 		<script src="resources/library/bootstrap.min.js"></script>
+		<script src="js/login.js"></script>
 	</body>
 </html>
