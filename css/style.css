@@ -1,0 +1,40 @@
+body {
+	font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+hr {
+	border-color: #879b36;
+	border-width: 3px;
+	max-width: 50px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.col-centered {
+	float: none;
+	margin: 0 auto;
+}
+
+.jumbotron {
+	background-color: #879b36;
+	color: white;
+}
+
+.error {
+	color: #a94442;
+}
+
+.tooltip-error + .tooltip.bottom > .tooltip-inner {
+	background-color: #cc0000;
+}
+
+.tooltip-error + .tooltip.bottom > .tooltip-arrow {
+	border-bottom-color: #cc0000;
+}
