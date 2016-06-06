@@ -19,6 +19,7 @@ endif;
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/jumbotron.css" rel="stylesheet">
 		<link href="css/sticky-footer-navbar.css" rel="stylesheet">
+		<link href="css/font-awesome.min.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
@@ -62,9 +63,13 @@ endif;
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="resources/library/jquery.min.js"></script>
 		<script src="resources/library/bootstrap.min.js"></script>
+		<script src="resources/library/moment-with-locales.min.js"></script>
+		<script src="resources/library/validator.min.js"></script>
+		<script src="js/fix-modal-navbar.js"></script>
 		<?php
 		if (!isset($email)):
 			echo '<script src="js/login.js"></script>';
+			echo '<script src="js/signup.js"></script>';
 		endif;
 		?>
 	</body>
