@@ -16,8 +16,8 @@ $arrows.on("click", "a", function($e) {
 	$.getJSON('/resources/library/get_couches.php', {
 		page: pageNumber
 	}, function(html) {
-		$couchesList.fadeTo(200, 0, function() {
-			$(this).html(html.couches).fadeTo(400, 1);
+		$couchesList.fadeOut(200, function() {
+			$(this).html(html.couches).fadeIn(200);
 		});
 		$arrows.html(html.arrows);
 	});

@@ -16,7 +16,11 @@ $couchesHtml = "";
 for ($i = 0; $i < count($couches); $i++):
 	$couch = $couches[$i];
 	if (isPremium($couch['owner'])):
-		$img = 'img/couches/'.$couch['picture'];
+		$sql = "SELECT picture1, picture2, picture3
+				FROM couch_picture
+				WHERE couch_id = '".$couch['id']."'";
+		$pictures = $db->query($sql)->fetch_row();
+		$img = 'img/couches/'.$pictures[0];
 	else:
 		$img = 'img/logo/couch.png';
 	endif;

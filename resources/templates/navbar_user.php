@@ -1,13 +1,14 @@
-<div id="navbar" class="navbar-collapse collapse">
-	<form id="login-form" class="navbar-form navbar-right" action="/resources/library/login.php" method="post">
-		<div class="form-group">
-			<input name="input-email" type="email" placeholder="Email" class="form-control" required>
-		</div>
-		<div class="form-group">
-			<input name="input-password" type="password" placeholder="Contraseña" class="form-control" required>
-		</div>
-		<input name="access-level" value="user" type="hidden" />
-		<button type="submit" class="tooltip-error btn btn-success" data-toggle="tooltip" data-placement="bottom" data-trigger="manual" title="Usuario o contraseña incorrecta">Iniciar sesión</button>
-	</form>
-</div>
-<div class="tooltip" ></div>
+<ul class="nav navbar-nav navbar-right">
+	<li class="dropdown">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php if ($isPremium): echo '<i class="fa fa-star"></i> '; endif; echo $email ?> <span class="caret"></span></a>
+		<ul class="dropdown-menu">
+			<li><a href="#">Perfil</a></li>
+			<li><a href="#">Mensajes</a></li>
+			<?php if (!$isPremium): ?>
+				<li><a href="" data-toggle="modal" data-target="#premium-modal">Ser Premium <i class="fa fa-star"></i></a></li>
+			<?php endif; ?>
+			<li role="separator" class="divider"></li>
+			<li><a href="resources/library/logout.php?user">Cerrar sesión</a></li>
+		</ul>
+	</li>
+</ul>

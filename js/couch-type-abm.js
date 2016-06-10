@@ -1,5 +1,6 @@
-var $form = $('#couch-types-abm');
+var $form = $('#couch-type-abm-form');
 var $selectedCouchType = $('select[name="couch-type-name"]');
+var $feedback = $('#feedback');
 
 var getCouchTypes = function() {
 	$.getJSON('/resources/library/get_couch_types.php', function(result) {
@@ -19,17 +20,18 @@ var resetInput = function() {
 }
 
 var abm = function(mode) {
-	var $feedback = $('#abm-result');
 	var formData = $form.serialize();
 	formData += mode;
 	$.post('/resources/library/couch_type_abm.php', formData, function(result) {
-		$feedback.hide();
-		if (result.success) {
-			$feedback.removeClass('alert-danger').addClass('alert-success');
-		} else {
-			$feedback.removeClass('alert-success').addClass('alert-danger');
-		}
-		$feedback.html(result.message).fadeIn();
+		$feedback.fadeOut(function() {
+			if (result.success) {
+				$(this).removeClass('alert-danger').addClass('alert-success');
+			}
+			else {
+				$(this).removeClass('alert-success').addClass('alert-danger');
+			}
+			$(this).html(result.message).fadeIn();
+		});
 		getCouchTypes();
 	});
 	resetInput();
@@ -42,8 +44,11 @@ $('input[name="edit"]').click(function($e) {
 	var trimmedValue = $.trim($newValueInput.val());
 	$newValueInput.val(trimmedValue);
 	if (trimmedValue == $selectedCouchType.val()) {
-		$('#abm-result').hide().removeClass('alert-success').addClass('alert-danger').html('Debe introducir un valor<br />distinto al seleccionado').fadeIn();
-	} else {
+		$feedback.fadeOut(function() {
+			$(this).removeClass('alert-success').addClass('alert-danger').html('Debe introducir un valor<br />distinto al seleccionado').fadeIn();
+		});
+	}
+	else {
 		abm('&edit');
 	}
 });
@@ -62,7 +67,8 @@ $selectedCouchType.click(function() {
 		$('input[name="new-value"]').val($(this).val());
 		$('input[name="delete"]').prop('disabled', false);
 		$('input[name="edit"]').val('Modificar').prop('disabled', false);
-	} else {
+	}
+	else {
 		resetInput();
 	}
 });
