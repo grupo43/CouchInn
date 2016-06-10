@@ -54,7 +54,8 @@ $('.modal').on('shown.bs.modal', function() {
 	$form.validator('destroy').validator();
 });
 
-$('#login-modal').on("click", "#signup-suggest", function() {
+/* HIDE LOGIN MODAL */
+$('#login-modal').on("click", "a", function() {
 	$('#login-modal').modal('hide');
 	var newUser = $('#login-modal').find('input[name="input-email"]').val();
 	$('#input-email').val(newUser);

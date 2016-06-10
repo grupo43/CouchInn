@@ -1,6 +1,6 @@
 var $form = $('#couch-type-abm-form');
 var $selectedCouchType = $('select[name="couch-type-name"]');
-var $feedback = $('#feedback');
+var $feedback = $('.feedback');
 
 var getCouchTypes = function() {
 	$.getJSON('/resources/library/get_couch_types.php', function(result) {

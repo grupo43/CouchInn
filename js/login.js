@@ -1,5 +1,5 @@
 var $form = $('#login-form');
-var $feedback = $('#feedback');
+var $feedback = $('.feedback');
 
 $form.submit(function($e) {
 	$e.preventDefault();

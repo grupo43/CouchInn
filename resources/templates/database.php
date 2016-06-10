@@ -13,7 +13,7 @@
 					<input class="text-lowercase" name="new-value" placeholder="Nuevo valor" type="text" />
 					<input class="btn btn-default" name="edit" value="Agregar" type="submit" disabled="disabled" />
 				</div>
-				<div id="feedback" class="alert text-center" role="alert" hidden="hidden"></div>
+				<div class="feedback alert text-center" role="alert" hidden="hidden"></div>
 			</form>
 		</div>
 	</div>

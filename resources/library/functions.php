@@ -1,9 +1,9 @@
 <?php
 function connect ($host = 'localhost', $user = 'root', $pass = '', $db_name = 'couchinn') {
-    $db = new mysqli($host,$user,$pass,$db_name);
-    if ($db->connect_error)
-        die('Connect Error (' . $db->connect_errno . ') '. $db->connect_error);
-    return $db;
+	$db = new mysqli($host,$user,$pass,$db_name);
+	if ($db->connect_error)
+		die('Connect Error (' . $db->connect_errno . ') '. $db->connect_error);
+	return $db;
 }
 
 function isPremium ($user) {
@@ -11,5 +11,15 @@ function isPremium ($user) {
 	$sql = "SELECT * FROM payment
 			WHERE user = '$user'";
 	return $db->query($sql)->num_rows;
+}
+
+function generateToken ($email) {
+	$salt = '7KH6jrq4j8GK4tCXVSUwzhDAefYUCCrs';
+	return md5($salt.$email);
+}
+
+function isValidToken ($email, $token) {
+	$salt = '7KH6jrq4j8GK4tCXVSUwzhDAefYUCCrs';
+	return md5($salt.$email) == $token;
 }
 ?>
