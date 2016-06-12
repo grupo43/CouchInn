@@ -5,13 +5,21 @@
 		</div>
 		<div class="panel-body">
 			<form class="form" id="couch-type-abm-form" action="/resources/library/couch_type_abm.php" method="post">
-				<div class="form-group">
-					<select name="couch-type-name" autocomplete="off"></select>
-					<input class="confirm btn btn-danger" name="delete" value="Eliminar" type="submit" disabled="disabled" />
+				<div class="form-group row">
+					<div class="col-md-8">
+						<select class="form-control" name="couch-type-name" autocomplete="off"></select>
+					</div>
+					<div class="col-md-4">
+						<input class="confirm btn btn-danger" name="delete" value="Eliminar" type="submit" disabled="disabled" />
+					</div>
 				</div>
-				<div class="form-group">
-					<input class="text-lowercase" name="new-value" placeholder="Nuevo valor" type="text" />
-					<input class="btn btn-default" name="edit" value="Agregar" type="submit" disabled="disabled" />
+				<div class="form-group row">
+					<div class="col-md-8">
+						<input class="form-control text-lowercase" name="new-value" placeholder="Nuevo valor" type="text" />
+					</div>
+					<div class="col-md-4">
+						<input class="btn btn-default" name="edit" value="Agregar" type="submit" disabled="disabled" />
+					</div>
 				</div>
 				<div class="feedback alert text-center" role="alert" hidden="hidden"></div>
 			</form>
