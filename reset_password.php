@@ -63,6 +63,6 @@ endif;
 
 	<script src="resources/library/jquery.min.js"></script>
 	<script src="resources/library/validator.min.js"></script>
-	<script src="js/reset_password.js"></script>
+	<script src="js/reset-password.js"></script>
 </body>
 </html>

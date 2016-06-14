@@ -5,7 +5,7 @@ require_once 'paginator.php';
 $db = connect();
 
 $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
-$sql =	"SELECT * FROM couch
+$sql = "SELECT * FROM couch
 		ORDER BY publication_date DESC";
 
 $Paginator = new Paginator($db, $sql);
@@ -29,8 +29,8 @@ endfor;
 
 $arrowsHtml = $Paginator->getArrows();
 
-$result = ["couches" => $couchesHtml, "arrows" => $arrowsHtml];
+$return = ["couches" => $couchesHtml, "arrows" => $arrowsHtml];
 
 header('Content-type: application/json; charset=utf-8');
-echo json_encode($result);
+echo json_encode($return);
 ?>

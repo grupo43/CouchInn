@@ -15,18 +15,18 @@ $form.validator({
 				}
 				date = moment(month + "-" + year, pattern);
 				if (!date.isValid()) {
-					$('#date-error').text("Fecha inválida, vuelva a intentarlo.").show();
+					$('.date-error').text("Fecha inválida, vuelva a intentarlo.").show();
 				}
 				else if (date.diff(moment(), 'month', true) < 0) {
-					$('#date-error').text("Lo sentimos, la tarjeta está vencida.").show();
+					$('.date-error').text("Lo sentimos, la tarjeta está vencida.").show();
 				}
 				else {
-					$('#date-error').hide();
+					$('.date-error').hide();
 					result = true;
 				}
 			}
 			else {
-				$('#date-error').text("Fecha inválida, vuelva a intentarlo.").show();
+				$('.date-error').text("Fecha inválida, vuelva a intentarlo.").show();
 			}
 			return result;
 		},

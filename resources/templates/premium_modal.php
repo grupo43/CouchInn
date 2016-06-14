@@ -23,7 +23,7 @@
 					<div class="form-group col-md-6">
 						<label for="cardExpiry">Fecha de caducidad</label>
 						<input class="form-control" name="cardExpiry" placeholder="MM / AA" data-validateexp="validateexp" required />
-						<div id="date-error" class="error" hidden="hidden"></div>
+						<div class="error date-error" hidden="hidden"></div>
 					</div>
 					<div class="form-group col-md-6">
 						<label for="cardCVC">Código CVC</label>
