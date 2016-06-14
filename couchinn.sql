@@ -17,13 +17,6 @@ CREATE TABLE `admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
-DROP TABLE IF EXISTS `city`;
-CREATE TABLE `city` (
-  `name` varchar(255) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
-
 DROP TABLE IF EXISTS `couch`;
 CREATE TABLE `couch` (
   `id` tinyint(2) unsigned NOT NULL AUTO_INCREMENT,
@@ -31,17 +24,16 @@ CREATE TABLE `couch` (
   `title` varchar(64) COLLATE utf8_bin NOT NULL,
   `description` tinytext COLLATE utf8_bin NOT NULL,
   `type` varchar(32) COLLATE utf8_bin NOT NULL,
-  `city` varchar(255) COLLATE utf8_bin NOT NULL,
+  `place_id` varchar(255) COLLATE utf8_bin NOT NULL,
   `capacity` tinyint(2) unsigned NOT NULL,
   `publication_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `enabled` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`),
   KEY `owner` (`owner`),
   KEY `type` (`type`),
-  KEY `city` (`city`),
+  KEY `place_id` (`place_id`),
   CONSTRAINT `couch_ibfk_2` FOREIGN KEY (`type`) REFERENCES `couch_type` (`name`) ON UPDATE CASCADE,
-  CONSTRAINT `couch_ibfk_4` FOREIGN KEY (`owner`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `couch_ibfk_5` FOREIGN KEY (`city`) REFERENCES `city` (`name`) ON UPDATE CASCADE
+  CONSTRAINT `couch_ibfk_4` FOREIGN KEY (`owner`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
@@ -51,8 +43,8 @@ CREATE TABLE `couch_picture` (
   `picture1` varchar(255) COLLATE utf8_bin NOT NULL,
   `picture2` varchar(255) COLLATE utf8_bin NOT NULL,
   `picture3` varchar(255) COLLATE utf8_bin NOT NULL,
-  KEY `couch_id` (`couch_id`),
-  CONSTRAINT `couch_picture_ibfk_1` FOREIGN KEY (`couch_id`) REFERENCES `couch` (`id`) ON DELETE CASCADE
+  PRIMARY KEY (`couch_id`),
+  CONSTRAINT `couch_picture_ibfk_2` FOREIGN KEY (`couch_id`) REFERENCES `couch` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
@@ -66,11 +58,13 @@ CREATE TABLE `couch_type` (
 
 DROP TABLE IF EXISTS `payment`;
 CREATE TABLE `payment` (
+  `id` tinyint(2) unsigned NOT NULL AUTO_INCREMENT,
   `user` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `amount` decimal(10,2) unsigned NOT NULL DEFAULT '150.00',
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  KEY `user` (`user`),
-  CONSTRAINT `payment_ibfk_3` FOREIGN KEY (`user`) REFERENCES `user` (`email`) ON DELETE SET NULL ON UPDATE CASCADE
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user` (`user`),
+  CONSTRAINT `payment_ibfk_2` FOREIGN KEY (`user`) REFERENCES `user` (`email`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
@@ -85,4 +79,4 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
--- 2016-06-10 05:20:04
+-- 2016-06-14 22:34:28

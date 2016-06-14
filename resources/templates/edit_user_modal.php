@@ -1,22 +1,31 @@
-<div id="signup-modal" class="modal fade" tabindex="-1" role="dialog">
+<?php
+$db = connect();
+$sql = "SELECT * FROM user
+		WHERE email = '$email'";
+$user = $db->query($sql)->fetch_assoc();
+$name			= $user['name'];
+$phoneNumber	= $user['phone_number'];
+?>
+
+<div id="edit-user-modal" class="modal fade" tabindex="-1" role="dialog">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
-			<form id="signup-form" class="form-with-date form-horizontal" data-toggle="validator" role="form" action="/resources/library/signup.php" method="post">
+			<form id="edit-user-form" class="form-with-date form-horizontal" data-toggle="validator" role="form" action="/resources/library/edit_user.php" method="post">
 				<div class="modal-header">
 					<button class="close" type="button" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Registrarse</h4>
+					<h4 class="modal-title">Modificar datos</h4>
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
 						<label for="input-name" class="col-md-4 control-label">Nombre</label>
 						<div class="col-md-8">
-							<input type="text" name="input-name" id="input-name" class="form-control" required />
+							<input type="text" name="input-name" id="input-name" class="form-control" placeholder="<?php echo $name ?>" />
 						</div>
 					</div>
 					<div class="form-group has-feedback">
 						<label for="input-email" class="col-md-4 control-label">Email</label>
 						<div class="col-md-8">
-							<input type="email" name="input-email" id="input-email" class="form-control" data-remote="/resources/library/validate_email.php" required />
+							<input type="email" name="input-email" id="input-email" class="form-control" placeholder="<?php echo $email ?>" data-remote="/resources/library/validate_email.php" />
 							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 							<div class="help-block with-errors"></div>
 						</div>
@@ -24,13 +33,13 @@
 					<div class="form-group" id="input-birthdate">
 						<label class="col-md-4 control-label">Fecha de nacimiento</label>
 						<div class="col-md-8">
-							<select name="input-day" required>
+							<select name="input-day">
 								<option value="" class="text-center">- Día -</option>
 							</select>
-							<select name="input-month" required>
+							<select name="input-month">
 								<option value="" class="text-center">- Mes -</option>
 							</select>
-							<select name="input-year" required>
+							<select name="input-year">
 								<option value="" class="text-center">- Año -</option>
 							</select>
 							<div class="error date-error" hidden="hidden"></div>
@@ -39,21 +48,21 @@
 					<div class="form-group">
 						<label for="input-phone" class="col-md-4 control-label">Número de teléfono</label>
 						<div class="col-md-8">
-							<input type="text" name="input-phone" id="input-phone" class="form-control" data-minlength="10" pattern="[0-9]+" required />
+							<input type="text" name="input-phone" id="input-phone" class="form-control" placeholder="<?php echo $phoneNumber ?>" data-minlength="10" pattern="[0-9]+" />
 							<div class="help-block">Sólo números (al menos 10)</div>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="input-password" class="col-md-4 control-label">Contraseña</label>
+						<label for="input-password" class="col-md-4 control-label">Contraseña nueva</label>
 						<div class="col-md-8">
-							<input name="input-password" type="password" data-minlength="6" class="form-control" id="input-password" required />
+							<input name="input-password" type="password" data-minlength="6" class="form-control" id="input-password" />
 							<div class="help-block">Al menos 6 caracteres</div>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="input-password-confirm" class="col-md-4 control-label">Confirme la contraseña</label>
 						<div class="col-md-8">
-							<input type="password" class="form-control" id="input-password-confirm" data-match="#input-password" data-match-error="Las contraseñas no coinciden" required />
+							<input type="password" class="form-control" id="input-password-confirm" data-match="#input-password" data-match-error="Las contraseñas no coinciden" />
 							<div class="help-block with-errors"></div>
 						</div>
 					</div>

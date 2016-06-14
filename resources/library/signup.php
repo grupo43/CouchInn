@@ -3,20 +3,13 @@ if (!$_SERVER["REQUEST_METHOD"] == "POST"):
 	header ('Location: /');
 endif;
 
-require_once 'functions.php';
-$db = connect();
-
-$email = $db->real_escape_string($_POST['input-email']);
-$password = $db->real_escape_string($_POST['input-password']);
-$name = $db->real_escape_string($_POST['input-name']);
-$birthDate = $_POST['input-year']."-".$_POST['input-month']."-".$_POST['input-day'];
-$phoneNumber = $db->real_escape_string($_POST['input-phone']);
+require 'edit-signup_input.php';
 
 $sql = "INSERT INTO user (email, password, name, birthdate, phone_number)
-		VALUES ('$email', PASSWORD('$password'), '$name', '$birthDate', '$phoneNumber')";
+		VALUES ('$inputEmail', PASSWORD('$inputPassword'), '$inputName', '$birthDate', '$phoneNumber')";
 if ($db->query($sql)):
 	session_start();
-	$_SESSION['user'] = $email;
+	$_SESSION['user'] = $inputEmail;
 	header('Location: /');
 endif;
 ?>

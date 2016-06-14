@@ -3,6 +3,7 @@
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php if ($isPremium): echo '<i class="fa fa-star"></i> '; endif; echo $email ?> <span class="caret"></span></a>
 		<ul class="dropdown-menu">
 			<li><a href="#">Perfil</a></li>
+			<li><a href="#" data-toggle="modal" data-target="#edit-user-modal">Modificar datos</a></li>
 			<li><a href="#">Mensajes</a></li>
 			<?php if (!$isPremium): ?>
 				<li><a href="" data-toggle="modal" data-target="#premium-modal">Ser Premium <i class="fa fa-star"></i></a></li>

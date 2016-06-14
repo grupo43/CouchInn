@@ -7,9 +7,10 @@ if (isset($_SESSION['user'])):
 	if (!$isPremium):
 		include 'resources/templates/premium_modal.php';
 	endif;
+	include 'resources/templates/edit_user_modal.php';
 else:
-	include 'resources/templates/signup_modal.php';
 	include 'resources/templates/login_modal.php';
+	include 'resources/templates/signup_modal.php';
 	include 'resources/templates/send_token_modal.php';
 endif;
 ?>
@@ -78,15 +79,15 @@ endif;
 	<script src="resources/library/moment-with-locales.min.js"></script>
 	<script src="resources/library/validator.min.js"></script>
 	<script src="js/fix-modal-navbar.js"></script>
-	<?php
-	if (!isset($email)):
-		echo '<script src="js/login.js"></script>';
-		echo '<script src="js/signup.js"></script>';
-		echo '<script src="js/send_token.js"></script>';
-	else:
-		echo '<script src="resources/library/jquery.payment.min.js"></script>';
-		echo '<script src="js/premium.js"></script>';
-	endif;
-	?>
+	<script src="js/form-with-date.js"></script>
+	<?php if (!isset($_SESSION['user'])): ?>
+		<script src="js/login.js"></script>
+		<script src="js/signup.js"></script>
+		<script src="js/send-token.js"></script>
+	<?php else: ?>
+		<script src="js/edit-user-data.js"></script>
+		<script src="resources/library/jquery.payment.min.js"></script>
+		<script src="js/premium.js"></script>
+	<?php endif; ?>
 </body>
 </html>

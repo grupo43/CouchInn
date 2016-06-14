@@ -4,7 +4,7 @@
 			<a href="/"><img alt="Couch Inn logo" src="img/logo/couchinn_logo_tiny.png" /></a>
 		</div>
 		<?php
-		if (isset($email)):
+		if (isset($_SESSION['user'])):
 			include 'resources/templates/navbar_user.php';
 		else:
 		?>
