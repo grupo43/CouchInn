@@ -2,6 +2,7 @@
 session_start();
 if (!isset ($_SESSION['admin'])):
 	header("Location: admin_login.php");
+	exit;
 else:
 	$email = $_SESSION['admin'];
 endif;

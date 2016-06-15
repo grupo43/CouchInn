@@ -1,6 +1,7 @@
 <?php
 if (!isset ($_GET['email']) || !isset ($_GET['token'])):
 	header('Location: /');
+	exit;
 endif;
 $email = $_GET['email'];
 $token = $_GET['token'];
