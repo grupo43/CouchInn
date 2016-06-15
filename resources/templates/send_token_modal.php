@@ -10,7 +10,7 @@
 					<div class="container-fluid">
 						<div class="row">
 							<div class="form-group">
-								<input name="email" type="email" class="form-control" placeholder="Email" required autofocus />
+								<input name="input-email" type="email" class="form-control" placeholder="Email" required autofocus />
 							</div>
 						</div>
 						<div class="row">
