@@ -5,8 +5,12 @@ require_once 'paginator.php';
 $db = connect();
 
 $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
-$sql = "SELECT * FROM couch
-		ORDER BY publication_date DESC";
+$sql = '
+	SELECT *
+	FROM couch
+	WHERE enabled = 1
+	ORDER BY publication_date DESC
+';
 
 $Paginator = new Paginator($db, $sql);
 $results = $Paginator->getData($page);
@@ -16,15 +20,22 @@ $couchesHtml = "";
 for ($i = 0; $i < count($couches); $i++):
 	$couch = $couches[$i];
 	if (isPremium($couch['owner'])):
-		$sql = "SELECT picture1, picture2, picture3
-				FROM couch_picture
-				WHERE couch_id = '".$couch['id']."'";
-		$pictures = $db->query($sql)->fetch_row();
-		$img = 'img/couches/'.$pictures[0];
+		$sql = "
+			SELECT picture1
+			FROM couch_picture
+			WHERE couch_id = {$couch['id']}
+		";
+		$mainPicture = $db->query($sql)->fetch_row()[0];
+		$img = 'img/couches/'.$mainPicture;
 	else:
 		$img = 'img/logo/couch.png';
 	endif;
-	$couchesHtml .= '<div class="couch col-lg-4"><img class="img-circle" src="'.$img.'" alt="Couch image" width="140" height="140"><h3>'.substr($couch['title'], 0, 24).'..</h3><p>'.substr($couch['description'], 0, 128).'..</p><p><a class="btn btn-default" href="#" role="button">Ver detalles &raquo;</a></p></div>';
+	$couchesHtml .= '<div class="couch col-lg-4">';
+	$couchesHtml .= '<img class="img-circle" src="' . $img . '" alt="Couch image" width="140" height="140" />'; // Add picture
+	$couchesHtml .= '<h3>' . substr($couch['title'], 0, 24) . '..</h3>'; // Couch title
+	$couchesHtml .= '<p>' . substr($couch['description'], 0, 128) . '..</p>'; // Description
+	$couchesHtml .= '<p><a class="btn btn-default" href="couch.php?id=' . $couch['id'] . '" role="button">Ver detalles &raquo;</a></p>'; // Details button
+	$couchesHtml .= '</div>';
 endfor;
 
 $arrowsHtml = $Paginator->getArrows();
