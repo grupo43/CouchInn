@@ -1,3 +1,4 @@
+/* SUGGESTION METHOD */
 var $feedback = $('.feedback');
 $feedback.on("click", "#send-token", function($e) {
 	$e.preventDefault();
@@ -19,6 +20,7 @@ $feedback.on("click", "#send-token", function($e) {
 	});
 });
 
+/* QUESTION METHOD */
 $('#send-token-form').submit(function($e) {
 	$e.preventDefault();
 	email = $(this).find('input[name="input-email"]').val();

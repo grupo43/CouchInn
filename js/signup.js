@@ -3,7 +3,7 @@ var $inputBirthdate = $('#input-birthdate');
 var $inputDay		= $inputBirthdate.find('select[name="input-day"]');
 var $inputMonth		= $inputBirthdate.find('select[name="input-month"]');
 var $inputYear		= $inputBirthdate.find('select[name="input-year"]');
-	
+
 var option = "";
 
 /* GENERATE DATES */

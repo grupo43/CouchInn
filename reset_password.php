@@ -3,9 +3,11 @@ if (!isset ($_GET['email']) || !isset ($_GET['token'])):
 	header('Location: /');
 	exit;
 endif;
-$email = $_GET['email'];
-$token = $_GET['token'];
 require_once 'resources/library/functions.php';
+$db = connect();
+
+$email = $db->real_escape_string($_GET['email']);
+$token = $db->real_escape_string($_GET['token']);
 if (!isValidToken ($email, $token)):
 	echo '<script>';
 		echo 'alert("Lo sentimos, el token es inválido o ha expirado");';
@@ -47,7 +49,7 @@ endif;
 						<div class="help-block with-errors"></div>
 					</div>
 					<div class="col-md-4">
-						<input name="input-passwordconfirm" class="form-control" type="password" data-match="#input-newpassword" data-match-error="Las contraseñas no coinciden" placeholder="Confirmar contraseña" required />
+						<input name="input-password-confirm" class="form-control" type="password" data-match="#input-newpassword" data-match-error="Las contraseñas no coinciden" placeholder="Confirmar contraseña" required />
 						<div class="help-block with-errors"></div>
 					</div>
 				</div>

@@ -2,9 +2,11 @@
 require_once 'functions.php';
 $db = connect();
 
-$sql = "SELECT * FROM couch_type
-		WHERE enabled = 1
-		ORDER BY name";
+$sql = "
+	SELECT * FROM couch_type
+	WHERE enabled = 1
+	ORDER BY name
+";
 $result = $db->query($sql);
 $couch_types = array();
 while ($row = $result->fetch_assoc()):

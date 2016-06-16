@@ -9,15 +9,19 @@ $db = connect();
 
 if (isset ($_POST['edit'])):
 	$newValue = strtolower($db->real_escape_string($_POST['new-value']));
-	$sql = "SELECT * FROM couch_type
-			WHERE name = '$newValue'";
+	$sql = "
+		SELECT * FROM couch_type
+		WHERE name = '$newValue'
+	";
 	$result = $db->query($sql);
 
 	// ADD
 	if (empty ($_POST['couch-type-name'])):
-		$sql = "INSERT INTO couch_type (name)
-				VALUES ('$newValue')
-				ON DUPLICATE KEY UPDATE enabled=1";
+		$sql = "
+			INSERT INTO couch_type (name)
+			VALUES ('$newValue')
+			ON DUPLICATE KEY UPDATE enabled=1
+		";
 		if ($result->num_rows):
 			if ($result->fetch_assoc()['enabled']):
 				$sql = "";
@@ -41,9 +45,11 @@ if (isset ($_POST['edit'])):
 	// EDIT
 	else:
 		$couchTypeName = $_POST['couch-type-name'];
-		$sql = "UPDATE couch_type
-				SET name = '$newValue'
-				WHERE name = '$couchTypeName'";
+		$sql = "
+			UPDATE couch_type
+			SET name = '$newValue'
+			WHERE name = '$couchTypeName'
+		";
 		if ($result->num_rows):
 			$sql = "";
 			if ($result->fetch_assoc()['enabled']):
@@ -68,20 +74,26 @@ if (isset ($_POST['edit'])):
 // DELETE
 elseif (isset ($_POST['delete'])):
 	$couchTypeName = $_POST['couch-type-name'];
-	$sql = "SELECT * FROM couch
-			WHERE type = '$couchTypeName'";
+	$sql = "
+		SELECT * FROM couch
+		WHERE type = '$couchTypeName'
+	";
 	$result = $db->query($sql);
 	if (!$result->num_rows):
-		$sql = "DELETE FROM couch_type
-				WHERE name = '$couchTypeName'";
+		$sql = "
+			DELETE FROM couch_type
+			WHERE name = '$couchTypeName'
+		";
 		$return = [
 			"success" => true,
 			"message" => "Valor '$couchTypeName' eliminado satisfactoriamente"
 		];
 	else:
-		$sql = "UPDATE couch_type
-				SET enabled = 0
-				WHERE name = '$couchTypeName'";
+		$sql = "
+			UPDATE couch_type
+			SET enabled = 0
+			WHERE name = '$couchTypeName'
+		";
 		$return = [
 			"success" => true,
 			"message" => "Valor '$couchTypeName' deshabilitado<br />(existen couches de este tipo)"

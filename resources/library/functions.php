@@ -8,8 +8,10 @@ function connect ($host = 'localhost', $user = 'root', $pass = '', $db_name = 'c
 
 function isPremium ($user) {
 	$db = connect();
-	$sql = "SELECT * FROM payment
-			WHERE user = '$user'";
+	$sql = "
+		SELECT * FROM payment
+		WHERE user = '$user'
+	";
 	return $db->query($sql)->num_rows;
 }
 

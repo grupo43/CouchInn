@@ -5,7 +5,6 @@ if ($_SERVER["REQUEST_METHOD"] != "POST"):
 endif;
 
 session_start();
-$email = $_SESSION['user'];
 
 require 'edit-signup_input.php';
 
@@ -24,7 +23,11 @@ if (!empty($phoneNumber)):
 endif;
 $newData .= " birthdate = '$birthDate'";
 
-$sql = "UPDATE user SET" . $newData . " WHERE email = '$email'";
+$sql = "
+	UPDATE user
+	SET{$newData}
+	WHERE email = '{$_SESSION['user']}'
+";
 if ($db->query($sql)):
 	if (!empty($inputEmail)):
 		$_SESSION['user'] = $inputEmail;

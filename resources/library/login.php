@@ -9,8 +9,10 @@ $db = connect();
 $email = $db->real_escape_string($_POST['input-email']);
 $password = $db->real_escape_string($_POST['input-password']);
 $accessLevel = $db->real_escape_string($_POST['access-level']);
-$sql = "SELECT * FROM $accessLevel
-		WHERE email = '$email'";
+$sql = "
+	SELECT * FROM $accessLevel
+	WHERE email = '$email'
+";
 if (!$db->query($sql)->num_rows):
 	if ($accessLevel == 'user'):
 		$result = ["success" => false, "message" => 'Lo sentimos, no existe una cuenta asociada a esa dirección de email.</br >Si lo desea, puede <a id="signup-suggest" href="javascript:void(0)" data-toggle="modal" data-target="#signup-modal">registrarse</a>.'];

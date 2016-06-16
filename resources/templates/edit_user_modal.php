@@ -1,7 +1,8 @@
 <?php
 $db = connect();
 $sql = "
-	SELECT * FROM user
+	SELECT *
+	FROM user
 	WHERE email = '{$_SESSION['user']}'
 ";
 $user = $db->query($sql)->fetch_assoc();

@@ -7,11 +7,12 @@ endif;
 require_once 'functions.php';
 $db = connect();
 session_start();
-$email = $_SESSION['user'];
 
 if (mt_rand(0,1)):
-	$sql = "INSERT INTO payment (user)
-			VALUES ('$email')";
+	$sql = "
+			INSERT INTO payment (user)
+			VALUES ('{$_SESSION['user']}')
+	";
 	if ($db->query($sql)):
 		$result = ["success" => true];
 	else:

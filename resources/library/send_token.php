@@ -7,8 +7,10 @@ endif;
 require_once 'functions.php';
 $db = connect();
 $email = $db->real_escape_string($_GET['input-email']);
-$sql = "SELECT name FROM user
-		WHERE email = '$email'";
+$sql = "
+	SELECT name FROM user
+	WHERE email = '$email'
+";
 $userName = $db->query($sql)->fetch_row()[0];
 $token = generateToken($email);
 $subject = "Couch Inn - Restablecimiento de contraseña";

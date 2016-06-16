@@ -10,9 +10,11 @@ $email = $db->real_escape_string($_POST['input-email']);
 $newPassword = $db->real_escape_string($_POST['input-newpassword']);
 $token = $db->real_escape_string($_POST['token']);
 if (isValidToken($email, $token)):
-	$sql = "UPDATE user
-			SET password = PASSWORD('$newPassword')
-			WHERE email = '$email'";
+	$sql = "
+		UPDATE user
+		SET password = PASSWORD('$newPassword')
+		WHERE email = '$email'
+	";
 	if ($db->query($sql)):
 		$return = ["success" => true, "message" => "Contraseña actualizada satisfactoriamente."];
 	endif;

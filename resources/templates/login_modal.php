@@ -21,7 +21,7 @@
 					</div>
 					<div class="form-group">
 						<div class="col-md-8 pull-right">
-							<a id="password-forgot-question" class="small" href="javascript:void(" data-toggle="modal" data-target="#reset-password-modal">¿Olvidaste tu contraseña?</a>
+							<a id="password-forgot-question" class="small" href="javascript:void()" data-toggle="modal" data-target="#reset-password-modal">¿Olvidaste tu contraseña?</a>
 						</div>
 					</div>
 					<input id="access-level" name="access-level" value="user" hidden />

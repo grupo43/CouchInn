@@ -1,3 +1,9 @@
+moment.locale('es');
+var $inputBirthdate = $('#input-birthdate');
+var $inputDay		= $inputBirthdate.find('select[name="input-day"]');
+var $inputMonth		= $inputBirthdate.find('select[name="input-month"]');
+var $inputYear		= $inputBirthdate.find('select[name="input-year"]');
+
 /* GET AND LOAD CURRENT USER BIRTHDATE */
 $.getJSON('/resources/library/get_birthdate.php', function(birthdate) {
 	var option = "";
@@ -43,11 +49,6 @@ $('#edit-user-form').submit(function ($e) {
 	$e.preventDefault();
 
 	/* VALIDATE BIRTHDATE */
-	moment.locale('es');
-	var $inputBirthdate = $('#input-birthdate');
-	var $inputDay		= $inputBirthdate.find('select[name="input-day"]');
-	var $inputMonth		= $inputBirthdate.find('select[name="input-month"]');
-	var $inputYear		= $inputBirthdate.find('select[name="input-year"]');
 	var validDate = isDateValid($inputDay.val(), $inputMonth.val(), $inputYear.val());
 	if (!validDate.success) {
 		$('#input-birthdate').addClass('has-error');

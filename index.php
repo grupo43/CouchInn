@@ -1,19 +1,4 @@
-<?php
-session_start();
-if (isset($_SESSION['user'])):
-	require_once 'resources/library/functions.php';
-	$email = $_SESSION['user'];
-	$isPremium = isPremium($email);
-	if (!$isPremium):
-		include 'resources/templates/premium_modal.php';
-	endif;
-	include 'resources/templates/edit_user_modal.php';
-else:
-	include 'resources/templates/login_modal.php';
-	include 'resources/templates/signup_modal.php';
-	include 'resources/templates/send_token_modal.php';
-endif;
-?>
+<?php include 'resources/templates/includes.php'; ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -37,7 +22,7 @@ endif;
 	<?php include 'resources/templates/navbar.php'; ?>
 
 	<!-- JUMBOTRON -->
-	<?php if (!isset($email)): ?>
+	<?php if (!isset($_SESSION['user'])): ?>
 	<div class="jumbotron">
 		<div class="container">
 			<h1 class="text-center">¡Alójese con nativos<br />y conozca viajeros!</h1>
