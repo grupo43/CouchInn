@@ -24,7 +24,7 @@ $('.modal').on('hidden.bs.modal', function() {
 });
 
 /* HIDE LOGIN MODAL */
-$('#login-modal').on("click", "a", function() {
+$('#login-modal').on("click", "#signup-suggest", function() {
 	$('#login-modal').modal('hide');
 	var newUser = $('#login-modal').find('input[name="input-email"]').val();
 	$('#input-email').val(newUser);

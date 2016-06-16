@@ -13,7 +13,7 @@ $sql = "SELECT * FROM $accessLevel
 		WHERE email = '$email'";
 if (!$db->query($sql)->num_rows):
 	if ($accessLevel == 'user'):
-		$result = ["success" => false, "message" => 'Lo sentimos, no existe una cuenta asociada a esa dirección de email.</br >Si lo desea, puede <a href="javascript:void(0)" data-toggle="modal" data-target="#signup-modal">registrarse</a>.'];
+		$result = ["success" => false, "message" => 'Lo sentimos, no existe una cuenta asociada a esa dirección de email.</br >Si lo desea, puede <a id="signup-suggest" href="javascript:void(0)" data-toggle="modal" data-target="#signup-modal">registrarse</a>.'];
 	elseif ($accessLevel == 'admin'):
 		$result = ["success" => false, "message" => 'Email o contraseña incorrecta. Verifique los datos ingresados y vuelva a intentarlo.'];
 	endif;
@@ -33,7 +33,7 @@ else:
 		endif;
 		$message .= 'Verifique los datos ingresados y vuelva a intentarlo.';
 		if ($accessLevel == 'user'):
-			$message .= '<br />Si lo desea, puede <a id="reset-password" href="resources/library/send_token.php?email='.$email.'">restablecer su contraseña</a>.';
+			$message .= '<br />Si lo desea, puede <a id="send-token" href="resources/library/send_token.php?input-email='.$email.'">restablecer su contraseña</a>.';
 		endif;
 		$result = ["success" => false, "message" => $message];
 	endif;

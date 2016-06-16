@@ -1,5 +1,5 @@
 var $feedback = $('.feedback');
-$feedback.on("click", "#reset-password", function($e) {
+$feedback.on("click", "#send-token", function($e) {
 	$e.preventDefault();
 	$feedback.fadeOut(function() {
 		$(this).removeClass('alert-danger').addClass('alert-info').html('Enviando email  <i class="fa fa-spinner fa-pulse"></i>').fadeTo(400, 1);
@@ -41,9 +41,4 @@ $('#send-token-form').submit(function($e) {
 			});
 		});
 	});
-});
-
-/* HIDE LOGIN MODAL */
-$('#login-modal').on("click", "a", function() {
-	$('#login-modal').modal('hide');
 });
