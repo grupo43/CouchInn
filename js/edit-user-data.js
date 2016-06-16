@@ -71,7 +71,7 @@ $('#edit-user-form').submit(function ($e) {
 
 			if (!$('#edit-user-form').find('.has-error').length && !$('#edit-user-form').find('input[type=submit]').hasClass('disabled')) {
 				$.post('/resources/library/edit_user.php', $('#edit-user-form').serialize());
-				$('#edit-user-modal').modal('hide');
+				location.reload();
 			}
 		});
 	}
