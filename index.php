@@ -75,12 +75,12 @@ endif;
 
 	<script src="resources/library/jquery.min.js"></script>
 	<script src="resources/library/bootstrap.min.js"></script>
+	<script src="resources/library/functions.js"></script>
 	<script src="resources/library/script.js"></script>
-	<script src="js/couches-list.js"></script>
 	<script src="resources/library/moment-with-locales.min.js"></script>
 	<script src="resources/library/validator.min.js"></script>
+	<script src="js/couches-list.js"></script>
 	<script src="js/fix-modal-navbar.js"></script>
-	<script src="js/form-with-date.js"></script>
 	<?php if (!isset($_SESSION['user'])): ?>
 		<script src="js/login.js"></script>
 		<script src="js/signup.js"></script>

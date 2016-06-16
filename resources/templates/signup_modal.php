@@ -1,7 +1,7 @@
 <div id="signup-modal" class="modal fade" tabindex="-1" role="dialog">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
-			<form id="signup-form" class="form-with-date form-horizontal" data-toggle="validator" role="form" action="/resources/library/signup.php" method="post">
+			<form id="signup-form" class="form-horizontal" data-toggle="validator" role="form" action="/resources/library/signup.php" method="post">
 				<div class="modal-header">
 					<button class="close" type="button" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
 					<h4 class="modal-title">Registrarse</h4>

@@ -1,22 +1,42 @@
+moment.locale('es');
+var $inputBirthdate = $('#input-birthdate');
+var $inputDay		= $inputBirthdate.find('select[name="input-day"]');
+var $inputMonth		= $inputBirthdate.find('select[name="input-month"]');
+var $inputYear		= $inputBirthdate.find('select[name="input-year"]');
+	
 var option = "";
 
-/* DAY */
-for (var i = 1; i <= 31; i++) {
-	option = '<option value="' + i + '">' + i + '</option>';
-	$inputDay.append(option);
-}
+/* GENERATE DATES */
+	/* DAY */
+	for (var i = 1; i <= 31; i++) {
+		option = '<option value="' + i + '">' + i + '</option>';
+		$inputDay.append(option);
+	}
 
-/* MONTH */
-$.each(moment.months(), function(index, value) {
-	option = '<option value="' + (index + 1) + '">' + value + '</option>';
-	$inputMonth.append(option);
+	/* MONTH */
+	$.each(moment.months(), function(index, value) {
+		option = '<option value="' + (index + 1) + '">' + value + '</option>';
+		$inputMonth.append(option);
+	});
+
+	/* YEAR */
+	for (var j = moment().year(); j >= moment().year() - 111; j--) {
+		option = '<option value="' + j + '">' + j + '</option>';
+		$inputYear.append(option);
+	}
+
+$('#signup-form').submit(function ($e) {
+	/* VALIDATE BIRTHDATE */
+	var validDate = isDateValid($inputDay.val(), $inputMonth.val(), $inputYear.val());
+	if (!validDate.success) {
+		$('#input-birthdate').addClass('has-error');
+		$('.date-error').text(validDate.error).show();
+		$e.preventDefault();
+	} else {
+		$('#input-birthdate').removeClass('has-error');
+		$('.date-error').hide();
+	}
 });
-
-/* YEAR */
-for (var j = moment().year(); j >= moment().year() - 111; j--) {
-	option = '<option value="' + j + '">' + j + '</option>';
-	$inputYear.append(option);
-}
 
 /* HIDE LOGIN MODAL */
 $('#login-modal').on("click", "#signup-suggest", function() {

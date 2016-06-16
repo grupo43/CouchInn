@@ -1,7 +1,9 @@
 <?php
 $db = connect();
-$sql = "SELECT * FROM user
-		WHERE email = '$email'";
+$sql = "
+	SELECT * FROM user
+	WHERE email = '{$_SESSION['user']}'
+";
 $user = $db->query($sql)->fetch_assoc();
 $name			= $user['name'];
 $phoneNumber	= $user['phone_number'];
@@ -10,7 +12,7 @@ $phoneNumber	= $user['phone_number'];
 <div id="edit-user-modal" class="modal fade" tabindex="-1" role="dialog">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
-			<form id="edit-user-form" class="form-with-date form-horizontal" data-toggle="validator" role="form" action="/resources/library/edit_user.php" method="post">
+			<form id="edit-user-form" class="form-horizontal" data-toggle="validator" role="form" action="/resources/library/edit_user.php" method="post">
 				<div class="modal-header">
 					<button class="close" type="button" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
 					<h4 class="modal-title">Modificar datos</h4>
@@ -25,7 +27,7 @@ $phoneNumber	= $user['phone_number'];
 					<div class="form-group has-feedback">
 						<label for="input-email" class="col-md-4 control-label">Email</label>
 						<div class="col-md-8">
-							<input type="email" name="input-email" id="input-email" class="form-control" placeholder="<?php echo $email ?>" data-remote="/resources/library/validate_email.php" />
+							<input type="email" name="input-email" id="input-email" class="form-control" placeholder="<?php echo $_SESSION['user'] ?>" data-remote="/resources/library/validate_email.php" />
 							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 							<div class="help-block with-errors"></div>
 						</div>
@@ -52,15 +54,20 @@ $phoneNumber	= $user['phone_number'];
 							<div class="help-block">Sólo números (al menos 10)</div>
 						</div>
 					</div>
+					<div class="form-group" id="input-current-password-group">
+						<label for="input-current-password" class="col-md-4 control-label">Contraseña actual</label>
+						<div class="col-md-8">
+							<input name="input-current-password" type="password" class="form-control" id="input-current-password" required />
+							<div class="help-block with-errors"></div>
+						</div>
+					</div>
 					<div class="form-group">
-						<label for="input-password" class="col-md-4 control-label">Contraseña nueva</label>
+						<label for="input-password" class="col-md-4 control-label">Nueva contraseña</label>
 						<div class="col-md-8">
 							<input name="input-password" type="password" data-minlength="6" class="form-control" id="input-password" />
 							<div class="help-block">Al menos 6 caracteres</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label for="input-password-confirm" class="col-md-4 control-label">Confirme la contraseña</label>
+						<label for="input-password" class="col-md-4 control-label">Confirme la contraseña</label>
 						<div class="col-md-8">
 							<input type="password" class="form-control" id="input-password-confirm" data-match="#input-password" data-match-error="Las contraseñas no coinciden" />
 							<div class="help-block with-errors"></div>
