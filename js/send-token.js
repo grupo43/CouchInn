@@ -42,3 +42,8 @@ $('#send-token-form').submit(function($e) {
 		});
 	});
 });
+
+/* HIDE LOGIN MODAL */
+$('#login-modal').on("click", "#password-forgot-question", function() {
+	$('#login-modal').modal('hide');
+});
