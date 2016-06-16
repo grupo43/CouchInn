@@ -75,6 +75,7 @@ endif;
 
 	<script src="resources/library/jquery.min.js"></script>
 	<script src="resources/library/bootstrap.min.js"></script>
+	<script src="resources/library/script.js"></script>
 	<script src="js/couches-list.js"></script>
 	<script src="resources/library/moment-with-locales.min.js"></script>
 	<script src="resources/library/validator.min.js"></script>

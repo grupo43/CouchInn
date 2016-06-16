@@ -18,11 +18,6 @@ for (var j = moment().year(); j >= moment().year() - 111; j--) {
 	$inputYear.append(option);
 }
 
-/* RESET FORM WHEN MODAL GETS HIDDEN */
-$('.modal').on('hidden.bs.modal', function() {
-	$('#signup-form').trigger('reset');
-});
-
 /* HIDE LOGIN MODAL */
 $('#login-modal').on("click", "#signup-suggest", function() {
 	$('#login-modal').modal('hide');

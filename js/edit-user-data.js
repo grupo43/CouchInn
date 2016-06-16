@@ -44,11 +44,6 @@ $('#input-password').keyup(function() {
 	}
 })
 
-/* RESET FORM WHEN MODAL GETS HIDDEN */
-$('.modal').on('hidden.bs.modal', function() {
-	$('#edit-user-form').trigger('reset');
-});
-
 /* VALIDATOR MODAL WORKAROUND */
 $('.modal').on('shown.bs.modal', function() {
 	$('#edit-user-form').validator('destroy').validator();
