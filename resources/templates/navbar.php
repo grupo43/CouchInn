@@ -9,8 +9,8 @@
 		else:
 		?>
 			<div class="navbar-form navbar-right">
-				<button class="btn btn-success" data-toggle="modal" data-target="#login-modal">Iniciar sesión</button>
-				<button class="btn btn-primary" data-toggle="modal" data-target="#signup-modal">Registrarse</button>
+				<button class="btn btn-primary" data-toggle="modal" data-target="#login-modal">Iniciar sesión</button>
+				<button class="btn btn-default" data-toggle="modal" data-target="#signup-modal">Registrarse</button>
 			</div>
 		<?php endif; ?>
 	</div>

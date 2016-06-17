@@ -30,11 +30,3 @@ h6 {
 .error {
 	color: #a94442;
 }
-
-.tooltip-error + .tooltip.bottom > .tooltip-inner {
-	background-color: #cc0000;
-}
-
-.tooltip-error + .tooltip.bottom > .tooltip-arrow {
-	border-bottom-color: #cc0000;
-}
