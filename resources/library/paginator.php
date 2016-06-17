@@ -43,10 +43,10 @@ class Paginator {
 
 		$html = '<nav><ul class="pager">';
 		if ($this->page != 1) {
-			$html .= '<li class="previous"><a href="" name="'.($this->page - 1).'"><span aria-hidden="true">&larr;</span> Más nuevos</a></li>';
+			$html .= '<li class="previous"><a href="" name="'.($this->page - 1).'"><span aria-hidden="true">&larr;</span> <strong>Más nuevos</strong></a></li>';
 		}
 		if ($this->page != $last) {
-			$html .= '<li class="next"><a href="" name="'.($this->page + 1).'">Anteriores <span aria-hidden="true">&rarr;</span></a></li>';
+			$html .= '<li class="next"><a href="" name="'.($this->page + 1).'"><strong>Anteriores</strong> <span aria-hidden="true">&rarr;</span></a></li>';
 		}
  		$html .= '</ul></nav>';
 

@@ -34,7 +34,7 @@ for ($i = 0; $i < count($couches); $i++):
 	$couchesHtml .= '<img class="img-circle" src="' . $img . '" alt="Couch image" width="140" height="140" />'; // Add picture
 	$couchesHtml .= '<h3>' . substr($couch['title'], 0, 24) . '..</h3>'; // Couch title
 	$couchesHtml .= '<p>' . substr($couch['description'], 0, 90) . '..</p>'; // Description
-	$couchesHtml .= '<p><a class="btn btn-default" href="couch.php?id=' . $couch['id'] . '" role="button">Ver detalles &raquo;</a></p>'; // Details button
+	$couchesHtml .= '<p><a class="btn btn-primary" href="couch.php?id=' . $couch['id'] . '" role="button">Ver detalles &raquo;</a></p>'; // Details button
 	$couchesHtml .= '</div>';
 endfor;
 
