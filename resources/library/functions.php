@@ -24,4 +24,35 @@ function isValidToken ($email, $token) {
 	$salt = '7KH6jrq4j8GK4tCXVSUwzhDAefYUCCrs';
 	return md5($salt.$email) == $token;
 }
+
+function getPictures ($couchID) {
+	$db = connect();
+	$sql = "
+		SELECT picture1, picture2, picture3
+		FROM couch_picture
+		WHERE couch_id = '$couchID'
+	";
+	return $db->query($sql)->fetch_row();
+}
+
+function isOwner ($user, $couchID) {
+	$db = connect();
+	$sql = "
+		SELECT enabled
+		FROM couch
+		WHERE id = '$couchID' AND owner = '{$_SESSION['user']}'
+	";
+	return $db->query($sql)->num_rows;
+}
+
+function isCouchEnabled ($couchID) {
+	$db = connect();
+	$sql = "
+		SELECT enabled
+		FROM couch
+		WHERE id = '$couchID'
+	";
+	return $db->query($sql)->fetch_assoc()['enabled'];
+}
+
 ?>
