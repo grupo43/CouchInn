@@ -39,7 +39,7 @@
 
 		<!-- SEARCH -->
 		<div class="container-fluid">
-			<form class="col-md-6 col-centered" role="search">
+			<form class="col-md-offset-3 col-md-6" role="search">
 				<div class="input-group">
 					<input type="text" class="form-control" placeholder="¿A dónde quieres ir?" name="q" disabled>
 					<div class="input-group-btn">

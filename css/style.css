@@ -17,11 +17,6 @@ h6 {
 	font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 
-.col-centered {
-	float: none;
-	margin: 0 auto;
-}
-
 .jumbotron {
 	background-color: #879b36;
 	color: white;
