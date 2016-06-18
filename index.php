@@ -1,4 +1,7 @@
-<?php include 'resources/templates/includes.php'; ?>
+<?php
+	require_once 'resources/library/functions.php';
+	include 'resources/templates/includes.php';
+?>
 
 <!DOCTYPE html>
 <html lang="es">

@@ -1,6 +1,5 @@
 <?php
 session_start();
-require_once 'resources/library/functions.php';
 if (isset($_SESSION['user'])):
 	$isPremium = isPremium($_SESSION['user']);
 	if (!$isPremium):
