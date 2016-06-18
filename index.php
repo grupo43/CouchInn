@@ -72,8 +72,10 @@
 		<script src="js/send-token.js"></script>
 	<?php else: ?>
 		<script src="js/edit-user-data.js"></script>
-		<script src="resources/library/jquery.payment.min.js"></script>
-		<script src="js/premium.js"></script>
+		<?php if (!$isPremium): ?>
+			<script src="resources/library/jquery.payment.min.js"></script>
+			<script src="js/premium.js"></script>
+		<?php endif; ?>
 	<?php endif; ?>
 </body>
 </html>
