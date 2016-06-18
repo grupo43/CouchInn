@@ -13,7 +13,7 @@ if (isOwner($_SESSION['user'], $couchID)): // If the couch exists and the logged
 	$sql = "
 		SELECT couch_id
 		FROM reservation
-		WHERE accepted = 0
+		WHERE couch_id = '$couchID'
 	";
 	if ($db->query($sql)->num_rows): // There are pending reservations
 		$sql = "

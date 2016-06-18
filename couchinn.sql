@@ -9,6 +9,15 @@ DROP DATABASE IF EXISTS `couchinn`;
 CREATE DATABASE `couchinn` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin */;
 USE `couchinn`;
 
+DROP TABLE IF EXISTS `accepted_reservation`;
+CREATE TABLE `accepted_reservation` (
+  `reservation_id` tinyint(2) unsigned NOT NULL,
+  `date` datetime NOT NULL,
+  KEY `reservation_id` (`reservation_id`),
+  CONSTRAINT `accepted_reservation_ibfk_1` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin` (
   `email` varchar(255) COLLATE utf8_bin NOT NULL,
@@ -68,6 +77,21 @@ CREATE TABLE `payment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
+DROP TABLE IF EXISTS `reservation`;
+CREATE TABLE `reservation` (
+  `id` tinyint(2) unsigned NOT NULL,
+  `couch_id` tinyint(2) unsigned NOT NULL,
+  `user` varchar(255) COLLATE utf8_bin NOT NULL,
+  `from` date NOT NULL,
+  `to` date NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `couch_id` (`couch_id`),
+  KEY `user` (`user`),
+  CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`couch_id`) REFERENCES `couch` (`id`),
+  CONSTRAINT `reservation_ibfk_3` FOREIGN KEY (`user`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `email` varchar(255) COLLATE utf8_bin NOT NULL,
@@ -79,4 +103,4 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
--- 2016-06-18 05:32:12
+-- 2016-06-18 18:47:11
