@@ -26,7 +26,7 @@ for ($i = 0; $i < count($couches); $i++):
 			WHERE couch_id = {$couch['id']}
 		";
 		$mainPicture = $db->query($sql)->fetch_row()[0];
-		$img = 'img/couches/'.$mainPicture;
+		$img = "img/couches/couch{$couch['id']}/".$mainPicture;
 	else:
 		$img = 'img/logo/couch.png';
 	endif;

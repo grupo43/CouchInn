@@ -28,11 +28,22 @@ function isValidToken ($email, $token) {
 function getPictures ($couchID) {
 	$db = connect();
 	$sql = "
-		SELECT picture1, picture2, picture3
+		SELECT picture1
+			, picture2
+			, picture3
+			, picture4
+			, picture5
 		FROM couch_picture
 		WHERE couch_id = '$couchID'
 	";
-	return $db->query($sql)->fetch_row();
+	$result = $db->query($sql)->fetch_row();
+	$pictures = array();
+	foreach ($result as $picture):
+		if ($picture): // If pictureX was loaded
+			$pictures[] = $picture;
+		endif;
+	endforeach;
+	return $pictures;
 }
 
 function isOwner ($user, $couchID) {

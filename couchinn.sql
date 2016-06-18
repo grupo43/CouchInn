@@ -43,8 +43,10 @@ CREATE TABLE `couch_picture` (
   `picture1` varchar(255) COLLATE utf8_bin NOT NULL,
   `picture2` varchar(255) COLLATE utf8_bin NOT NULL,
   `picture3` varchar(255) COLLATE utf8_bin NOT NULL,
+  `picture4` varchar(255) COLLATE utf8_bin NOT NULL,
+  `picture5` varchar(255) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`couch_id`),
-  CONSTRAINT `couch_picture_ibfk_2` FOREIGN KEY (`couch_id`) REFERENCES `couch` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `couch_picture_ibfk_3` FOREIGN KEY (`couch_id`) REFERENCES `couch` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
@@ -58,11 +60,9 @@ CREATE TABLE `couch_type` (
 
 DROP TABLE IF EXISTS `payment`;
 CREATE TABLE `payment` (
-  `id` tinyint(2) unsigned NOT NULL AUTO_INCREMENT,
   `user` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `amount` decimal(10,2) unsigned NOT NULL DEFAULT '150.00',
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
   UNIQUE KEY `user` (`user`),
   CONSTRAINT `payment_ibfk_2` FOREIGN KEY (`user`) REFERENCES `user` (`email`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -79,4 +79,4 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
--- 2016-06-14 22:34:28
+-- 2016-06-18 05:32:12
