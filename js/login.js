@@ -7,12 +7,7 @@ $form.submit(function($e) {
 	$.post('/resources/library/login.php', formData, function(result) {
 		if (result.success) {
 			var accessLevel = $('#access-level').val();
-			if (accessLevel == 'admin') {
-				window.location.replace('admin.php');
-			}
-			else if (accessLevel == 'user') {
-				window.location.replace('/');
-			}
+			window.location.reload();
 		}
 		else {
 			$feedback.fadeOut(function() {
