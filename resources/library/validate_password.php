@@ -18,6 +18,6 @@ if ($db->query($sql)->num_rows):
 else:
 	$result = ["success" => false];
 endif;
-header('Content-type: application/json; charset=utf-8');
+header('Content-type: application/json');
 echo json_encode($result);
 ?>

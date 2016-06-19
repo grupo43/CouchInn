@@ -21,6 +21,6 @@ if (isValidToken($email, $token)):
 else:
 	$return = ["success" => false, "message" => "Lo sentimos, el token es inválido o ha expirado."];
 endif;
-header('Content-type: application/json; charset=utf-8');
+header('Content-type: application/json');
 echo json_encode($return);
 ?>

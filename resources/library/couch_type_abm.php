@@ -109,6 +109,6 @@ if ($sql && !$db->query($sql)):
 endif;
 
 
-header('Content-type: application/json; charset=utf-8');
+header('Content-type: application/json');
 echo json_encode($return);
 ?>

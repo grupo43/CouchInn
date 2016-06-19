@@ -10,8 +10,8 @@ session_start();
 
 if (mt_rand(0,1)):
 	$sql = "
-			INSERT INTO payment (user)
-			VALUES ('{$_SESSION['user']}')
+		INSERT INTO payment (user)
+		VALUES ('{$_SESSION['user']}')
 	";
 	if ($db->query($sql)):
 		$result = ["success" => true];
@@ -28,6 +28,6 @@ else:
 	];
 endif;
 
-header('Content-type: application/json; charset=utf-8');
+header('Content-type: application/json');
 echo json_encode($result);
 ?>

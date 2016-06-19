@@ -12,6 +12,6 @@ $couch_types = array();
 while ($row = $result->fetch_assoc()):
 	$couch_types[] = $row['name'];
 endwhile;
-header('Content-type: application/json; charset=utf-8');
+header('Content-type: application/json');
 echo json_encode($couch_types);
 ?>

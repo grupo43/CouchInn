@@ -40,6 +40,6 @@ else:
 		$result = ["success" => false, "message" => $message];
 	endif;
 endif;
-header('Content-type: application/json; charset=utf-8');
+header('Content-type: application/json');
 echo json_encode($result);
 ?>

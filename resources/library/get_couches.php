@@ -42,6 +42,6 @@ $arrowsHtml = $Paginator->getArrows();
 
 $return = ["couches" => $couchesHtml, "arrows" => $arrowsHtml];
 
-header('Content-type: application/json; charset=utf-8');
+header('Content-type: application/json');
 echo json_encode($return);
 ?>

@@ -17,6 +17,6 @@ if ($result = $db->query($sql)):
 		"year"	=> $year
 	];
 endif;
-header('Content-type: application/json; charset=utf-8');
+header('Content-type: application/json');
 echo json_encode($return);
 ?>

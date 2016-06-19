@@ -33,6 +33,6 @@ if (mail($email, $subject, $body, $headers)):
 else:
 	$return = ["success" => false, "message" => "Lo sentimos, ha ocurrido un error. Vuelva a intentarlo más tarde."];
 endif;
-header('Content-type: application/json; charset=utf-8');
+header('Content-type: application/json');
 echo json_encode($return);
 ?>
