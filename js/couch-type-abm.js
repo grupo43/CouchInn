@@ -11,7 +11,6 @@ var getCouchTypes = function() {
 		});
 	});
 };
-getCouchTypes(); // Update couch type values
 
 var resetInput = function() {
 	$('input[name="new-value"]').val('');

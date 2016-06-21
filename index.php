@@ -54,8 +54,9 @@
 
 		<!-- RESULT -->
 		<div class="container marketing">
-			<div id="couches-list" class="row"></div>
-			<div id="arrows" class="row"></div>
+			<?php $couchesPaginator = getCouchesPaginator(1) ?>
+			<div id="couches-list" class="row"><?php echo $couchesPaginator['couches'] ?></div>
+			<div id="arrows" class="row"><?php echo $couchesPaginator['arrows'] ?></div>
 		</div>
 
 	<!-- FOOTER -->

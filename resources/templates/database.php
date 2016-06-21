@@ -7,7 +7,12 @@
 			<form class="form" id="couch-type-abm-form" action="/resources/library/couch_type_abm.php" method="post">
 				<div class="form-group row">
 					<div class="col-md-8">
-						<select class="form-control" name="couch-type-name" autocomplete="off"></select>
+						<select class="form-control" name="couch-type-name" autocomplete="off">
+							<option value="">-</option>
+							<?php foreach (getCouchTypes() as $couchType): ?>
+								<option value="<?php echo $couchType ?>"><?php echo $couchType ?></option>
+							<?php endforeach; ?>
+						</select>
 					</div>
 					<div class="col-md-4">
 						<input class="confirm btn btn-danger" name="delete" value="Eliminar" type="submit" disabled="disabled" />
