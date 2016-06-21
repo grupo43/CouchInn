@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_GET['id']) || !isset($_SESSION['user'])):
+if (!isset($_SESSION['user']) || !isset($_GET['id'])):
 	header ('Location: /');
 	exit;
 else:
@@ -20,11 +20,15 @@ if (isOwner($_SESSION['user'], $couchID)): // If the couch exists and the logged
 			UPDATE couch
 			SET enabled = 0
 		";
+		$disabled = true;
 	else:
 		$sql = "DELETE FROM couch";
+		$disabled = false;
 	endif;
 	$sql .= " WHERE id = '$couchID'";
-	$db->query($sql);
+	if ($db->query($sql)):
+		header('Content-Type: application/json');
+		echo json_encode(["disabled" => $disabled]);
+	endif;
 endif;
-header ('Location: /');
 ?>

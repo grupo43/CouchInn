@@ -16,7 +16,9 @@ if (isOwner($_SESSION['user'], $couchID)): // If the couch exists and the logged
 	";
 	$sql .= (isCouchEnabled($couchID))?"0":"1"; // enabled->disabled | disabled->enabled
 	$sql .= " WHERE id = '$couchID'";
-	$db->query($sql);
+	if ($db->query($sql)):
+		header('Content-Type: application/json');
+		echo json_encode(["disabled" => isCouchEnabled($couchID)?false:true]);
+	endif;
 endif;
-header ('Location: /');
 ?>

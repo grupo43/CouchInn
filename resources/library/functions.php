@@ -46,6 +46,21 @@ function getPictures ($couchID) {
 	return $pictures;
 }
 
+function getQuestions ($couchID) {
+	$db = connect();
+	$sql = "
+		SELECT question, answer
+		FROM `q&a`
+		WHERE couch_id = '$couchID'
+	";
+	$result = $db->query($sql);
+	$questions = array();
+	while ($question = $result->fetch_assoc()):
+		$questions[] = $question;
+	endwhile;
+	return $questions;
+}
+
 function isOwner ($user, $couchID) {
 	$db = connect();
 	$sql = "
