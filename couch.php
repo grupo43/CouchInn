@@ -66,7 +66,7 @@ $questions	= getQuestions($id);
 			<ul class="list-inline center-block text-center">
 				<li class="col-md-4"><strong>Tipo</strong><br /><?php echo ucfirst($couch['type']) ?></li>
 				<li class="col-md-4"><strong>Capacidad</strong><br /><?php echo $couch['capacity'] ?> huéspedes</li>
-				<li class="col-md-4" id="location" place-id="<?php echo $couch['place_id'] ?>"><strong>Ubicación</strong><br /></li>
+				<li class="col-md-4"><strong>Ubicación</strong><br /><?php echo $couch['city'] ?></li>
 			</ul>
 		</div>
 	</div>
@@ -120,7 +120,6 @@ $questions	= getQuestions($id);
 	
 	<script src="resources/library/jquery.min.js"></script>
 	<script src="resources/library/bootstrap.min.js"></script>
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=&libraries=places"></script>
 	<script src="resources/library/moment-with-locales.min.js"></script>
 	<script src="resources/library/validator.min.js"></script>
 	<script src="resources/library/couch-delete-toggle.js"></script>
