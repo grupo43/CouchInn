@@ -11,7 +11,7 @@ USE `couchinn`;
 
 DROP TABLE IF EXISTS `accepted_reservation`;
 CREATE TABLE `accepted_reservation` (
-  `reservation_id` tinyint(2) unsigned NOT NULL,
+  `reservation_id` int(10) unsigned NOT NULL,
   `date` datetime NOT NULL,
   KEY `reservation_id` (`reservation_id`),
   CONSTRAINT `accepted_reservation_ibfk_1` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`) ON DELETE CASCADE
@@ -28,9 +28,9 @@ CREATE TABLE `admin` (
 
 DROP TABLE IF EXISTS `couch`;
 CREATE TABLE `couch` (
-  `id` tinyint(2) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `owner` varchar(255) COLLATE utf8_bin NOT NULL,
-  `title` varchar(64) COLLATE utf8_bin NOT NULL,
+  `title` varchar(32) COLLATE utf8_bin NOT NULL,
   `description` tinytext COLLATE utf8_bin NOT NULL,
   `type` varchar(32) COLLATE utf8_bin NOT NULL,
   `city` varchar(255) COLLATE utf8_bin NOT NULL,
@@ -48,7 +48,7 @@ CREATE TABLE `couch` (
 
 DROP TABLE IF EXISTS `couch_picture`;
 CREATE TABLE `couch_picture` (
-  `couch_id` tinyint(2) unsigned NOT NULL,
+  `couch_id` int(10) unsigned NOT NULL,
   `picture1` varchar(255) COLLATE utf8_bin NOT NULL,
   `picture2` varchar(255) COLLATE utf8_bin NOT NULL,
   `picture3` varchar(255) COLLATE utf8_bin NOT NULL,
@@ -80,7 +80,7 @@ CREATE TABLE `payment` (
 DROP TABLE IF EXISTS `q&a`;
 CREATE TABLE `q&a` (
   `user` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `couch_id` tinyint(2) unsigned NOT NULL,
+  `couch_id` int(10) unsigned NOT NULL,
   `question` varchar(255) COLLATE utf8_bin NOT NULL,
   `answer` varchar(255) COLLATE utf8_bin NOT NULL,
   KEY `user` (`user`),
@@ -92,8 +92,8 @@ CREATE TABLE `q&a` (
 
 DROP TABLE IF EXISTS `reservation`;
 CREATE TABLE `reservation` (
-  `id` tinyint(2) unsigned NOT NULL AUTO_INCREMENT,
-  `couch_id` tinyint(2) unsigned NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `couch_id` int(10) unsigned NOT NULL,
   `user` varchar(255) COLLATE utf8_bin NOT NULL,
   `from` date NOT NULL,
   `to` date NOT NULL,
@@ -116,4 +116,4 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
--- 2016-06-21 13:21:12
+-- 2016-06-22 17:34:52
