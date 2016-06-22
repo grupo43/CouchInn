@@ -120,6 +120,7 @@ $questions	= getQuestions($id);
 	
 	<script src="resources/library/jquery.min.js"></script>
 	<script src="resources/library/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
 	<script src="resources/library/moment-with-locales.min.js"></script>
 	<script src="resources/library/validator.min.js"></script>
 	<script src="resources/library/couch-delete-toggle.js"></script>
@@ -131,6 +132,7 @@ $questions	= getQuestions($id);
 		<script src="js/send-token.js"></script>
 	<?php else: ?>
 		<script src="js/edit-user-data.js"></script>
+		<script src="js/add-couch.js"></script>
 		<?php if (!$isPremium): ?>
 			<script src="resources/library/jquery.payment.min.js"></script>
 			<script src="js/premium.js"></script>

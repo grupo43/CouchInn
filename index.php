@@ -64,6 +64,7 @@
 
 	<script src="resources/library/jquery.min.js"></script>
 	<script src="resources/library/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
 	<script src="resources/library/functions.js"></script>
 	<script src="resources/library/script.js"></script>
 	<script src="resources/library/moment-with-locales.min.js"></script>
@@ -76,6 +77,7 @@
 		<script src="js/send-token.js"></script>
 	<?php else: ?>
 		<script src="js/edit-user-data.js"></script>
+		<script src="js/add-couch.js"></script>
 		<?php if (!$isPremium): ?>
 			<script src="resources/library/jquery.payment.min.js"></script>
 			<script src="js/premium.js"></script>

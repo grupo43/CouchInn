@@ -4,6 +4,7 @@
 		<ul class="dropdown-menu">
 			<li><a href="#">Perfil</a></li>
 			<li><a href="#" data-toggle="modal" data-target="#edit-user-modal">Modificar datos</a></li>
+			<li><a href="#" data-toggle="modal" data-target="#add-couch-modal">Agregar couch</a></li>
 			<li><a href="#">Mensajes</a></li>
 			<?php if (!$isPremium): ?>
 				<li><a href="" data-toggle="modal" data-target="#premium-modal">Ser Premium <i class="fa fa-star"></i></a></li>
