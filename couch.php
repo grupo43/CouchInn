@@ -57,7 +57,7 @@ $questions	= getQuestions($id);
 
 	<div class="row">
 		<div class="col-md-offset-2 col-md-8">
-			<div class="feedback alert alert-info text-center" role="alert" hidden></div>
+			<div class="feedback alert text-center" role="alert" hidden></div>
 		</div>
 	</div>
 	<!-- COUCH DATA -->
@@ -94,6 +94,16 @@ $questions	= getQuestions($id);
 		<?php endif; ?>
 	</div>
 	<!-- QUESTIONS & ANSWERS -->
+	<?php if (isset($_SESSION['user']) && ($_SESSION['user'] != $couch['owner'])): ?>
+	<div class="container">
+		<div class="row">
+			<div class="form-horizontal col-md-offset-3 col-md-6">
+				<input type="text" class="col-md-12" placeholder="Escriba su pregunta.." />
+			</div>
+			<button class="btn btn-primary col-md-1">Enviar</button>
+		</div>
+	</div>
+	<?php endif; ?>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-offset-2 col-md-8">
@@ -105,8 +115,8 @@ $questions	= getQuestions($id);
 					<?php if ($question['answer']): ?>
 						<li><?php echo $question['answer'] ?></li>
 					<?php elseif (isset($_SESSION['user']) && ($_SESSION['user'] == $couch['owner'])): ?>
-						<input type="text" placeholder="Escriba su respuesta" />
-						<button class="btn btn-primary">Responder</button>
+						<input type="text" class="col-md-9" placeholder="Escriba su respuesta.." />
+						<button class="btn btn-primary col-md-offset-1 col-md-2">Enviar</button>
 					<?php endif; ?>
 					</ul>
 				<?php endforeach; ?>
