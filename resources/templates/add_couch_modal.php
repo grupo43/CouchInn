@@ -48,13 +48,17 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="input-images" class="col-md-4 control-label">Imágenes</label>
+						<label for="input-photos" class="col-md-4 control-label">Imágenes</label>
 						<div class="col-md-8">
-							<input id="input-images" name="input-images[]" type="file" multiple required />
-							<p class="help-block small">Mínimo 1 / Máximo 5 (jpg/jpeg/png)</p>
+							<input id="input-photos" name="input-photos[]" type="file" multiple required />
+							<p class="help-block small">Mínimo 1 / Máximo 5 (jpeg/png)</p>
 						</div>
 					</div>
 					<div class="feedback-error alert alert-danger text-center" role="alert" hidden></div>
+					<div id="photos-preview" hidden>
+						<div id="photos-preview-r1" class="form-group"></div>
+						<div id="photos-preview-r2" class="form-group" hidden></div>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>

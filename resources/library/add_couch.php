@@ -8,35 +8,6 @@ session_start();
 require_once 'resources/library/functions.php';
 $db = connect();
 
-$imagesCount = count($_FILES['input-images']['name']);
-if ($imagesCount >= 1 && $imagesCount <= 5):
-	$validextensions = ["jpeg", "jpg", "png"];
-	$images = array();
-	for ($i = 0; $i < $imagesCount; $i++):
-		$tmp = explode('.', basename($_FILES['input-images']['name'][$i]));
-		$ext = end($tmp); // File $i extension
-		if (!in_array($ext, $validextensions)):
-			$return = [
-				"success" => false,
-				"message" => "Todos los archivos deben ser imágenes (jpg/jpeg/png)"
-			];
-		endif;
-	endfor;
-else:
-	$return = ["success" => false];
-	if ($imagesCount < 1):
-		$return["message"] = "Debe subir al menos una foto.";
-	else:
-		$return["message"] = "Lo sentimos, no puede subir más de 5 fotos.";
-	endif;
-endif;
-
-if (isset($return)):
-	header ('Content-Type: application/json');
-	echo json_encode($return);
-	exit;
-endif;
-
 $sql = "
 	INSERT INTO couch
 		( owner
@@ -63,12 +34,12 @@ if ($db->query($sql)):
 	$columns = "couch_id,";
 	$values = "'$couch_id',";
 	for ($i = 0; $i < $imagesCount; $i++):
-		$fileName = basename($_FILES['input-images']['name'][$i]);
+		$fileName = basename($_FILES['input-photos']['name'][$i]);
 		$tmp = explode('.', $fileName);
 		$ext = end($tmp); // File $i extension
 		$columns .= "picture".($i+1).",";
 		$values .= "'".($i+1).".{$ext}',";
-		move_uploaded_file($_FILES['input-images']['tmp_name'][$i], "$folder/".($i+1).".{$ext}");
+		move_uploaded_file($_FILES['input-photos']['tmp_name'][$i], "$folder/".($i+1).".{$ext}");
 	endfor;
 	$columns = substr($columns, 0, -1); // Remove last comma
 	$values = substr($values, 0, -1); // Remove last comma

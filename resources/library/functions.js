@@ -22,3 +22,14 @@ var isDateValid = function(day, month, year) {
 	}
 	return {"success": isValid, "error": errorMessage};
 };
+
+var areImages = function(fileArray) {
+	var result = true;
+	$.each(fileArray, function(index, file) {
+		if (!file.type.match('image/jpeg') && !file.type.match('image/png')) {
+			result = false;
+			return false; // Stop looping
+		}
+	});
+	return result;
+};

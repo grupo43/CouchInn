@@ -147,6 +147,7 @@ $questions	= getQuestions($id);
 			<script src="resources/library/jquery.payment.min.js"></script>
 			<script src="js/premium.js"></script>
 		<?php endif; ?>
+		<script src="resources/library/functions.js"></script>
 	<?php endif; ?>
 </body>
 </html>
