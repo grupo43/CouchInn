@@ -9,7 +9,7 @@ require_once 'resources/library/functions.php';
 $db = connect();
 
 $imagesCount = count($_FILES['input-images']['name']);
-if ($imagesCount >= 3 && $imagesCount <= 5):
+if ($imagesCount >= 1 && $imagesCount <= 5):
 	$validextensions = ["jpeg", "jpg", "png"];
 	$images = array();
 	for ($i = 0; $i < $imagesCount; $i++):
@@ -20,16 +20,18 @@ if ($imagesCount >= 3 && $imagesCount <= 5):
 				"success" => false,
 				"message" => "Todos los archivos deben ser imágenes (jpg/jpeg/png)"
 			];
-			header ('Content-Type: application/json');
-			echo json_encode($return);
-			exit;
 		endif;
 	endfor;
 else:
-	$return = [
-		"success" => false,
-		"message" => "Debe subir 3, 4 ó 5 imágenes"
-	];
+	$return = ["success" => false];
+	if ($imagesCount < 1):
+		$return["message"] = "Debe subir al menos una foto.";
+	else:
+		$return["message"] = "Lo sentimos, no puede subir más de 5 fotos.";
+	endif;
+endif;
+
+if (isset($return)):
 	header ('Content-Type: application/json');
 	echo json_encode($return);
 	exit;

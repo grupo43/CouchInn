@@ -51,7 +51,7 @@
 						<label for="input-images" class="col-md-4 control-label">Imágenes</label>
 						<div class="col-md-8">
 							<input id="input-images" name="input-images[]" type="file" multiple required />
-							<p class="help-block small">Mínimo 3 / Máximo 5 (jpg/jpeg/png)</p>
+							<p class="help-block small">Mínimo 1 / Máximo 5 (jpg/jpeg/png)</p>
 						</div>
 					</div>
 					<div class="feedback-error alert alert-danger text-center" role="alert" hidden></div>

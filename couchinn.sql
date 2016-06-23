@@ -50,8 +50,8 @@ DROP TABLE IF EXISTS `couch_picture`;
 CREATE TABLE `couch_picture` (
   `couch_id` int(10) unsigned NOT NULL,
   `picture1` varchar(255) COLLATE utf8_bin NOT NULL,
-  `picture2` varchar(255) COLLATE utf8_bin NOT NULL,
-  `picture3` varchar(255) COLLATE utf8_bin NOT NULL,
+  `picture2` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `picture3` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `picture4` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `picture5` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`couch_id`),
@@ -116,4 +116,4 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
--- 2016-06-22 17:34:52
+-- 2016-06-23 12:44:29
