@@ -17,6 +17,10 @@ h6 {
 	font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 
+#input-birthdate select, #couch-type {
+	color: gray;
+}
+
 .jumbotron {
 	background-color: #879b36;
 	color: white;

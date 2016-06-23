@@ -45,6 +45,16 @@ $.getJSON('/resources/library/get_birthdate.php', function(birthdate) {
 	}
 });
 
+/* BLACK OPTIONS WHEN SELECT IS FOCUSED */
+$('select').focus(function() {
+	$(this).css('color', 'black');
+});
+
+/* RESET OPTIONS TO GRAY WHEN MODAL GETS HIDDEN */
+$('#edit-user-modal').on('hidden.bs.modal', function() {
+	$(this).find('select').css('color', 'gray');
+});
+
 $('#edit-user-form').submit(function ($e) {
 	$e.preventDefault();
 
@@ -71,7 +81,7 @@ $('#edit-user-form').submit(function ($e) {
 
 			if (!$('#edit-user-form').find('.has-error').length && !$('#edit-user-form').find('input[type=submit]').hasClass('disabled')) {
 				$.post('/resources/library/edit_user.php', $('#edit-user-form').serialize());
-				location.reload();
+				window.location.reload();
 			}
 		});
 	}

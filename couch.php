@@ -130,11 +130,11 @@ $questions	= getQuestions($id);
 	
 	<script src="resources/library/jquery.min.js"></script>
 	<script src="resources/library/bootstrap.min.js"></script>
+	<script src="resources/library/script.js"></script>
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
 	<script src="resources/library/moment-with-locales.min.js"></script>
 	<script src="resources/library/validator.min.js"></script>
 	<script src="resources/library/couch-delete-toggle.js"></script>
-	<script src="js/couch.js"></script>
 	<script src="js/fix-modal-navbar.js"></script>
 	<?php if (!isset($_SESSION['user'])): ?>
 		<script src="js/login.js"></script>
