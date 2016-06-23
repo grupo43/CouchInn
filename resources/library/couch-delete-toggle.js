@@ -41,7 +41,12 @@ $('#delete-couch').click(function($e) {
 				});
 			}
 			else {
-				window.location.replace('/');
+				$feedback.fadeOut(function() {	
+					$feedback.removeClass('alert-danger').addClass('alert-info').text("El couch ha sido eliminado. Aguarde y será redirigido..").fadeIn();
+				});
+				window.setTimeout(function() {
+					window.location.replace('/');
+				}, 2000);
 			}
 		});
 	}
