@@ -36,7 +36,33 @@ h6 {
 	color: #a94442;
 }
 
+.img-wrap {
+	position: relative;
+}
+
+.img-wrap .close {
+	position: absolute;
+	top: 0.2em;
+	right: 1em;
+	z-index: 100;
+	font-size: 24px;
+	color: red;
+	filter: alpha(opacity=75);
+	opacity: .75;
+}
+
+.img-wrap
+.close:hover,
+.img-wrap
+.close:focus {
+	color: red;
+	text-decoration: none;
+	cursor: pointer;
+	filter: alpha(opacity=100);
+	opacity: 1;
+}
+
 /* FIX LOCATION AUTOCOMPLETE INSIDE MODAL */
 .pac-container {
-    z-index: 1050;
+	z-index: 1050;
 }

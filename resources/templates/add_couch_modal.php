@@ -50,7 +50,10 @@
 					<div class="form-group">
 						<label for="input-photos" class="col-md-3 control-label">Imágenes</label>
 						<div class="col-md-9">
-							<input id="input-photos" name="inputPhotos[]" type="file" multiple required />
+							<label class="btn btn-default">
+								Agregar fotos ..
+								<input id="input-photos" name="inputPhotos[]" type="file" multiple required style="display: none" />
+							</label>
 							<p class="help-block small">Mínimo 1 / Máximo 5 (jpeg/png)</p>
 						</div>
 					</div>
