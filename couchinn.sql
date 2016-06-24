@@ -49,11 +49,11 @@ CREATE TABLE `couch` (
 DROP TABLE IF EXISTS `couch_picture`;
 CREATE TABLE `couch_picture` (
   `couch_id` int(10) unsigned NOT NULL,
-  `picture1` varchar(255) COLLATE utf8_bin NOT NULL,
-  `picture2` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `picture3` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `picture4` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `picture5` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `picture1` mediumblob NOT NULL,
+  `picture2` mediumblob,
+  `picture3` mediumblob,
+  `picture4` mediumblob,
+  `picture5` mediumblob,
   PRIMARY KEY (`couch_id`),
   CONSTRAINT `couch_picture_ibfk_3` FOREIGN KEY (`couch_id`) REFERENCES `couch` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -116,4 +116,4 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
--- 2016-06-23 12:44:29
+-- 2016-06-24 14:48:15

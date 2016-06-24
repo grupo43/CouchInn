@@ -15,14 +15,6 @@ function isPremium($user) {
 	return $db->query($sql)->num_rows;
 }
 
-function delTree($dir) {
-	$files = array_diff(scandir($dir), array('.','..'));
-	foreach ($files as $file) {
-		(is_dir("$dir/$file")) ? delTree("$dir/$file") : unlink("$dir/$file");
-	}
-	return rmdir($dir);
-}
-
 function generateToken($email) {
 	$salt = '7KH6jrq4j8GK4tCXVSUwzhDAefYUCCrs';
 	return md5($salt.$email);
@@ -57,8 +49,7 @@ function getCouchesPaginator($page) {
 				FROM couch_picture
 				WHERE couch_id = {$couch['id']}
 			";
-			$mainPicture = $db->query($sql)->fetch_row()[0];
-			$img = "img/couches/couch{$couch['id']}/".$mainPicture;
+			$img = $db->query($sql)->fetch_row()[0];
 		else:
 			$img = 'img/logo/couch.png';
 		endif;

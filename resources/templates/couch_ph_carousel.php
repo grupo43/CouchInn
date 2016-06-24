@@ -14,7 +14,7 @@
 	</div>
 	<div class="carousel-inner" role="listbox">
 		<?php foreach ($pictures as $index => $picture): ?>
-			<div class="cover-image item<?php if ($index == 0): echo ' active'; endif; ?>" style="background-image:url(img/couches/couch<?php echo "{$couch['id']}/$picture"?>)">
+			<div class="cover-image item<?php if ($index == 0): echo ' active'; endif; ?>" style="background-image:url(<?php echo $picture ?>)">
 			</div>
 		<?php endforeach; ?>
 	</div>

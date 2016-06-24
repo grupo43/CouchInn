@@ -24,6 +24,7 @@ $('#input-city').blur(function() {
 /* PHOTOS PREVIEW AND VALIDATION */
 $inputPhotos = $('#input-photos');
 $inputPhotos.change(function() {
+	images = [];
 	$('#photos-preview').fadeOut();
 	var files = $inputPhotos[0].files;
 	if (files.length <= 5 && areImages(files)) {
@@ -34,14 +35,15 @@ $inputPhotos.change(function() {
 				var reader = new FileReader();
 				reader.onload = function(e) {
 					if (index < 3) {
-						$row = $('#photos-preview-r1');
+						$row = $('#ph-preview-add-r1');
 					}
 					else {
-						$row = $('#photos-preview-r2');
+						$row = $('#ph-preview-add-r2');
 						$row.show();
 					}
 					var div = '<div class="col-md-4"><img class="img-thumbnail" src="' + e.target.result + '"></div>';
 					$row.append(div);
+					images.push(e.target.result);
 				};
 				reader.readAsDataURL(file);
 			});
@@ -60,10 +62,11 @@ $inputPhotos.change(function() {
 	}
 });
 
-$('#photos-preview-r1, #photos-preview-r2').bind("DOMSubtreeModified", function() {
+/* ALIGN PHOTOS */
+$('#ph-preview-add-r1, #ph-preview-add-r2').bind("DOMSubtreeModified", function() {
 	var children = $(this).children();
-	var offset = ((12 - children.length*4) / 2);
-	$(this).children().first().addClass('col-md-offset-'+offset);
+	var offset = ((12 - children.length * 4) / 2);
+	$(this).children().first().addClass('col-md-offset-' + offset);
 });
 
 /* FORM SUBMISSION */
@@ -71,21 +74,11 @@ var $form = $('#add-couch-form');
 $form.submit(function($e) {
 	$e.preventDefault();
 	if (!$form.find('input[type=submit]').hasClass('disabled')) {
-		$.ajax({
-			url: '/resources/library/add_couch.php',
-			type: 'POST',
-			data: new FormData(this),
-			processData: false,
-			contentType: false
-		}).done(function(result) {
-			if (result.success) {
-				window.location = 'couch.php?id=' + result.id;
-			}
-			else {
-				$('.feedback-error').fadeOut(function() {
-					$(this).html(result.message).fadeIn();
-				});
-			}
+		$.post('/resources/library/add_couch.php', {
+			formData: $form.serialize(),
+			photos: images
+		}, function(couchID) {
+			window.location = 'couch.php?id=' + couchID;
 		});
 	}
 });
@@ -94,7 +87,7 @@ $form.submit(function($e) {
 $('.modal').on('hidden.bs.modal', function() {
 	autocomplete = new google.maps.places.Autocomplete(input, options); // Reset city value
 	$('.feedback-error').hide(); // Hide feedback errors
-	$('#photos-preview, #photos-preview-r2').hide(); // Hide photos
+	$('#photos-preview, #ph-preview-add-r2').hide(); // Hide photos
 });
 
 /* VALIDATOR MODAL WORKAROUND */

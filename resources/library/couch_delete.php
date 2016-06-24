@@ -24,7 +24,6 @@ if (isOwner($_SESSION['user'], $couchID)): // If the couch exists and the logged
 	else:
 		$sql = "DELETE FROM couch";
 		$disabled = false;
-		delTree($_SERVER['DOCUMENT_ROOT']."/img/couches/couch{$couchID}");
 	endif;
 	$sql .= " WHERE id = '$couchID'";
 	if ($db->query($sql)):
