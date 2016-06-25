@@ -4,6 +4,7 @@ if (!isset ($_GET['id'])):
 	exit;
 endif;
 
+session_start();
 require_once 'resources/library/functions.php';
 $db = connect();	
 $id = $db->real_escape_string($_GET['id']);
@@ -18,7 +19,6 @@ if (!$result->num_rows): // There is no couch with that ID
 	header ('Location: /');
 	exit;
 else:
-	session_start();
 	$couch = $result->fetch_assoc();
 	if (!$couch['enabled'] && (!isset($_SESSION['user']) || !isOwner($_SESSION['user'], $id))):
 		// The couch is disabled and the user trying to access it isn't the owner
@@ -31,6 +31,8 @@ include 'resources/templates/includes.php';
 
 $pictures	= getPictures($id);
 $questions	= getQuestions($id);
+
+include 'resources/templates/edit_couch_modal.php';
 ?>
 
 <!DOCTYPE html>
@@ -88,7 +90,7 @@ $questions	= getQuestions($id);
 					btn-success">Habilitar
 				<?php endif; ?>
 				</a>
-				<a href="javascript:void(0)" class="btn btn-info btn-block">Modificar</a>
+				<a class="btn btn-info btn-block" data-toggle="modal" data-target="#edit-couch-modal">Modificar</a>
 			</div>
 		</div>
 		<?php endif; ?>
@@ -141,6 +143,9 @@ $questions	= getQuestions($id);
 		<script src="js/signup.js"></script>
 		<script src="js/send-token.js"></script>
 	<?php else: ?>
+		<?php if ($_SESSION['user'] == $couch['owner']): ?>
+			<script src="js/edit-couch.js"></script>
+		<?php endif; ?>
 		<script src="js/edit-user-data.js"></script>
 		<script src="js/add-couch.js"></script>
 		<?php if (!$isPremium): ?>

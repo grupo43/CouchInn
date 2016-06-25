@@ -41,24 +41,24 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="input-city" class="col-md-3 control-label">Ciudad</label>
+						<label for="input-city-add" class="col-md-3 control-label">Ciudad</label>
 						<div class="col-md-9">
-							<input id="input-city" class="form-control" name="inputCity" type="text" required />
+							<input id="input-city-add" class="form-control" name="inputCity" type="text" required />
 							<p class="help-block with-errors"></p>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="input-photos" class="col-md-3 control-label">Imágenes</label>
+						<label for="input-photos" class="col-md-3 control-label">Fotos</label>
 						<div class="col-md-9">
 							<label class="btn btn-default">
 								Agregar fotos ..
-								<input id="input-photos" name="inputPhotos[]" type="file" multiple required style="display: none" />
+								<input id="input-photos-add" name="inputPhotos[]" type="file" multiple required style="display: none" />
 							</label>
 							<p class="help-block small">Mínimo 1 / Máximo 5 (jpeg/png)</p>
 						</div>
 					</div>
 					<div class="feedback-error alert alert-danger text-center" role="alert" hidden></div>
-					<div id="photos-preview" hidden>
+					<div id="photos-preview-add" hidden>
 						<div id="ph-preview-add-r1" class="form-group"></div>
 						<div id="ph-preview-add-r2" class="form-group" hidden></div>
 					</div>
