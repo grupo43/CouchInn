@@ -1,5 +1,4 @@
 <?php
-session_start();
 if (isset($_SESSION['user'])):
 	$isPremium = isPremium($_SESSION['user']);
 	if (!$isPremium):

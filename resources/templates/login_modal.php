@@ -8,19 +8,19 @@
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
-						<label for="input-email" class="col-md-4 control-label">Email</label>
-						<div class="col-md-8">
+						<label for="input-email" class="col-md-3 control-label">Email</label>
+						<div class="col-md-9">
 							<input name="input-email" type="email" class="form-control" required autofocus />
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="input-password" class="col-md-4 control-label">Contraseña</label>
-						<div class="col-md-8">
+						<label for="input-password" class="col-md-3 control-label">Contraseña</label>
+						<div class="col-md-9">
 							<input name="input-password" type="password" class="form-control" required />
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="col-md-8 pull-right">
+						<div class="col-md-9 pull-right">
 							<a id="password-forgot-question" class="small" href="javascript:void()" data-toggle="modal" data-target="#reset-password-modal">¿Olvidaste tu contraseña?</a>
 						</div>
 					</div>

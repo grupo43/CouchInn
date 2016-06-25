@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	require_once 'resources/library/functions.php';
 	include 'resources/templates/includes.php';
 ?>
