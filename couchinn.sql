@@ -95,6 +95,7 @@ CREATE TABLE `reservation` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `couch_id` int(10) unsigned NOT NULL,
   `user` varchar(255) COLLATE utf8_bin NOT NULL,
+  `num_guests` tinyint(2) NOT NULL,
   `from` date NOT NULL,
   `till` date NOT NULL,
   PRIMARY KEY (`id`),
@@ -116,4 +117,4 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
--- 2016-07-02 18:49:13
+-- 2016-07-02 22:47:33

@@ -58,7 +58,7 @@
     delay: 500,
     html: false,
     disable: true,
-    focus: true,
+    focus: false,
     custom: {},
     errors: {
       match: 'Does not match',

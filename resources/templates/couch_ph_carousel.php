@@ -8,7 +8,7 @@
 		<div class="carousel-caption">
 			<h1><?php echo $couch['title'] ?></h1>
 			<?php if (isset($_SESSION['user']) && $_SESSION['user'] != $couch['owner']): ?>
-				<p><a class="btn btn-lg btn-primary" href="#" role="button">Reservar couch</a></p>
+				<p><a class="btn btn-lg btn-primary" href="#" data-toggle="modal" data-target="#book-couch-modal">Reservar couch</a></p>
 			<?php endif; ?>
 		</div>
 	</div>

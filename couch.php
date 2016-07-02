@@ -33,7 +33,13 @@ include 'resources/templates/includes.php';
 $pictures	= getPictures($id);
 $questions	= getQuestions($id);
 
-include 'resources/templates/edit_couch_modal.php';
+if (isset($_SESSION['user'])):
+	if ($_SESSION['user'] == $couch['owner']):
+		include 'resources/templates/edit_couch_modal.php';
+	else:
+		include 'resources/templates/book_couch_modal.php';
+	endif;
+endif;
 ?>
 
 <!DOCTYPE html>
@@ -46,6 +52,7 @@ include 'resources/templates/edit_couch_modal.php';
 	<link rel="icon" href="img/favicon.ico">
 	<title>Couch Inn</title>
 	<link href="css/bootstrap.css" rel="stylesheet">
+	<link href="css/bootstrap-datepicker3.css" rel="stylesheet">
 	<link href="css/font-awesome.min.css" rel="stylesheet">
 	<link href="css/carousel.css" rel="stylesheet">
 	<link href="css/sticky-footer-navbar.css" rel="stylesheet">
@@ -60,7 +67,7 @@ include 'resources/templates/edit_couch_modal.php';
 
 	<div class="row">
 		<div class="col-md-offset-2 col-md-8">
-			<div class="feedback alert text-center" role="alert" hidden></div>
+			<div id="couch-delete-toggle-feedback" class="feedback alert text-center" role="alert" hidden></div>
 		</div>
 	</div>
 	<!-- COUCH DATA -->
@@ -134,6 +141,8 @@ include 'resources/templates/edit_couch_modal.php';
 	<script src="resources/library/jquery-2.2.4.js"></script>
 	<script src="resources/library/bootstrap.js"></script>
 	<script src="resources/library/script.js"></script>
+	<script src="resources/library/bootstrap-datepicker.js"></script>
+	<script src="resources/locales/bootstrap-datepicker.es.min.js"></script>
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
 	<script src="resources/library/moment-with-locales.js"></script>
 	<script src="resources/library/validator.js"></script>
@@ -146,6 +155,8 @@ include 'resources/templates/edit_couch_modal.php';
 	<?php else: ?>
 		<?php if ($_SESSION['user'] == $couch['owner']): ?>
 			<script src="js/edit-couch.js"></script>
+		<?php else: ?>
+			<script src="js/book-couch.js"></script>
 		<?php endif; ?>
 		<script src="js/edit-user-data.js"></script>
 		<script src="js/add-couch.js"></script>

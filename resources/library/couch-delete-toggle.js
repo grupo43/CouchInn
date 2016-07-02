@@ -1,4 +1,4 @@
-var $feedback = $('.feedback');
+var $feedback = $('#couch-delete-toggle-feedback');
 
 $('#toggle-couch').click(function($e) {
 	$e.preventDefault();
