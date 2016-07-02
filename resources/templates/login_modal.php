@@ -25,7 +25,7 @@
 						</div>
 					</div>
 					<input id="access-level" name="access-level" value="user" hidden />
-					<div class="feedback alert text-center" role="alert" hidden="hidden"></div>
+					<div id="login-feedback" class="alert text-center" role="alert" hidden="hidden"></div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>

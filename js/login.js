@@ -1,16 +1,15 @@
 var $form = $('#login-form');
-var $feedback = $('.feedback');
+var $loginFeedback = $('#login-feedback');
 
 $form.submit(function($e) {
 	$e.preventDefault();
 	var formData = $(this).serialize();
 	$.post('/resources/library/login.php', formData, function(result) {
 		if (result.success) {
-			var accessLevel = $('#access-level').val();
 			window.location.reload();
 		}
 		else {
-			$feedback.fadeOut(function() {
+			$loginFeedback.fadeOut(function() {
 				$(this).removeClass('alert-success').addClass('alert-danger').html(result.message).fadeIn();
 			});
 		}
@@ -18,5 +17,5 @@ $form.submit(function($e) {
 });
 
 $('.modal').on('hidden.bs.modal', function() {
-	$feedback.fadeOut();
+	$loginFeedback.fadeOut();
 });

@@ -28,7 +28,7 @@ endif;
 			<input id="access-level" name="access-level" value="admin" hidden />
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar sesión</button>
 		</form>
-		<div class="feedback alert text-center" role="alert"></div>
+		<div id="login-feedback" class="alert text-center" role="alert"></div>
 	</div>
 
 	<script src="resources/library/jquery-2.2.4.js"></script>
