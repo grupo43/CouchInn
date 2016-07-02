@@ -2,7 +2,7 @@ $('#datepicker').datepicker({
 	startDate: "today",
 	maxViewMode: 2,
 	clearBtn: true,
-	language: "es",
+	language: "es"
 });
 
 var $couchesList = $('#couches-list');
@@ -26,15 +26,21 @@ $('#search-form').submit(function($e) {
 	if (input.length) {
 		filter += " AND (title LIKE '%" + input + "%' OR description LIKE '%" + input + "%')"; // Append title/description filter
 	}
-	var from = $(this).find('input[name="from"]').val();
-	var till = $(this).find('input[name="till"]').val();
-	if (from.length && till.length) { // Append available dates filter
-		from = moment(from, "DD/MM/YYYY").format("YYYY-MM-DD");
-		till = moment(till, "DD/MM/YYYY").format("YYYY-MM-DD");
+	var $from = $(this).find('input[name="from"]');
+	var $till = $(this).find('input[name="till"]');
+	// Append available date filter
+	if ($from.val().length && $till.val().length) {
+		var fromVal = moment($from.val(), "DD/MM/YYYY").format("YYYY-MM-DD");
+		var tillVal = moment($till.val(), "DD/MM/YYYY").format("YYYY-MM-DD");
 		filter += " AND id NOT IN (";
 		filter += "SELECT couch_id FROM (";
 		filter += "SELECT couch_id, `from`, till FROM reservation WHERE id IN (SELECT reservation_id FROM accepted_reservation)) AS accepted";
-		filter += " WHERE (DATE('" + from + "') BETWEEN accepted.from AND accepted.till) OR (DATE('" + till + "')) BETWEEN accepted.from AND accepted.till)";
+		filter += " WHERE (DATE('" + fromVal + "') BETWEEN accepted.from AND accepted.till) OR (DATE('" + tillVal + "')) BETWEEN accepted.from AND accepted.till)";
+	}
+	// Clear date inputs
+	else {
+		$from.val("");
+		$till.val("");
 	}
 	if (filter.length) {
 		var insertPoint = sql.indexOf('1') + 1;
