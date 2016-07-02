@@ -13,7 +13,7 @@ include 'resources/templates/includes.php';
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 	<link rel="icon" href="img/favicon.ico">
 	<title>Couch Inn</title>
-	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap.css" rel="stylesheet">
 	<link href="css/jumbotron.css" rel="stylesheet">
 	<link href="css/bootstrap-datepicker3.css" rel="stylesheet">
 	<link href="css/carousel.css" rel="stylesheet">
@@ -88,15 +88,15 @@ include 'resources/templates/includes.php';
 	<!-- FOOTER -->
 	<?php include 'resources/templates/footer.php' ?>
 
-	<script src="resources/library/jquery.min.js"></script>
-	<script src="resources/library/bootstrap.min.js"></script>
+	<script src="resources/library/jquery-2.2.4.js"></script>
+	<script src="resources/library/bootstrap.js"></script>
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
 	<script src="resources/library/functions.js"></script>
 	<script src="resources/library/script.js"></script>
 	<script src="resources/library/bootstrap-datepicker.js"></script>
 	<script src="resources/locales/bootstrap-datepicker.es.min.js"></script>
-	<script src="resources/library/moment-with-locales.min.js"></script>
-	<script src="resources/library/validator.min.js"></script>
+	<script src="resources/library/moment-with-locales.js"></script>
+	<script src="resources/library/validator.js"></script>
 	<script src="js/couches-list.js"></script>
 	<script src="js/fix-modal-navbar.js"></script>
 	<?php if (!isset($_SESSION['user'])): ?>
@@ -107,7 +107,7 @@ include 'resources/templates/includes.php';
 		<script src="js/edit-user-data.js"></script>
 		<script src="js/add-couch.js"></script>
 		<?php if (!$isPremium): ?>
-			<script src="resources/library/jquery.payment.min.js"></script>
+			<script src="resources/library/jquery.payment.js"></script>
 			<script src="js/premium.js"></script>
 		<?php endif; ?>
 	<?php endif; ?>

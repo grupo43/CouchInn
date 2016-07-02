@@ -15,7 +15,7 @@ endif;
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 	<link rel="icon" href="img/favicon.ico">
 	<title>Couch Inn - Admin Login</title>
-	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap.css" rel="stylesheet">
 	<link href="css/signin.css" rel="stylesheet">
 </head>
 
@@ -31,8 +31,8 @@ endif;
 		<div class="feedback alert text-center" role="alert"></div>
 	</div>
 
-	<script src="resources/library/jquery.min.js"></script>
-	<script src="resources/library/bootstrap.min.js"></script>
+	<script src="resources/library/jquery-2.2.4.js"></script>
+	<script src="resources/library/bootstrap.js"></script>
 	<script src="js/login.js"></script>
 </body>
 </html>

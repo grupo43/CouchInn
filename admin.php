@@ -18,7 +18,7 @@ $db = connect();
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 	<link rel="icon" href="img/favicon.ico">
 	<title>Couch Inn - Admin Dashboard</title>
-	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap.css" rel="stylesheet">
 	<link href="css/dashboard.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
 </head>
@@ -55,8 +55,8 @@ $db = connect();
 		</div>
 	</div>
 
-	<script src="resources/library/jquery.min.js"></script>
-	<script src="resources/library/bootstrap.min.js"></script>
+	<script src="resources/library/jquery-2.2.4.js"></script>
+	<script src="resources/library/bootstrap.js"></script>
 	<script src="resources/library/functions.js"></script>
 	<script src="js/couch-type-abm.js"></script>
 	<!-- Just to make our placeholder images work. Remove at production! -->

@@ -25,7 +25,7 @@ endif;
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 	<link rel="icon" href="img/favicon.ico">
 	<title>Couch Inn - Restablecer Contraseña</title>
-	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap.css" rel="stylesheet">
 	<link href="css/jumbotron-narrow.css" rel="stylesheet">
 </head>
 <body>
@@ -64,8 +64,8 @@ endif;
 		</footer>
 	</div>
 
-	<script src="resources/library/jquery.min.js"></script>
-	<script src="resources/library/validator.min.js"></script>
+	<script src="resources/library/jquery-2.2.4.js"></script>
+	<script src="resources/library/validator.js"></script>
 	<script src="js/reset-password.js"></script>
 </body>
 </html>
