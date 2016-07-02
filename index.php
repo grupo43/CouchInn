@@ -1,7 +1,7 @@
 <?php
-	session_start();
-	require_once 'resources/library/functions.php';
-	include 'resources/templates/includes.php';
+session_start();
+require_once 'resources/library/functions.php';
+include 'resources/templates/includes.php';
 ?>
 
 <!DOCTYPE html>
@@ -15,6 +15,7 @@
 	<title>Couch Inn</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/jumbotron.css" rel="stylesheet">
+	<link href="css/bootstrap-datepicker3.css" rel="stylesheet">
 	<link href="css/carousel.css" rel="stylesheet">
 	<link href="css/sticky-footer-navbar.css" rel="stylesheet">
 	<link href="css/font-awesome.min.css" rel="stylesheet">
@@ -23,7 +24,7 @@
 
 <body>
 	<!-- HEADER -->
-	<?php include 'resources/templates/navbar.php'; ?>
+	<?php include 'resources/templates/navbar.php' ?>
 
 	<!-- JUMBOTRON -->
 	<?php if (!isset($_SESSION['user'])): ?>
@@ -37,28 +38,52 @@
 	</div>
 	<?php endif; ?>
 
-	<!-- COUCHES -->
+	<!-- COUCHES HEAD -->
 	<h1 class="text-center text-capitalize">Encuentre dónde hospedarse</h1>
 	<hr />
 
-		<!-- SEARCH -->
-		<div class="container-fluid">
-			<form class="col-md-offset-3 col-md-6" role="search">
-				<div class="input-group">
-					<input type="text" class="form-control" placeholder="¿A dónde quieres ir?" name="q" disabled>
-					<div class="input-group-btn">
-						<button class="btn btn-default" type="submit" disabled><i class="glyphicon glyphicon-search"></i></button>
+	<!-- SEARCH -->
+	<div class="container-fluid">
+		<div class="col-md-offset-2 col-md-8">
+			<form id="search-form" class="form-horizontal" role="search">
+				<div class="form-group">
+					<div class="col-md-3">
+						<select class="form-control" name="couchType" autocomplete="off">
+							<option value="">Tipo de couch</option>
+							<?php foreach (getCouchTypes() as $couchType): ?>
+								<option value="<?php echo $couchType ?>"><?php echo ucfirst($couchType) ?></option>
+							<?php endforeach; ?>
+						</select>
+					</div>
+					<div class="col-md-6">
+						<div id="datepicker" class="input-daterange input-group" >
+							<input type="text" class="input form-control" name="from" />
+							<span class="input-group-addon">hasta</span>
+							<input type="text" class="input form-control" name="till" />
+						</div>
+					</div>
+					<div class="col-md-3">
+						<input class="form-control" name="inputCapacity" type="number" min="1" placeholder="Capacidad mínima" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-offset-2 col-md-8">
+						<input name="search" class="form-control" placeholder="Título o descripción .." type="text" />
+					</div>
+					<div class="col-md-2">
+						<button class="form-control btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i> <strong>Buscar</strong> </button>
 					</div>
 				</div>
 			</form>
 		</div>
+	</div>
 
-		<!-- RESULT -->
-		<div class="container marketing">
-			<?php $couchesPaginator = getCouchesPaginator(1) ?>
-			<div id="couches-list" class="row"><?php echo $couchesPaginator['couches'] ?></div>
-			<div id="arrows" class="row"><?php echo $couchesPaginator['arrows'] ?></div>
-		</div>
+	<!-- RESULT -->
+	<div class="container marketing">
+		<?php $couchesPaginator = getCouchesPaginator(1) ?>
+		<div id="couches-list" class="row"><?php echo $couchesPaginator['couches'] ?></div>
+		<div id="arrows" class="row"><?php echo $couchesPaginator['arrows'] ?></div>
+	</div>
 
 	<!-- FOOTER -->
 	<?php include 'resources/templates/footer.php' ?>
@@ -68,6 +93,8 @@
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
 	<script src="resources/library/functions.js"></script>
 	<script src="resources/library/script.js"></script>
+	<script src="resources/library/bootstrap-datepicker.js"></script>
+	<script src="resources/locales/bootstrap-datepicker.es.min.js"></script>
 	<script src="resources/library/moment-with-locales.min.js"></script>
 	<script src="resources/library/validator.min.js"></script>
 	<script src="js/couches-list.js"></script>

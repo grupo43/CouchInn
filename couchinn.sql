@@ -30,8 +30,8 @@ DROP TABLE IF EXISTS `couch`;
 CREATE TABLE `couch` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `owner` varchar(255) COLLATE utf8_bin NOT NULL,
-  `title` varchar(32) COLLATE utf8_bin NOT NULL,
-  `description` tinytext COLLATE utf8_bin NOT NULL,
+  `title` varchar(32) CHARACTER SET utf8 NOT NULL,
+  `description` tinytext CHARACTER SET utf8 NOT NULL,
   `type` varchar(32) COLLATE utf8_bin NOT NULL,
   `city` varchar(255) COLLATE utf8_bin NOT NULL,
   `capacity` tinyint(2) unsigned NOT NULL,
@@ -96,7 +96,7 @@ CREATE TABLE `reservation` (
   `couch_id` int(10) unsigned NOT NULL,
   `user` varchar(255) COLLATE utf8_bin NOT NULL,
   `from` date NOT NULL,
-  `to` date NOT NULL,
+  `till` date NOT NULL,
   PRIMARY KEY (`id`),
   KEY `couch_id` (`couch_id`),
   KEY `user` (`user`),
@@ -116,4 +116,4 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
--- 2016-06-24 14:48:15
+-- 2016-07-02 18:49:13

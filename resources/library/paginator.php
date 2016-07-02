@@ -25,6 +25,7 @@ class Paginator {
 		}
 
 		$result = $this->db->query($sql);
+		$results = [];
 		while ($row = $result->fetch_assoc()) {
 			$results[] = $row;
 		}
