@@ -36,7 +36,7 @@ h6 {
 	color: #879b36;
 }
 
-#questions, #questions > ul {
+#questions, #questions ul {
 	list-style-type: none;
 	color: #333333;
 }
