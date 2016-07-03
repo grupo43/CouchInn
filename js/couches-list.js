@@ -30,12 +30,24 @@ $('#search-form').submit(function($e) {
 	var $till = $(this).find('input[name="till"]');
 	// Append available date filter
 	if ($from.val().length && $till.val().length) {
-		var fromVal = moment($from.val(), "DD/MM/YYYY").format("YYYY-MM-DD");
-		var tillVal = moment($till.val(), "DD/MM/YYYY").format("YYYY-MM-DD");
-		filter += " AND id NOT IN (";
-		filter += "SELECT couch_id FROM (";
-		filter += "SELECT couch_id, `from`, till FROM reservation WHERE id IN (SELECT reservation_id FROM accepted_reservation)) AS accepted";
-		filter += " WHERE (DATE('" + fromVal + "') BETWEEN accepted.from AND accepted.till) OR (DATE('" + tillVal + "')) BETWEEN accepted.from AND accepted.till)";
+		// Invert date to match MySQL format
+		var fromVal = $from.val();
+		fromVal = fromVal.split("/").reverse().join("-");
+		var tillVal = $till.val();
+		tillVal = tillVal.split("/").reverse().join("-");
+		filter +=
+			" AND id NOT IN (" +
+				"SELECT couch_id " +
+				"FROM (" +
+					"SELECT couch_id, `from`, till " +
+					"FROM reservation " +
+					"WHERE id IN (SELECT reservation_id FROM accepted_reservation)" +
+				") AS accepted " +
+				"WHERE " +
+					"(DATE('" + fromVal + "') BETWEEN accepted.from AND accepted.till) OR " +
+					"(DATE('" + tillVal + "') BETWEEN accepted.from AND accepted.till) OR " +
+					"(DATE('" + fromVal + "') < accepted.from AND DATE('" + tillVal + "') > accepted.till)" +
+			")";
 	}
 	// Clear date inputs
 	else {

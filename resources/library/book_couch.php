@@ -18,7 +18,10 @@ $sql = "
 		FROM reservation
 		WHERE couch_id = '{$_POST['couchID']}' AND id IN (SELECT reservation_id FROM accepted_reservation)
 	) AS accepted
-	WHERE (DATE('{$from}') BETWEEN accepted.from AND accepted.till) OR (DATE('{$till}') BETWEEN accepted.from AND accepted.till)
+	WHERE
+		(DATE('{$from}') BETWEEN accepted.from AND accepted.till) OR
+		(DATE('{$till}') BETWEEN accepted.from AND accepted.till) OR
+		(DATE('{$from}') < accepted.from AND DATE('{$till}') > accepted.till)
 ";
 
 if (!$db->query($sql)->num_rows):
