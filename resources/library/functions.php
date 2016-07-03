@@ -111,9 +111,10 @@ function getPictures($couchID) {
 function getQuestions($couchID) {
 	$db = connect();
 	$sql = "
-		SELECT question, answer
+		SELECT user, question, answer
 		FROM `q&a`
 		WHERE couch_id = '$couchID'
+		ORDER BY `date` DESC
 	";
 	$result = $db->query($sql);
 	$questions = array();

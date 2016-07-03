@@ -83,6 +83,7 @@ CREATE TABLE `q&a` (
   `couch_id` int(10) unsigned NOT NULL,
   `question` varchar(255) COLLATE utf8_bin NOT NULL,
   `answer` varchar(255) COLLATE utf8_bin NOT NULL,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   KEY `user` (`user`),
   KEY `couch_id` (`couch_id`),
   CONSTRAINT `q&a_ibfk_3` FOREIGN KEY (`user`) REFERENCES `user` (`email`) ON DELETE SET NULL ON UPDATE CASCADE,
@@ -117,4 +118,4 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
--- 2016-07-02 22:47:33
+-- 2016-07-03 17:38:13

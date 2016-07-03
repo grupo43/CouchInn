@@ -107,33 +107,36 @@ endif;
 	<?php if (isset($_SESSION['user']) && ($_SESSION['user'] != $couch['owner'])): ?>
 	<div class="container">
 		<div class="row">
-			<div class="form-horizontal col-md-offset-3 col-md-6">
-				<input type="text" class="col-md-12" placeholder="Escriba su pregunta.." />
-			</div>
-			<button class="btn btn-primary col-md-1">Enviar</button>
+			<form id="add-question" class="form-horizontal" action="/resources/library/add_question.php" method="POST">
+				<div class="col-md-offset-3 col-md-6">
+					<input class="col-md-12 form-control" name="question" type="text" placeholder="Escriba su pregunta.." required />
+					<input name="couchID" value="<?php echo $couch['id'] ?>" hidden />
+				</div>
+				<input class="btn btn-primary col-md-1" type="submit" value="Enviar" />
+			</form>
 		</div>
-	</div>
 	<?php endif; ?>
-	<div class="container">
+	<?php if ($questions): ?>
+		<br />
 		<div class="row">
-			<div class="col-md-offset-2 col-md-8">
-			<?php if ($questions): ?>
-				<ul>
+			<fieldset class="col-md-offset-2 col-md-8">
+				<legend>Preguntas y respuestas</legend>
+				<ul id="questions">
 				<?php foreach ($questions as $question): ?>
-					<li><?php echo $question['question'] ?></li>
+					<li><i class="fa fa-comment" aria-hidden="true"></i> <?php echo $question['question'] ?></li>
 					<ul>
 					<?php if ($question['answer']): ?>
-						<li><?php echo $question['answer'] ?></li>
+						<li><i class="fa fa-comments" aria-hidden="true"></i> <?php echo $question['answer'] ?></li>
 					<?php elseif (isset($_SESSION['user']) && ($_SESSION['user'] == $couch['owner'])): ?>
 						<input type="text" class="col-md-9" placeholder="Escriba su respuesta.." />
 						<button class="btn btn-primary col-md-offset-1 col-md-2">Enviar</button>
 					<?php endif; ?>
 					</ul>
 				<?php endforeach; ?>
-			<?php endif; ?>
-			</div>
+			</fieldset>
 		</div>
 	</div>
+	<?php endif; ?>
 
 	<!-- FOOTER -->
 	<?php include 'resources/templates/footer.php' ?>
@@ -156,6 +159,7 @@ endif;
 		<?php if ($_SESSION['user'] == $couch['owner']): ?>
 			<script src="js/edit-couch.js"></script>
 		<?php else: ?>
+			<script src="js/add-question.js"></script>
 			<script src="js/book-couch.js"></script>
 		<?php endif; ?>
 		<script src="js/edit-user-data.js"></script>

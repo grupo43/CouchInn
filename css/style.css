@@ -32,6 +32,15 @@ h6 {
 	background-position: 50% 50%;
 }
 
+#questions i {
+	color: #879b36;
+}
+
+#questions, #questions > ul {
+	list-style-type: none;
+	color: #333333;
+}
+
 .error {
 	color: #a94442;
 }
