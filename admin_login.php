@@ -25,7 +25,7 @@ endif;
 		<form id="login-form" class="form-signin" action="/resources/library/login.php" method="post">
 			<input name="input-email" type="email" class="form-control" placeholder="Email" required autofocus />
 			<input name="input-password" type="password" class="form-control" placeholder="Contraseña" required />
-			<input id="access-level" name="access-level" value="admin" hidden />
+			<input id="access-level" name="access-level" value="admin" type="hidden" />
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar sesión</button>
 		</form>
 		<div id="login-feedback" class="alert text-center" role="alert"></div>

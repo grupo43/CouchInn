@@ -53,7 +53,7 @@ endif;
 						<div class="help-block with-errors"></div>
 					</div>
 				</div>
-				<input name="token" value="<?php echo $token ?>" hidden />
+				<input name="token" value="<?php echo $token ?>" type="hidden" />
 				<input class="col-md-offset-4 btn btn-success" value="Cambiar contraseña" type="submit" required />
 			</form>
 		</div>

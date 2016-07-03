@@ -24,7 +24,7 @@
 							<a id="password-forgot-question" class="small" href="javascript:void()" data-toggle="modal" data-target="#reset-password-modal">¿Olvidaste tu contraseña?</a>
 						</div>
 					</div>
-					<input id="access-level" name="access-level" value="user" hidden />
+					<input id="access-level" name="access-level" value="user" type="hidden" />
 					<div id="login-feedback" class="alert text-center" role="alert" hidden="hidden"></div>
 				</div>
 				<div class="modal-footer">
