@@ -44,9 +44,9 @@ $('#search-form').submit(function($e) {
 					"WHERE id IN (SELECT reservation_id FROM accepted_reservation)" +
 				") AS accepted " +
 				"WHERE " +
-					"(DATE('" + fromVal + "') BETWEEN accepted.from AND accepted.till) OR " +
-					"(DATE('" + tillVal + "') BETWEEN accepted.from AND accepted.till) OR " +
-					"(DATE('" + fromVal + "') < accepted.from AND DATE('" + tillVal + "') > accepted.till)" +
+					"('" + fromVal + "' BETWEEN accepted.from AND accepted.till) OR " +
+					"('" + tillVal + "' BETWEEN accepted.from AND accepted.till) OR " +
+					"('" + fromVal + "' < accepted.from AND '" + tillVal + "' > accepted.till)" +
 			")";
 	}
 	// Clear date inputs

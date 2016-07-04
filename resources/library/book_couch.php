@@ -19,9 +19,9 @@ $sql = "
 		WHERE couch_id = '{$_POST['couchID']}' AND id IN (SELECT reservation_id FROM accepted_reservation)
 	) AS accepted
 	WHERE
-		(DATE('{$from}') BETWEEN accepted.from AND accepted.till) OR
-		(DATE('{$till}') BETWEEN accepted.from AND accepted.till) OR
-		(DATE('{$from}') < accepted.from AND DATE('{$till}') > accepted.till)
+		('$from' BETWEEN accepted.from AND accepted.till) OR
+		('$till' BETWEEN accepted.from AND accepted.till) OR
+		('$from' < accepted.from AND '$till' > accepted.till)
 ";
 
 if (!$db->query($sql)->num_rows):
@@ -44,7 +44,7 @@ if (!$db->query($sql)->num_rows):
 	$db->query($sql);
 	$return = [
 		"success" => true,
-		"message" => "Se ha reservado el couch satifactoriamente."
+		"message" => "Se ha reservado el couch satisfactoriamente."
 	];
 else:
 	$return = [
