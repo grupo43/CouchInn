@@ -82,65 +82,82 @@ endif;
 	</div>
 	<hr />
 	<!-- COUCH DESCRIPTION -->
-	<div class="row">
-		<div class="col-md-offset-3 col-md-6">
-			<h4 class="text-"><?php echo $couch['description'] ?></h4>
-		</div>
-		<!-- COUCH MANAGEMENT BUTTONS -->
-		<?php if (isset($_SESSION['user']) && ($_SESSION['user'] == $couch['owner'])): ?>
-		<div class="col-md-2 pull-right">
-			<div class="col-md-12">
-				<a id="delete-couch" class="btn btn-danger btn-block" href="/resources/library/couch_delete.php?id=<?php echo $id ?>">Eliminar</a>
-				<a id="toggle-couch" href="/resources/library/couch_toggle.php?id=<?php echo $id ?>" class="btn btn-block 
-				<?php if ($couch['enabled']): ?>
-					btn-warning">Deshabilitar
-				<?php else: ?>
-					btn-success">Habilitar
-				<?php endif; ?>
-				</a>
-				<a class="btn btn-info btn-block" data-toggle="modal" data-target="#edit-couch-modal">Modificar</a>
-			</div>
-		</div>
-		<?php endif; ?>
-	</div>
-	<!-- QUESTIONS & ANSWERS -->
-	<?php if (isset($_SESSION['user']) && ($_SESSION['user'] != $couch['owner'])): ?>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
-			<form id="add-question" class="form-horizontal" action="/resources/library/add_question.php" method="POST">
-				<div class="col-md-offset-3 col-md-6">
-					<input class="col-md-12 form-control" name="question" type="text" placeholder="Escriba su pregunta.." required />
-					<input name="couchID" value="<?php echo $couch['id'] ?>" hidden />
+			<div class="col-md-offset-3 col-md-6">
+				<h4 class="text-"><?php echo $couch['description'] ?></h4>
+			</div>
+			<!-- COUCH MANAGEMENT BUTTONS -->
+			<?php if (isset($_SESSION['user']) && ($_SESSION['user'] == $couch['owner'])): ?>
+			<div class="col-md-2 pull-right">
+				<div class="col-md-12">
+					<a id="delete-couch" class="btn btn-danger btn-block" href="/resources/library/couch_delete.php?id=<?php echo $id ?>">Eliminar</a>
+					<a id="toggle-couch" href="/resources/library/couch_toggle.php?id=<?php echo $id ?>" class="btn btn-block
+					<?php if ($couch['enabled']): ?>
+						btn-warning">Deshabilitar
+					<?php else: ?>
+						btn-success">Habilitar
+					<?php endif; ?>
+					</a>
+					<a class="btn btn-info btn-block" data-toggle="modal" data-target="#edit-couch-modal">Modificar</a>
 				</div>
-				<input class="btn btn-primary col-md-1" type="submit" value="Enviar" />
-			</form>
+			</div>
+			<?php endif; ?>
 		</div>
-	<?php endif; ?>
-	<?php if ($questions): ?>
-		<br />
+	</div>
+	<br />
+	<!-- QUESTIONS & ANSWERS -->
+	<div class="container-fluid">
 		<div class="row">
 			<fieldset class="col-md-offset-2 col-md-8">
 				<legend>Preguntas y respuestas</legend>
-				<ul id="questions">
-				<?php foreach ($questions as $question): ?>
-					<li><i class="fa fa-comment" aria-hidden="true"></i> <?php echo $question['question'] ?></li>
-					<ul>
-					<?php if ($question['answer']): ?>
-						<li><i class="fa fa-comments" aria-hidden="true"></i> <?php echo $question['answer'] ?></li>
-					<?php elseif (isset($_SESSION['user']) && ($_SESSION['user'] == $couch['owner'])): ?>
-						<input type="text" class="col-md-9" placeholder="Escriba su respuesta.." />
-						<button class="btn btn-primary col-md-offset-1 col-md-2">Enviar</button>
-					<?php endif; ?>
-					</ul>
-				<?php endforeach; ?>
+				<?php if (isset($_SESSION['user']) && ($_SESSION['user'] != $couch['owner'])): ?>
+					<div class="row">
+						<form id="add-question" action="/resources/library/add_question.php" method="POST">
+							<div class="col-md-offset-1 col-md-9">
+								<input class="form-control" name="question" type="text" placeholder="Escriba su pregunta.." required />
+							</div>
+							<input name="couchID" value="<?php echo $couch['id'] ?>" type="hidden" />
+							<input class="btn btn-primary col-md-1" type="submit" value="Enviar" />
+						</form>
+					</div>
+					<br />
+				<?php endif; ?>
+				<ul id="questions" class="row">
+				<?php if ($questions): ?>
+					<?php foreach ($questions as $question): ?>
+						<li><i class="fa fa-comment" aria-hidden="true"></i> <?php echo $question['question'] ?></li>
+						<?php if ($question['answer']): ?>
+						<ul>
+							<li><i class="fa fa-comments" aria-hidden="true"></i> <?php echo $question['answer'] ?></li>
+						</ul>
+						<br />
+						<?php elseif (isset($_SESSION['user']) && ($_SESSION['user'] == $couch['owner'])): ?>
+						<ul>
+							<li>
+								<form class="answer-question" action="/resources/library/answer_question.php" method="POST">
+									<div class="col-md-10">
+										<input type="text" name="answer" class="form-control" placeholder="Escriba su respuesta.." />
+									</div>
+									<input name="questionID" value="<?php echo $question['id'] ?>" type="hidden">
+									<input name="couchID" value="<?php echo $couch['id'] ?>" type="hidden" />
+									<input class="btn btn-primary" type="submit" value="Enviar" />
+								</form>
+							</li>
+						</ul>
+						<?php else: ?>
+						<br />
+						<?php endif; ?>
+					<?php endforeach; ?>
+				<?php endif; ?>
+				</ul>
 			</fieldset>
 		</div>
 	</div>
-	<?php endif; ?>
 
 	<!-- FOOTER -->
 	<?php include 'resources/templates/footer.php' ?>
-	
+
 	<script src="resources/library/jquery-2.2.4.js"></script>
 	<script src="resources/library/bootstrap.js"></script>
 	<script src="resources/library/script.js"></script>
@@ -158,6 +175,7 @@ endif;
 	<?php else: ?>
 		<?php if ($_SESSION['user'] == $couch['owner']): ?>
 			<script src="js/edit-couch.js"></script>
+			<script src="js/answer-question.js"></script>
 		<?php else: ?>
 			<script src="js/add-question.js"></script>
 			<script src="js/book-couch.js"></script>
