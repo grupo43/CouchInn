@@ -22,4 +22,5 @@ $('#add-question').submit(function($e) {
 			});
 		});
 	});
+	$(this).trigger('reset');
 });
