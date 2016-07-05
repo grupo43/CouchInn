@@ -124,6 +124,23 @@ function getQuestions($couchID) {
 	return $questions;
 }
 
+function getPremiumSales($from = "", $to = "") {
+	$db = connect();
+	$sql = "
+		SELECT *
+		FROM payment
+	";
+	if ($from && $to):
+		$sql .= "WHERE `date` BETWEEN '$from' AND '$to'";
+	endif;
+	$result = $db->query($sql);
+	$sales = array();
+	while ($sale = $result->fetch_assoc()):
+		$sales[] = $sale;
+	endwhile;
+	return $sales;
+}
+
 function isOwner($user, $couchID) {
 	$db = connect();
 	$sql = "

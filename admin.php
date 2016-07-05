@@ -20,6 +20,7 @@ $db = connect();
 	<title>Couch Inn - Admin Dashboard</title>
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<link href="css/dashboard.css" rel="stylesheet">
+	<link href="css/bootstrap-datepicker3.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
 </head>
 
@@ -58,6 +59,15 @@ $db = connect();
 	<script src="resources/library/jquery-2.2.4.js"></script>
 	<script src="resources/library/bootstrap.js"></script>
 	<script src="resources/library/functions.js"></script>
+	<script src="js/reports.js"></script>
+	<script src="resources/library/bootstrap-datepicker.js"></script>
+	<script src="resources/locales/bootstrap-datepicker.es.min.js"></script>
+	<script>
+		$('#datepicker').datepicker({
+			maxViewMode: 2,
+			language: "es"
+		});
+	</script>
 	<script src="js/couch-type-abm.js"></script>
 	<!-- Just to make our placeholder images work. Remove at production! -->
 	<script src="resources/library/holder.min.js"></script>
