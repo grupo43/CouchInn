@@ -1,5 +1,8 @@
 <div class="col-md-6">
 	<h2 class="sub-header text-center">Ventas premium</h2>
+	<?php
+	$sales = getPremiumSales();
+	if ($sales): ?>
 	<form id="report-premium-sales" action="/resources/library/premium_report.php" method="post">
 	<div id="datepicker" class="input-daterange input-group" >
 		<input type="text" class="input form-control" name="from" required />
@@ -19,7 +22,7 @@
 	</div>
 	</form>
 	<br />
-	<div class="table-responsive">
+	<div id="premium-report-table" class="table-responsive">
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -28,36 +31,35 @@
 					<th>Fecha</th>
 				</tr>
 			</thead>
-			<tbody id="premium-report-table">
-				<?php
-				$sales = getPremiumSales();
-				if ($sales):
-					$totalAmount = 0;
-					foreach ($sales as $sale):
-						$date = substr($sale['date'], 0, 10);
-						$date = implode('/', array_reverse(explode('-', $date)));
-						$time = substr($sale['date'], 10);
-						$amount = $sale['amount'];
-						if (substr($amount, -2) == "00"):
-							$amount = substr($amount, 0, -3);
-						endif;
-						$totalAmount += $sale['amount'];
-					?>
-					<tr>
-						<td><?php echo $sale['user'] ?></td>
-						<td><?php echo '$'.$amount ?></td>
-						<td><?php echo $date.$time ?></td>
-					</tr>
-					<?php endforeach; ?>
-					<tr>
-						<td><strong>Monto total recaudado:</strong></td>
-						<td><strong><?php echo '$'.$totalAmount ?></strong></td>
-						<td></td>
-					</tr>
-				<?php endif; ?>
+			<tbody>
+			<?php
+				$totalAmount = 0;
+				foreach ($sales as $sale):
+					$date = substr($sale['date'], 0, 10);
+					$date = implode('/', array_reverse(explode('-', $date)));
+					$time = substr($sale['date'], 10);
+					$amount = $sale['amount'];
+					if (substr($amount, -2) == "00"):
+						$amount = substr($amount, 0, -3);
+					endif;
+					$totalAmount += $sale['amount']; ?>
+				<tr>
+					<td><?php echo $sale['user'] ?></td>
+					<td><?php echo '$'.$amount ?></td>
+					<td><?php echo $date.$time ?></td>
+				</tr>
+				<?php endforeach; ?>
+				<tr>
+					<td><strong>Monto total recaudado:</strong></td>
+					<td><strong><?php echo '$'.$totalAmount ?></strong></td>
+					<td></td>
+				</tr>
 			</tbody>
 		</table>
 	</div>
+	<?php else: ?>
+		<div class="alert alert-info text-center" role="alert">Lo sentimos, aún no se han registrado ventas premium.</div>
+	<?php endif; ?>
 </div>
 <div class="col-md-6">
 	<h2 class="sub-header text-center">Reservas Concretadas</h2>
