@@ -3,18 +3,34 @@ $table = $('#premium-report-table');
 var updateSalesTable = function(range) {
 	$.get('/resources/library/premium_report.php', range, function(sales) {
 		$table.html('');
-		$.each(sales, function(index, sale) {
-			var date = sale.date.substr(0, 10);
-			date = date.split("-").reverse().join("/");
-			var time = sale.date.substr(10);
+		if (sales.length) {
+			var totalAmount = 0;
+			$.each(sales, function(index, sale) {
+				var date = sale.date.substr(0, 10);
+				date = date.split("-").reverse().join("/");
+				var time = sale.date.substr(10);
+				var amount = sale.amount;
+				totalAmount += parseFloat(amount);
+				if (amount.substr(-2) == "00") {
+					amount = amount.slice(0, -3);
+				}
+				$table.append(
+					'<tr>' +
+					'<td>' + sale.user + '</td>' +
+					'<td>' + '$' + amount + '</td>' +
+					'<td>' + date + time + '</td>' +
+					'</tr>'
+				);
+			});
 			$table.append(
 				'<tr>' +
-					'<td>' + sale.user + '</td>' +
-					'<td>' + sale.amount + '</td>' +
-					'<td>' + date + time + '</td>' +
+					'<td><strong>Monto total recaudado:</strong></td>' +
+					'<td><strong>' + '$' + totalAmount + '</strong></td>' +
+					'<td></td>' +
 				'</tr>'
 			);
-		});
+
+		}
 	});
 };
 
