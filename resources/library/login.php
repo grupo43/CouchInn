@@ -35,7 +35,7 @@ else:
 		endif;
 		$message .= 'Verifique los datos ingresados y vuelva a intentarlo.';
 		if ($accessLevel == 'user'):
-			$message .= '<br />Si lo desea, puede <a id="send-token" href="resources/library/send_token.php?input-email='.$email.'">restablecer su contraseña</a>.';
+			$message .= '<br />Si lo desea, puede <a id="send-token" href="resources/library/send_token?input-email='.$email.'">restablecer su contraseña</a>.';
 		endif;
 		$result = ["success" => false, "message" => $message];
 	endif;

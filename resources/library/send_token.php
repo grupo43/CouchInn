@@ -14,7 +14,7 @@ $sql = "
 $userName = $db->query($sql)->fetch_row()[0];
 $token = generateToken($email);
 $subject = "Couch Inn - Restablecimiento de contraseña";
-$url = 'reset_password.php?email='.$email.'&token='.$token;
+$url = 'reset_password?email='.$email.'&token='.$token;
 $body = '
 	<html>
 		<body>

@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<a href="admin.php"><img src="img/logo/couchinn_logo_tiny.png" alt="Couchinn logo"/></a>
+			<a href="admin"><img src="img/logo/couchinn_logo_tiny.png" alt="Couchinn logo"/></a>
 		</div>
 		<ul class="nav navbar-nav navbar-right">
 			<li class="dropdown">

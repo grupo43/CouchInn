@@ -120,7 +120,7 @@ $addForm.submit(function($e) {
 				formData: $addForm.serialize(),
 				photos: imagesArrAdd
 			}, function(couchID) {
-				window.location = 'couch.php?id=' + couchID;
+				window.location = 'couch?id=' + couchID;
 			});
 		}
 	} else {
