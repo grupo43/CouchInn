@@ -65,18 +65,18 @@
 	<h2 class="sub-header text-center">Reservas Concretadas</h2>
 	<form action="javascript:void(0)" method="post">
 		<div class="input-daterange input-group" >
-			<input type="text" class="input form-control" name="from" required />
+			<input type="text" class="input form-control" name="from" required disabled />
 			<span class="input-group-addon">hasta</span>
-			<input type="text" class="input form-control" name="to" required />
+			<input type="text" class="input form-control" name="to" required disabled />
 		</div>
 		<br />
 		<div class="row">
 			<div class="col-md-offset-2 col-md-8">
 				<div class="col-md-6">
-					<input class="btn btn-primary form-control" type="submit" value="Filtrar" />
+					<input class="btn btn-default form-control" type="submit" value="Filtrar" disabled />
 				</div>
 				<div class="col-md-6">
-					<input class="btn btn-default form-control" value="Restablecer" />
+					<input class="btn btn-default form-control" value="Restablecer" disabled />
 				</div>
 			</div>
 		</div>

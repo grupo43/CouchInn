@@ -1,4 +1,5 @@
 <div class="col-md-4">
+	<h1 class="page-header text-capitalize">Base de datos</h1>
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h3 class="panel-title"><strong>Tipos de Couches</strong></h3>

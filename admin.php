@@ -26,32 +26,54 @@ $db = connect();
 
 <body>
 	<!-- NAVBAR -->
-	<?php include 'resources/templates/navbar_admin.php'; ?>
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a href="admin"><img src="img/logo/couchinn_logo_tiny.png" alt="Couchinn logo"/></a>
+			</div>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['admin'] ?> <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Ayuda</a></li>
+						<li><a href="#">Mensajes</a></li>
+						<li role="separator" class="divider"></li>
+						<li><a href="resources/library/logout.php?admin">Cerrar sesión</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</nav>
 
 	<div class="container-fluid">
 		<div class="row">
 			<!-- SIDEBAR -->
-			<?php include 'resources/templates/sidebar_admin.php'; ?>
+			<div class="col-md-2 sidebar">
+				<ul class="nav nav-sidebar">
+					<li <?php if (empty ($_GET)): echo 'class="active"'; endif; ?>><a href="admin">Inicio</a></li>
+					<li <?php if (isset ($_GET['database'])): echo 'class="active"'; endif; ?>><a href="?database">Base de Datos</a></li>
+					<li <?php if (isset ($_GET['reports'])): echo 'class="active"'; endif; ?>><a href="?reports">Reportes</span></a></li>
+				</ul>
+			</div>
 
 			<!-- BODY -->
 			<div class="main col-md-10 col-md-offset-2">
-				<h1 class="page-header">Panel de control</h1>
-				<?php
-				//-- DASHBOARD --//
-				if (empty ($_GET)):
-					include 'resources/templates/dashboard.php';
-				endif;
+			<?php
+			//-- DASHBOARD --//
+			if (empty ($_GET)):
+				include 'resources/templates/dashboard.php';
+			endif;
 
-				//-- DATABASE --//
-				if (isset ($_GET['database'])):
-					include 'resources/templates/database.php';
-				endif;
+			//-- DATABASE --//
+			if (isset ($_GET['database'])):
+				include 'resources/templates/database.php';
+			endif;
 
-				//-- REPORTS --//
-				if (isset ($_GET['reports'])):
-					include 'resources/templates/reports.php';
-				endif;
-				?>
+			//-- REPORTS --//
+			if (isset ($_GET['reports'])):
+				include 'resources/templates/reports.php';
+			endif;
+			?>
 			</div>
 		</div>
 	</div>
@@ -69,7 +91,5 @@ $db = connect();
 		});
 	</script>
 	<script src="js/couch-type-abm.js"></script>
-	<!-- Just to make our placeholder images work. Remove at production! -->
-	<script src="resources/library/holder.min.js"></script>
 </body>
 </html>

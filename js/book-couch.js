@@ -3,7 +3,6 @@ $('#datepicker').datepicker({
 	maxViewMode: 2,
 	language: "es"
 });
-
 var $bookForm = $('#book-couch-form');
 var $bookFormFeedback = $bookForm.find('.feedback');
 
@@ -11,7 +10,7 @@ var $bookFormFeedback = $bookForm.find('.feedback');
 $bookForm.submit(function($e) {
 	$e.preventDefault();
 	if (!$(this).find('input[type="submit"]').hasClass('disabled')) {
-		$.post('resources/library/book_couch.php', $bookForm.serialize(), function(result) {
+		$.post('/resources/library/book_couch.php', $bookForm.serialize(), function(result) {
 			$bookFormFeedback.fadeOut(function() {
 				if (result.success) {
 					$bookFormFeedback.removeClass('alert-danger').addClass('alert-success');

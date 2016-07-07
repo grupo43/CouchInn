@@ -66,6 +66,26 @@ endif;
 
 	<script src="resources/library/jquery-2.2.4.js"></script>
 	<script src="resources/library/validator.js"></script>
-	<script src="js/reset-password.js"></script>
+	<script>
+		$('#reset-password-form').submit(function($e) {
+			$e.preventDefault();
+			if (!$(this).find('input[type="submit"]').hasClass('disabled')) {
+				var formData = $(this).serialize();
+				$.post('/resources/library/reset_password.php', formData, function(result) {
+					$feedback = $('.feedback');
+					if (result.success) {
+						$feedback.addClass('alert-success');
+					}
+					else {
+						$feedback.addClass('alert-danger');
+					}
+					$feedback.html(result.message).fadeIn();
+					window.setTimeout(function() {
+						window.location.replace('/');
+					}, 2000);
+				});
+			}
+		});
+	</script>
 </body>
 </html>
