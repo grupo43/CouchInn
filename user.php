@@ -23,6 +23,7 @@ $db = connect();
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<link href="css/dashboard.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
+	<link href="css/star-rating.css" rel="stylesheet">
 </head>
 
 <body>
@@ -95,11 +96,18 @@ $db = connect();
 	<script src="resources/library/functions.js"></script>
 	<script src="resources/library/moment-with-locales.js"></script>
 	<script src="resources/library/validator.js"></script>
+	<script src="resources/library/star-rating.js"></script>
 	<script src="js/edit-user-data.js"></script>
 	<script src="js/add-couch.js"></script>
 	<?php if (!$isPremium): ?>
 		<script src="resources/library/jquery.payment.js"></script>
 		<script src="js/premium.js"></script>
 	<?php endif; ?>
+	<script>
+		$("#user-score").rating({
+			size: 'xs',
+			displayOnly: true
+		});
+	</script>
 </body>
 </html>
