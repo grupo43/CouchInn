@@ -126,10 +126,10 @@ endif;
 				<ul id="questions" class="row">
 				<?php if ($questions): ?>
 					<?php foreach ($questions as $question): ?>
-						<li><i class="fa fa-comment" aria-hidden="true"></i> <?php echo $question['question'] ?></li>
+						<li><i class="fa fa-comment" aria-hidden="true"></i> <strong><?php echo $question['user'] ?>: </strong><?php echo $question['question'] ?></li>
 						<?php if ($question['answer']): ?>
 						<ul>
-							<li><i class="fa fa-comments" aria-hidden="true"></i> <?php echo $question['answer'] ?></li>
+							<li><i class="fa fa-comments" aria-hidden="true"></i> <strong><?php echo $couch['owner'] ?>: </strong><?php echo $question['answer'] ?></li>
 						</ul>
 						<br />
 						<?php elseif (isset($_SESSION['user']) && ($_SESSION['user'] == $couch['owner'])): ?>
