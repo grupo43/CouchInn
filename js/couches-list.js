@@ -10,6 +10,18 @@ var $arrows = $('#arrows');
 
 var sql = "SELECT * FROM couch WHERE enabled = 1 ORDER BY publication_date DESC";
 
+var updateCouchList = function(sql) {
+	$.getJSON('/resources/library/get_couches.php', {
+		page: 1,
+		sql: sql
+	}, function(html) {
+		$couchesList.fadeOut(200, function() {
+			$(this).html(html.couches).fadeIn(200);
+		});
+		$arrows.html(html.arrows);
+	});
+};
+
 $('#search-form').submit(function($e) {
 	$e.preventDefault();
 	sql = "SELECT * FROM couch WHERE enabled = 1 ORDER BY publication_date DESC";
@@ -58,15 +70,7 @@ $('#search-form').submit(function($e) {
 		var insertPoint = sql.indexOf('1') + 1;
 		sql = [sql.slice(0, insertPoint), filter, sql.slice(insertPoint)].join(''); // Append filters into SQL statement
 	}
-	$.getJSON('/resources/library/get_couches.php', {
-		page: 1,
-		sql: sql
-	}, function(html) {
-		$couchesList.fadeOut(200, function() {
-			$(this).html(html.couches).fadeIn(200);
-		});
-		$arrows.html(html.arrows);
-	});
+	updateCouchList(sql);
 });
 
 $arrows.on("click", "a", function($e) {
@@ -81,4 +85,10 @@ $arrows.on("click", "a", function($e) {
 		});
 		$arrows.html(html.arrows);
 	});
+});
+
+$('#reset-couches-list').click(function() {
+	$('#search-form').trigger('reset');
+	sql = "SELECT * FROM couch WHERE enabled = 1 ORDER BY publication_date DESC";
+	updateCouchList(sql);
 });

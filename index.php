@@ -45,7 +45,7 @@ include 'resources/templates/includes.php';
 	<!-- SEARCH -->
 	<div class="container-fluid">
 		<div class="col-md-offset-2 col-md-8">
-			<form id="search-form" class="form-horizontal" role="search">
+			<form id="search-form" href="javascript:void(0)" class="form-horizontal" role="search">
 				<div class="form-group">
 					<div class="col-md-3">
 						<select class="form-control" name="couchType" autocomplete="off">
@@ -67,11 +67,14 @@ include 'resources/templates/includes.php';
 					</div>
 				</div>
 				<div class="form-group">
-					<div class="col-md-offset-2 col-md-8">
+					<div class="col-md-2">
+						<input id="reset-couches-list" class="btn btn-default form-control" value="Restablecer" />
+					</div>
+					<div class="col-md-8">
 						<input name="search" class="form-control" placeholder="Título o descripción .." type="text" />
 					</div>
 					<div class="col-md-2">
-						<button class="form-control btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i> <strong>Buscar</strong> </button>
+						<button class="form-control btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i> <strong>Buscar</strong></button>
 					</div>
 				</div>
 			</form>
