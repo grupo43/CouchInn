@@ -11,8 +11,10 @@ USE `couchinn`;
 
 DROP TABLE IF EXISTS `accepted_reservation`;
 CREATE TABLE `accepted_reservation` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `reservation_id` int(10) unsigned NOT NULL,
-  `date` datetime NOT NULL,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
   KEY `reservation_id` (`reservation_id`),
   CONSTRAINT `accepted_reservation_ibfk_1` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -67,6 +69,37 @@ CREATE TABLE `couch_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
+DROP TABLE IF EXISTS `denied_reservation`;
+CREATE TABLE `denied_reservation` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `reservation_id` int(10) unsigned NOT NULL,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `reservation_id` (`reservation_id`),
+  CONSTRAINT `denied_reservation_ibfk_1` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+
+DROP TABLE IF EXISTS `guest_score`;
+CREATE TABLE `guest_score` (
+  `reservation_id` int(10) unsigned NOT NULL,
+  `score` decimal(10,0) unsigned NOT NULL,
+  `comment` varchar(255) COLLATE utf8_bin NOT NULL,
+  KEY `reservation_id` (`reservation_id`),
+  CONSTRAINT `guest_score_ibfk_1` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+
+DROP TABLE IF EXISTS `host_score`;
+CREATE TABLE `host_score` (
+  `reservation_id` int(10) unsigned NOT NULL,
+  `score` decimal(10,0) unsigned NOT NULL,
+  `comment` varchar(255) COLLATE utf8_bin NOT NULL,
+  KEY `reservation_id` (`reservation_id`),
+  CONSTRAINT `host_score_ibfk_1` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+
 DROP TABLE IF EXISTS `payment`;
 CREATE TABLE `payment` (
   `user` varchar(255) COLLATE utf8_bin DEFAULT NULL,
@@ -79,11 +112,13 @@ CREATE TABLE `payment` (
 
 DROP TABLE IF EXISTS `q&a`;
 CREATE TABLE `q&a` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `couch_id` int(10) unsigned NOT NULL,
   `question` varchar(255) COLLATE utf8_bin NOT NULL,
   `answer` varchar(255) COLLATE utf8_bin NOT NULL,
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
   KEY `user` (`user`),
   KEY `couch_id` (`couch_id`),
   CONSTRAINT `q&a_ibfk_3` FOREIGN KEY (`user`) REFERENCES `user` (`email`) ON DELETE SET NULL ON UPDATE CASCADE,
@@ -94,16 +129,16 @@ CREATE TABLE `q&a` (
 DROP TABLE IF EXISTS `reservation`;
 CREATE TABLE `reservation` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `couch_id` int(10) unsigned NOT NULL,
-  `user` varchar(255) COLLATE utf8_bin NOT NULL,
+  `host_id` int(10) unsigned NOT NULL,
+  `guest_id` varchar(255) COLLATE utf8_bin NOT NULL,
   `num_guests` tinyint(2) NOT NULL,
   `from` date NOT NULL,
   `till` date NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `couch_id` (`couch_id`),
-  KEY `user` (`user`),
-  CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`couch_id`) REFERENCES `couch` (`id`),
-  CONSTRAINT `reservation_ibfk_3` FOREIGN KEY (`user`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `couch_id` (`host_id`),
+  KEY `user` (`guest_id`),
+  CONSTRAINT `reservation_ibfk_3` FOREIGN KEY (`guest_id`) REFERENCES `user` (`email`) ON UPDATE CASCADE,
+  CONSTRAINT `reservation_ibfk_4` FOREIGN KEY (`host_id`) REFERENCES `couch` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
@@ -118,4 +153,4 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
--- 2016-07-03 17:38:13
+-- 2016-07-08 18:03:39

@@ -51,7 +51,7 @@ $('#search-form').submit(function($e) {
 			" AND id NOT IN (" +
 				"SELECT couch_id " +
 				"FROM (" +
-					"SELECT couch_id, `from`, till " +
+					"SELECT host_id, `from`, till " +
 					"FROM reservation " +
 					"WHERE id IN (SELECT reservation_id FROM accepted_reservation)" +
 				") AS accepted " +

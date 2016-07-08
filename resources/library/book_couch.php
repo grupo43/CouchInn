@@ -16,7 +16,7 @@ $sql = "
 	FROM (
 		SELECT `from`, till
 		FROM reservation
-		WHERE couch_id = '{$_POST['couchID']}' AND id IN (SELECT reservation_id FROM accepted_reservation)
+		WHERE `host_id` = '{$_POST['couchID']}' AND id IN (SELECT reservation_id FROM accepted_reservation)
 	) AS accepted
 	WHERE
 		('$from' BETWEEN accepted.from AND accepted.till) OR
@@ -27,8 +27,8 @@ $sql = "
 if (!$db->query($sql)->num_rows):
 	$sql = "
 		INSERT INTO reservation
-			( couch_id
-			, user
+			( `host_id`
+			, `guest_id`
 			, num_guests
 			, `from`
 			, till
