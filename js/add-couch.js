@@ -6,7 +6,7 @@ var options = {
 		country: 'ar'
 	}
 };
-autocompleteAdd = new google.maps.places.Autocomplete(cityInput, options);
+var autocompleteAdd = new google.maps.places.Autocomplete(cityInput, options);
 
 /* FORCE CITY SELECTION */
 $('#input-city-add').blur(function() {
@@ -56,7 +56,7 @@ $('#input-photos-add').change(function() {
 
 // Add photo to preview
 var previewPhotoAdd = function(index, photo) {
-	$row = $('#ph-preview-add-r1');
+	var $row = $('#ph-preview-add-r1');
 	$row.show();
 	if ($row.children().length >= 3) {
 		$row = $('#ph-preview-add-r2');
@@ -89,7 +89,7 @@ var updatePreviewAdd = function(photos) {
 	$('#ph-preview-add-r2').html('');
 	var div;
 	var photoNum = 0;
-	$row = $('#ph-preview-add-r1');
+	var $row = $('#ph-preview-add-r1');
 	$.each(photos, function(index, photo) {
 		if (photo !== null) {
 			photoNum++;
@@ -138,7 +138,9 @@ $addForm.submit(function($e) {
 $('#add-couch-modal').on('hidden.bs.modal', function() {
 	autocompleteAdd = new google.maps.places.Autocomplete(cityInput, options); // Reset city value
 	$('.feedback-error').hide(); // Hide feedback errors
-	$('#photos-preview-add, #ph-preview-add-r2').hide(); // Hide photos
+	// Clear preview
+	$('#photos-preview-add').hide();
+	$('#ph-preview-add-r1, #ph-preview-add-r2').html('').hide(); //
 	imagesArrAdd	= []; // Empty images array
 	imagesCountAdd	= 0; // Reset counter
 });
