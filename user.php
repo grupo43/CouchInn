@@ -58,7 +58,7 @@ $db = connect();
 					<li <?php if (isset ($_GET['myCouches'])): echo 'class="active"'; endif; ?>><a href="?myCouches" class="text-capitalize">Mis couches</a></li>
 					<li <?php if (isset ($_GET['requestsIn'])): echo 'class="active"'; endif; ?>><a href="?requestsIn" class="text-capitalize">Solicitudes recibidas</a></li>
 					<li <?php if (isset ($_GET['requestsOut'])): echo 'class="active"'; endif; ?>><a href="?requestsOut" class="text-capitalize">Solicitudes realizadas</a></li>
-					<li <?php if (isset ($_GET['couchVisited'])): echo 'class="active"'; endif; ?>><a href="?couchVisited" class="text-capitalize">Couches que visité</a></li>
+					<li <?php if (isset ($_GET['visitedCouches'])): echo 'class="active"'; endif; ?>><a href="?visitedCouches" class="text-capitalize">Couches visitados</a></li>
 				</ul>
 			</div>
 
@@ -83,8 +83,8 @@ $db = connect();
 				endif;
 
 				//-- VISITED --//
-				if (isset ($_GET['couchVisited'])):
-					include 'resources/templates/couchVisited.php';
+				if (isset ($_GET['visitedCouches'])):
+					include 'resources/templates/visited_couches.php';
 				endif;
 				?>
 			</div>
