@@ -7,6 +7,8 @@
 	<div class="container">
 		<div class="carousel-caption">
 			<h1><?php echo $couch['title'] ?></h1>
+			<input id="couch-score" type="number" class="rating" value="<?php echo $couchScore ?>">
+			<br />
 			<?php if (isset($_SESSION['user']) && $_SESSION['user'] != $couch['owner']): ?>
 				<p><a class="btn btn-lg btn-primary" href="#" data-toggle="modal" data-target="#book-couch-modal">Reservar couch</a></p>
 			<?php endif; ?>

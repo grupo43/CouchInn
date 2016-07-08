@@ -40,6 +40,25 @@ if (isset($_SESSION['user'])):
 		include 'resources/templates/book_couch_modal.php';
 	endif;
 endif;
+
+$sql = "
+	SELECT score
+	FROM host_score
+	WHERE reservation_id IN (
+		SELECT id
+		FROM reservation
+		WHERE host_id = $id
+)
+";
+$couchScore = 0;
+$scores = $db->query($sql);
+$numScores = $scores->num_rows;
+if ($numScores > 0):
+	while ($score = $scores->fetch_row()[0]):
+		$couchScore += $score;
+	endwhile;
+	$couchScore = round(($couchScore / $numScores) * 2) / 2;
+endif;
 ?>
 
 <!DOCTYPE html>
@@ -56,6 +75,7 @@ endif;
 	<link href="css/font-awesome.min.css" rel="stylesheet">
 	<link href="css/carousel.css" rel="stylesheet">
 	<link href="css/sticky-footer-navbar.css" rel="stylesheet">
+	<link href="css/star-rating.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
 </head>
 <body>
@@ -166,6 +186,7 @@ endif;
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
 	<script src="resources/library/moment-with-locales.js"></script>
 	<script src="resources/library/validator.js"></script>
+	<script src="resources/library/star-rating.js"></script>
 	<script src="resources/library/couch-delete-toggle.js"></script>
 	<script src="js/fix-modal-navbar.js"></script>
 	<?php if (!isset($_SESSION['user'])): ?>
@@ -188,5 +209,11 @@ endif;
 		<?php endif; ?>
 		<script src="resources/library/functions.js"></script>
 	<?php endif; ?>
+	<script>
+		$("#couch-score").rating({
+			size: 'xs',
+			displayOnly: true
+		});
+	</script>
 </body>
 </html>
