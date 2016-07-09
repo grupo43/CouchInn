@@ -3,10 +3,12 @@ $db = connect();
 $sql = "
 	SELECT *
 	FROM user
-	WHERE email = '{$_SESSION['user']}'
+	WHERE username = '{$_SESSION['user']}'
 ";
 $user = $db->query($sql)->fetch_assoc();
 $name			= $user['name'];
+$userName		= $user['username'];
+$email			= $user['email'];
 $phoneNumber	= $user['phone_number'];
 ?>
 
@@ -20,15 +22,23 @@ $phoneNumber	= $user['phone_number'];
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
-						<label for="input-name" class="col-md-3 control-label">Nombre</label>
+						<label for="input-name" class="col-md-3 control-label">Nombre y Apellido</label>
 						<div class="col-md-9">
 							<input type="text" name="input-name" id="input-name" class="form-control" placeholder="<?php echo $name ?>" />
 						</div>
 					</div>
 					<div class="form-group has-feedback">
+						<label for="input-username" class="col-md-3 control-label">Nombre de usuario</label>
+						<div class="col-md-9">
+							<input type="text" name="input-username" id="input-username" class="form-control" placeholder="<?php echo $userName ?>" data-remote="/resources/library/validate_username.php" />
+							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							<div class="help-block with-errors"></div>
+						</div>
+					</div>
+					<div class="form-group has-feedback">
 						<label for="input-email" class="col-md-3 control-label">Email</label>
 						<div class="col-md-9">
-							<input type="email" name="input-email" id="input-email" class="form-control" placeholder="<?php echo $_SESSION['user'] ?>" data-remote="/resources/library/validate_email.php" />
+							<input type="email" name="input-email" id="input-email" class="form-control" placeholder="<?php echo $email ?>" data-remote="/resources/library/validate_email.php" />
 							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 							<div class="help-block with-errors"></div>
 						</div>

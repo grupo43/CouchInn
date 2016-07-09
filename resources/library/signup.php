@@ -6,6 +6,7 @@ endif;
 
 require_once 'functions.php';
 $db = connect();
+$inputUserName	= $db->real_escape_string($_POST['input-username']);
 $inputEmail		= $db->real_escape_string($_POST['input-email']);
 $inputPassword	= $db->real_escape_string($_POST['input-password']);
 $inputName		= $db->real_escape_string($_POST['input-name']);
@@ -17,14 +18,16 @@ $phoneNumber	= $db->real_escape_string($_POST['input-phone']);
 
 $sql = "
 	INSERT INTO user
-		( email
+		( username
+		, email
 		, password
 		, name
 		, birthdate
 		, phone_number
 		)
 	VALUES
-		( '$inputEmail'
+		( '$inputUserName'
+		, '$inputEmail'
 		, PASSWORD('$inputPassword')
 		, '$inputName'
 		, '$birthDate'
@@ -33,7 +36,7 @@ $sql = "
 ";
 if ($db->query($sql)):
 	session_start();
-	$_SESSION['user'] = $inputEmail;
+	$_SESSION['user'] = $inputUserName;
 	header('Location: /');
 endif;
 ?>

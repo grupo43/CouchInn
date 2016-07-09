@@ -12,13 +12,13 @@ $sql = "
 	WHERE reservation_id IN (
 		SELECT id
 		FROM reservation
-		WHERE guest_id = '{$_SESSION['user']}'
+		WHERE guest = '{$_SESSION['user']}'
 	)
 ";
 $userScore = 0;
 $scores = $db->query($sql);
 $numScores = $scores->num_rows;
-if ($numScores > 0):
+if ($numScores):
 	while ($score = $scores->fetch_row()[0]):
 		$userScore += $score;
 	endwhile;
@@ -34,7 +34,8 @@ endif;
 	</div>
 </div>
 <div class="col-md-4">
-	<h4><strong>Nombre:</strong> <?php echo $user['name'] ?></h4>
+	<h4><strong>Nombre y Apellido:</strong> <?php echo $user['name'] ?></h4>
+	<h4><strong>Nombre de Usuario:</strong> <?php echo $user['username'] ?></h4>
 	<h4><strong>Email:</strong> <?php echo $user['email'] ?></h4>
 	<h4><strong>Nacimiento:</strong> <?php echo implode('/', array_reverse(explode('-', $user['birthdate']))) ?></h4>
 	<h4><strong>Teléfono:</strong> <?php echo $user['phone_number'] ?></h4>

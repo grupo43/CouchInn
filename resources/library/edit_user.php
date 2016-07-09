@@ -35,7 +35,7 @@ $newData .= " birthdate = '$birthDate'";
 $sql = "
 	UPDATE user
 	SET{$newData}
-	WHERE email = '{$_SESSION['user']}'
+	WHERE username = '{$_SESSION['user']}'
 ";
 if ($db->query($sql)):
 	if (!empty($inputEmail)):

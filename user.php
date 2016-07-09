@@ -22,6 +22,7 @@ $db = connect();
 	<title>Couch Inn - Perfil de usuario</title>
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<link href="css/dashboard.css" rel="stylesheet">
+	<link href="css/font-awesome.min.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
 	<link href="css/star-rating.css" rel="stylesheet">
 </head>
@@ -93,6 +94,7 @@ $db = connect();
 
 	<script src="resources/library/jquery-2.2.4.js"></script>
 	<script src="resources/library/bootstrap.js"></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
 	<script src="resources/library/functions.js"></script>
 	<script src="resources/library/moment-with-locales.js"></script>
 	<script src="resources/library/validator.js"></script>

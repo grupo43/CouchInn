@@ -23,8 +23,7 @@ if ($couches->num_rows):
 			FROM couch_picture
 			WHERE couch_id = {$couch['id']}
 		";
-		$img = $db->query($sql)->fetch_row()[0];
-		?>
+		$img = $db->query($sql)->fetch_row()[0]; ?>
 		<?php if (($index) % 3 == 0): ?>
 		<div class="row">
 		<?php endif; ?>

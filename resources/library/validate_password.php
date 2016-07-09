@@ -11,7 +11,7 @@ $sql = "
 	SELECT email
 	FROM user
 	WHERE
-		email = '{$_SESSION['user']}' AND password = PASSWORD('{$_GET['input-password']}')
+		username = '{$_SESSION['user']}' AND password = PASSWORD('{$_GET['input-password']}')
 ";
 if ($db->query($sql)->num_rows):
 	$result = ["success" => true];

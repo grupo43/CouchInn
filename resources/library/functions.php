@@ -111,7 +111,7 @@ function getPictures($couchID) {
 function getQuestions($couchID) {
 	$db = connect();
 	$sql = "
-		SELECT id, user, question, answer
+		SELECT id, `user`, couch_id, question, answer
 		FROM `q&a`
 		WHERE couch_id = '$couchID'
 		ORDER BY `date` DESC
@@ -141,12 +141,22 @@ function getPremiumSales($from = "", $to = "") {
 	return $sales;
 }
 
+function getOwner($couchID) {
+	$db = connect();
+	$sql = "
+		SELECT owner
+		FROM couch
+		WHERE id = '$couchID'
+	";
+	return $db->query($sql)->fetch_row()[0];
+}
+
 function isOwner($user, $couchID) {
 	$db = connect();
 	$sql = "
-		SELECT enabled
+		SELECT id
 		FROM couch
-		WHERE id = '$couchID' AND owner = '{$_SESSION['user']}'
+		WHERE id = '$couchID' AND owner = '$user'
 	";
 	return $db->query($sql)->num_rows;
 }

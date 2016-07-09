@@ -4,7 +4,7 @@ session_start();
 $db = connect();
 $sql = "
 	SELECT birthdate FROM user
-	WHERE email = '{$_SESSION['user']}'
+	WHERE username = '{$_SESSION['user']}'
 ";
 if ($result = $db->query($sql)):
 	$birthDate = strtotime($result->fetch_row()[0]);

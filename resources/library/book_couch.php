@@ -28,7 +28,7 @@ if (!$db->query($sql)->num_rows):
 	$sql = "
 		INSERT INTO reservation
 			( `host_id`
-			, `guest_id`
+			, `guest`
 			, num_guests
 			, `from`
 			, till

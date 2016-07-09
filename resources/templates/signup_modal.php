@@ -8,9 +8,17 @@
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
-						<label for="input-name" class="col-md-3 control-label">Nombre</label>
+						<label for="input-name" class="col-md-3 control-label">Nombre y Apellido</label>
 						<div class="col-md-9">
 							<input type="text" name="input-name" id="input-name" class="form-control" required />
+						</div>
+					</div>
+					<div class="form-group has-feedback">
+						<label for="input-username" class="col-md-3 control-label">Nombre de usuario</label>
+						<div class="col-md-9">
+							<input type="text" name="input-username" id="input-username" class="form-control" data-remote="/resources/library/validate_username.php" required />
+							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							<div class="help-block with-errors"></div>
 						</div>
 					</div>
 					<div class="form-group has-feedback">

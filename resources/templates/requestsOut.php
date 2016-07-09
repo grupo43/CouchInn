@@ -2,7 +2,7 @@
 $sql = "
 	SELECT *
 	FROM reservation
-	WHERE guest_id = '{$_SESSION['user']}'
+	WHERE guest = '{$_SESSION['user']}'
 	ORDER BY id DESC
 ";
 $reservations = $db->query($sql);

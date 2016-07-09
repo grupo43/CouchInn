@@ -11,7 +11,7 @@ $question = stripslashes($_POST['question']);
 
 $sql = "
 	INSERT INTO `q&a`
-		( user
+		( `user`
 		, couch_id
 		, question		
 		)

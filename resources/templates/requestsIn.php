@@ -37,7 +37,7 @@ $reservations = $db->query($sql);
 			<a href="/couch?id=<?php echo $reservation['host_id'] ?>"><img class="couch thumbnail center-block" src="<?php echo $img ?>" alt="Couch image" width="128" height="128" /></a>
 		</td>
 		<td>
-			<?php echo $reservation['guest_id'] ?>
+			<?php echo $reservation['guest'] ?>
 			<input id="user-score" value="2">
 		</td>
 		<td><?php echo $reservation['num_guests'] ?></td>
