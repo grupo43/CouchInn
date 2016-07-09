@@ -4,10 +4,10 @@ if ($_SERVER["REQUEST_METHOD"] != "POST"):
 	exit;
 endif;
 
-$answer = stripslashes($_POST['answer']);
-
+session_start();
 require_once 'resources/library/functions.php';
 $db = connect();
+$answer = stripslashes($_POST['answer']);
 
 $sql = "
 	UPDATE `q&a`
@@ -15,4 +15,5 @@ $sql = "
 	WHERE id = {$_POST['questionID']}
 ";
 $db->query($sql);
+echo $_SESSION['user'];
 ?>

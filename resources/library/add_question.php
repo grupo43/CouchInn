@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] != "POST"):
 endif;
 
 session_start();
-require_once 'functions.php';
+require_once 'resources/library/functions.php';
 $db = connect();
 $question = stripslashes($_POST['question']);
 
@@ -22,4 +22,5 @@ $sql = "
 		)
 ";
 $db->query($sql);
+echo $_SESSION['user'];
 ?>

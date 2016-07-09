@@ -1,28 +1,10 @@
 $('#add-question').submit(function($e) {
 	$e.preventDefault();
-	var $questionList = $('#questions');
-	var couchID = $('input[name="couchID"]').val();
-	$.post('/resources/library/add_question.php', $(this).serialize(), function() {
-		$.get('/resources/library/get_owner.php', {couchID: couchID}, function(owner) {
-			$.get('/resources/library/get_questions.php', {couchID: couchID}, function (questions) {
-				$questionList.html('');
-				$.each(questions, function (index, question) {
-					$questionList.append(
-						'<li><i class="fa fa-comment" aria-hidden="true"></i> <strong>' + question.user + ': </strong>' + question.question + '</li>'
-					);
-					if (question.answer.length) {
-						$questionList.append(
-							'<ul>' +
-							'<li><i class="fa fa-comments" aria-hidden="true"></i> <strong>' + owner + ': </strong>' + question.answer + '</li>' +
-							'</ul>'
-						);
-					}
-					$questionList.append(
-						'<br />'
-					);
-				});
-			});
-		});
+	$.post('/resources/library/add_question.php', $(this).serialize(), function(user) {
+		var question = $('input[name="question"]').val();
+		$('#questions').prepend(
+			'<li><i class="fa fa-comment" aria-hidden="true"></i> <strong>' + user + ': </strong>' + question + '</li><br />'
+		);
+		$(this).trigger('reset');
 	});
-	$(this).trigger('reset');
 });
