@@ -1,13 +1,11 @@
 <?php
 $sql = "
 	SELECT *
-	FROM reservation
-	WHERE host_id IN (
-		SELECT id
-		FROM couch
-		WHERE owner = '{$_SESSION['user']}'
-	)
-	ORDER BY id DESC 
+	FROM
+		reservation r JOIN couch c
+		ON r.host_id = c.id
+	WHERE c.owner = '{$_SESSION['user']}'
+	ORDER BY r.id DESC 
 ";
 $reservations = $db->query($sql);
 ?>

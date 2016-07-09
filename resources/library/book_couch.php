@@ -15,8 +15,10 @@ $sql = "
 	SELECT *
 	FROM (
 		SELECT `from`, till
-		FROM reservation
-		WHERE `host_id` = '{$_POST['couchID']}' AND id IN (SELECT reservation_id FROM accepted_reservation)
+		FROM
+			reservation r JOIN accepted_reservation ar
+			ON r.id = ar.reservation_id
+		WHERE `host_id` = '{$_POST['couchID']}'
 	) AS accepted
 	WHERE
 		('$from' BETWEEN accepted.from AND accepted.till) OR

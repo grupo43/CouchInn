@@ -1,15 +1,12 @@
 <?php
 $sql = "
-	SELECT id, title, description
-	FROM couch AS c
-	WHERE c.id IN (
-		SELECT r.host_id
-		FROM reservation AS r
-		WHERE NOW() > r.till AND r.id IN (
-			SELECT reservation_id
-			FROM accepted_reservation
-		)
-	)
+	SELECT c.id, c.title, c.description
+	FROM reservation r
+		JOIN couch c
+			ON c.id = r.host_id
+		JOIN accepted_reservation ar
+			ON r.id = ar.reservation_id
+	WHERE r.guest = '{$_SESSION['user']}' AND NOW() > r.till
 ";
 $couches = $db->query($sql);
 ?>
