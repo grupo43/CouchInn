@@ -42,22 +42,15 @@ if (isset($_SESSION['user'])):
 endif;
 
 $sql = "
-	SELECT score
-	FROM host_score
-	WHERE reservation_id IN (
-		SELECT id
-		FROM reservation
-		WHERE host_id = $id
-)
+	SELECT AVG(score)
+	FROM
+		host_score hs JOIN reservation r
+		ON hs.reservation_id = r.id
+	WHERE host_id = $id
 ";
-$couchScore = 0;
-$scores = $db->query($sql);
-$numScores = $scores->num_rows;
-if ($numScores > 0):
-	while ($score = $scores->fetch_row()[0]):
-		$couchScore += $score;
-	endwhile;
-	$couchScore = round(($couchScore / $numScores) * 2) / 2;
+$couchScore = $db->query($sql)->fetch_row()[0];
+if ($couchScore):
+	$couchScore = round(($couchScore * 2)) / 2;
 endif;
 ?>
 

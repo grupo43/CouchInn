@@ -7,22 +7,15 @@ endif;
 require_once 'resources/library/functions.php';
 $db = connect();
 $sql = "
-	SELECT score
-	FROM guest_score
-	WHERE reservation_id IN (
-		SELECT id
-		FROM reservation
-		WHERE guest = '{$_SESSION['user']}'
-	)
+	SELECT AVG(score)
+	FROM
+		guest_score gs JOIN reservation r
+		ON gs.reservation_id = r.id
+	WHERE guest = '{$_SESSION['user']}'
 ";
-$userScore = 0;
-$scores = $db->query($sql);
-$numScores = $scores->num_rows;
-if ($numScores):
-	while ($score = $scores->fetch_row()[0]):
-		$userScore += $score;
-	endwhile;
-	$userScore = round(($userScore / $numScores) * 2) / 2;
+$userScore = $db->query($sql)->fetch_row()[0];
+if ($userScore):
+	$userScore = round(($userScore * 2)) / 2;
 endif;
 ?>
 <h1 class="page-header">Perfil</h1>
