@@ -6,14 +6,7 @@ endif;
 
 require_once 'resources/library/functions.php';
 $db = connect();
-$sql = "
-	SELECT AVG(score)
-	FROM
-		guest_score gs JOIN reservation r
-		ON gs.reservation_id = r.id
-	WHERE guest = '{$_SESSION['user']}'
-";
-$userScore = $db->query($sql)->fetch_row()[0];
+$userScore = userScore($_SESSION['user']);
 if ($userScore):
 	$userScore = round(($userScore * 2)) / 2;
 endif;
@@ -23,7 +16,7 @@ endif;
 	<div><img class="img-circle" src="https://placeholdit.imgix.net/~text?txtsize=24&txt=Foto de perfil&w=160&h=160" /></div>
 	<br />
 	<div>
-		<input id="user-score" value="<?php echo $userScore ?>">
+		<input class="user-score" value="<?php echo $userScore ?>">
 	</div>
 </div>
 <div class="col-md-4">

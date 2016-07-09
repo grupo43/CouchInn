@@ -106,7 +106,7 @@ $db = connect();
 		<script src="js/premium.js"></script>
 	<?php endif; ?>
 	<script>
-		$("#user-score").rating({
+		$(".user-score").rating({
 			size: 'xs',
 			displayOnly: true
 		});

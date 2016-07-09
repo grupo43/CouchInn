@@ -25,6 +25,18 @@ function isValidToken($email, $token) {
 	return md5($salt.$email) == $token;
 }
 
+function userScore($user) {
+	$db = connect();
+	$sql = "
+		SELECT AVG(score)
+		FROM
+			guest_score gs JOIN reservation r
+			ON gs.reservation_id = r.id
+		WHERE guest = '$user'
+	";
+	return $db->query($sql)->fetch_row()[0];
+}
+
 function getCouchesPaginator (
 	$page,
 	$sql = "SELECT * FROM couch WHERE enabled = 1 ORDER BY publication_date DESC")

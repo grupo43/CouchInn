@@ -24,6 +24,10 @@ $reservations = $db->query($sql);
 		</tr>
 	</thead>
 	<?php foreach ($reservations as $index => $reservation):
+	$userScore = userScore($reservation['guest']);
+	if ($userScore):
+		$userScore = round(($userScore * 2)) / 2;
+	endif;
 	$sql = "
 		SELECT picture1
 		FROM couch_picture
@@ -36,7 +40,7 @@ $reservations = $db->query($sql);
 		</td>
 		<td>
 			<?php echo $reservation['guest'] ?>
-			<input id="user-score" value="2">
+			<input class="user-score" value="<?php echo $userScore ?>">
 		</td>
 		<td><?php echo $reservation['num_guests'] ?></td>
 		<td><?php echo implode('/', array_reverse(explode('-', $reservation['from']))) ?><br />↓<br /><?php echo implode('/', array_reverse(explode('-', $reservation['till']))) ?></td>
