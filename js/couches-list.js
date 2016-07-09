@@ -49,7 +49,7 @@ $('#search-form').submit(function($e) {
 		tillVal = tillVal.split("/").reverse().join("-");
 		filter +=
 			" AND id NOT IN (" +
-				"SELECT couch_id " +
+				"SELECT host_id " +
 				"FROM (" +
 					"SELECT host_id, `from`, till " +
 					"FROM reservation " +
