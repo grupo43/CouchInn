@@ -71,6 +71,10 @@ h6 {
 	opacity: 1;
 }
 
+.valign-table > tbody > tr > td {
+	vertical-align: middle;
+}
+
 /* FIX LOCATION AUTOCOMPLETE INSIDE MODAL */
 .pac-container {
 	z-index: 1050;
