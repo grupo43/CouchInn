@@ -46,6 +46,7 @@ $reservations = $db->query($sql);
 		<td><?php echo implode('/', array_reverse(explode('-', $reservation['from']))) ?><br />↓<br /><?php echo implode('/', array_reverse(explode('-', $reservation['till']))) ?></td>
 		<td>
 			<?php
+			// TODO: Refactor this spaghetti code
 			$sql = "SELECT id FROM accepted_reservation WHERE reservation_id = {$reservation['id']}";
 			if ($db->query($sql)->num_rows):
 				echo "La reserva fue aceptada";
@@ -53,10 +54,29 @@ $reservations = $db->query($sql);
 				$sql = "SELECT id FROM denied_reservation WHERE reservation_id = {$reservation['id']}";
 				if ($db->query($sql)->num_rows):
 					echo "La reserva fue rechazada";
+					if ($_SESSION['user'] == getOwner($reservation['host_id'])):
+						$sql = "
+							SELECT *
+							FROM (
+								SELECT `from`, till
+								FROM
+									reservation r JOIN accepted_reservation ar
+									ON r.id = ar.reservation_id
+								WHERE `host_id` = '{$reservation['host_id']}'
+							) AS accepted
+							WHERE
+								('{$reservation['from']}' BETWEEN accepted.from AND accepted.till) OR
+								('{$reservation['till']}' BETWEEN accepted.from AND accepted.till) OR
+								('{$reservation['from']}' < accepted.from AND '{$reservation['till']}' > accepted.till)
+						";
+						if ($db->query($sql)->num_rows):
+							echo " automáticamente<br />(los días coinciden con otra reserva aceptada)";
+						endif;
+					endif;
 				elseif (date_create() > date_create($reservation['from'])):
 					echo "La reserva fue rechazada automáticamente<br />(la fecha de inicio de la misma ya pasó)";
 				else: ?>
-					<button class="btn btn-success">Aceptar</button>
+					<button class="btn btn-success accept-reservation" name="reservationID" value="<?php echo $reservation['id'] ?>">Aceptar</button>
 					<button class="btn btn-danger deny-reservation" name="reservationID" value="<?php echo $reservation['id'] ?>">Rechazar</button>
 				<?php endif;
 			endif;

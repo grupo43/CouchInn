@@ -183,4 +183,103 @@ function isCouchEnabled($couchID) {
 	return $db->query($sql)->fetch_assoc()['enabled'];
 }
 
-?>
+function emailReservationToHost($reservation, $host, $guest, $headers) {
+	$guestScore = userScore($reservation['guest'])?:'0 - nula';
+	$subject = "Couch Inn - Datos de reserva";
+	$body = '
+		<html>
+		
+		<head>
+			<meta charset="utf-8">
+		</head>
+		
+		<body>
+			<p>Hola <strong>'.$host['name'].'</strong>,
+				<br />te confirmamos que has aceptado la siguiente reserva.
+			</p>
+			<fieldset style="display: inline-block">
+				<legend><strong>Reserva</strong></legend>
+				<p>Couch: <a href="http://couchinn.com/couch?id='.$reservation['host_id'].'">Ver Couch</a></p>
+				<p>Huésped: <em>'.$reservation['guest'].'</em> (reputación: '.$guestScore.')</p>
+				<p>Cant. de huéspedes: '.$reservation['num_guests'].'</p>
+				<p>Fecha: '.$reservation['from'].' → '.$reservation['till'].'</p>
+			</fieldset>
+			<fieldset style="display: inline-block">
+				<legend><strong>Datos del huésped</strong></legend>
+				<p>Nombre: '.$guest['name'].'</p>
+				<p>Teléfono: '.$guest['phone_number'].'</p>
+				<p>Email: <a href="mailto:'.$guest['email'].'">'.$guest['email'].'</a></p>
+			</fieldset>
+			</p>
+			<p>Saludos,
+				<br />
+				<em>Couch Inn</em>.
+			</p>
+		</body>
+		
+		</html>
+	';
+	mail($host['email'], $subject, $body, $headers);
+}
+
+function emailReservationToGuest($reservation, $host, $guest, $headers) {
+	$subject = "Couch Inn - Reserva aceptada";
+	$body = '
+		<html>
+		
+		<head>
+			<meta charset="utf-8">
+		</head>
+		
+		<body>
+			<p>Hola <strong>'.$guest['name'].'</strong>,
+				<br />te informamos que la siguiente reserva fue aceptada.
+			</p>
+			<fieldset style="display: inline-block">
+				<legend><strong>Reserva</strong></legend>
+				<p>Couch: <a href="http://couchinn.com/couch?id='.$reservation['host_id'].'">Ver Couch</a></p>
+				<p>Cant. de huéspedes: '.$reservation['num_guests'].'</p>
+				<p>Fecha: '.$reservation['from'].' → '.$reservation['till'].'</p>
+			</fieldset>
+			<fieldset style="display: inline-block">
+				<legend><strong>Datos del anfitrión</strong></legend>
+				<p>Nombre: '.$host['name'].'</p>
+				<p>Teléfono: '.$host['phone_number'].'</p>
+				<p>Email: <a href="mailto:'.$host['email'].'">'.$host['email'].'</a></p>
+			</fieldset>
+			</p>
+			<p>Saludos,
+				<br />
+				<em>Couch Inn</em>.
+			</p>
+		</body>
+		
+		</html>
+	';
+	mail($guest['email'], $subject, $body, $headers);
+}
+
+function emailReservation($reservation) {
+	$db = connect();
+	$sql = "
+		SELECT username, email, name, birthdate, phone_number
+		FROM user
+		WHERE username = '{$reservation['guest']}'
+	";
+	$guest = $db->query($sql)->fetch_assoc();
+	$sql = "
+		SELECT username, email, name, birthdate, phone_number
+		FROM couch c
+			JOIN user u
+				ON c.owner = u.username
+		WHERE
+			c.id = {$reservation['host_id']}
+		
+	";
+	$host = $db->query($sql)->fetch_assoc();
+	$headers  = 'MIME-Version: 1.0' . "\r\n";
+	$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+	$headers .= 'From: "Couch Inn" <couchinn@couch.com>';
+	emailReservationToHost($reservation, $host, $guest, $headers);
+	emailReservationToGuest($reservation, $host, $guest, $headers);
+}
