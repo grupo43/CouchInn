@@ -101,6 +101,7 @@ $db = connect();
 	<script src="resources/library/star-rating.js"></script>
 	<script src="js/edit-user-data.js"></script>
 	<script src="js/add-couch.js"></script>
+	<script src="js/deny-reservation.js"></script>
 	<?php if (!$isPremium): ?>
 		<script src="resources/library/jquery.payment.js"></script>
 		<script src="js/premium.js"></script>

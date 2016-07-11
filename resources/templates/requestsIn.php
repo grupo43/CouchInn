@@ -1,6 +1,6 @@
 <?php
 $sql = "
-	SELECT *
+	SELECT r.id, host_id, guest, num_guests, `from`, till
 	FROM
 		reservation r JOIN couch c
 		ON r.host_id = c.id
@@ -57,7 +57,7 @@ $reservations = $db->query($sql);
 					echo "La reserva fue rechazada automáticamente<br />(la fecha de inicio de la misma ya pasó)";
 				else: ?>
 					<button class="btn btn-success">Aceptar</button>
-					<button class="btn btn-danger">Rechazar</button>
+					<button class="btn btn-danger deny-reservation" name="reservationID" value="<?php echo $reservation['id'] ?>">Rechazar</button>
 				<?php endif;
 			endif;
 			?>
