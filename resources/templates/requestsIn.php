@@ -14,13 +14,13 @@ $reservations = $db->query($sql);
 <br />
 <?php if ($reservations->num_rows): ?>
 <table class="table table-bordered text-center valign-table">
-	<thead class="h3">
+	<thead>
 		<tr>
-			<td>Couch</td>
-			<td>Usuario</td>
-			<td>Huéspedes</td>
-			<td>Fecha</td>
-			<td>Estado</td>
+			<th>Couch</th>
+			<th>Usuario</th>
+			<th>Huéspedes</th>
+			<th>Fecha</th>
+			<th>Estado</th>
 		</tr>
 	</thead>
 	<?php foreach ($reservations as $index => $reservation):
@@ -46,10 +46,26 @@ $reservations = $db->query($sql);
 		<td><?php echo implode('/', array_reverse(explode('-', $reservation['from']))) ?><br />↓<br /><?php echo implode('/', array_reverse(explode('-', $reservation['till']))) ?></td>
 		<td>
 			<?php
-			// TODO: Refactor this spaghetti code
+			// TODO: Clean this mess!
 			$sql = "SELECT id FROM accepted_reservation WHERE reservation_id = {$reservation['id']}";
-			if ($db->query($sql)->num_rows):
-				echo "La reserva fue aceptada";
+			$accepted = $db->query($sql);
+			if ($accepted->num_rows):
+				if (date_create() > date_create($reservation['till'])):
+					$sql = "
+						SELECT *
+						FROM guest_score
+						WHERE reservation_id = {$reservation['id']}
+					";
+					$result = $db->query($sql);
+					if ($result->num_rows):
+						echo "Le diste al usuario un puntaje de ".$result->fetch_assoc()['score'];
+					else: ?>
+						<button id="vote" name="<?php echo $reservation['id'] ?>" class="btn btn-success" data-toggle="modal" data-target="#give-score-modal">Puntuar usuario</button>
+					<?php
+					endif;
+				else:
+					echo "La reserva fue aceptada";
+				endif;
 			else:
 				$sql = "SELECT id FROM denied_reservation WHERE reservation_id = {$reservation['id']}";
 				if ($db->query($sql)->num_rows):

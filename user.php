@@ -108,9 +108,21 @@ $db = connect();
 		<script src="js/premium.js"></script>
 	<?php endif; ?>
 	<script>
-		$(".user-score").rating({
+		$('.user-score').rating({
 			size: 'xs',
 			displayOnly: true
+		});
+
+		$('.score').rating({
+			size: 'xs',
+			step: 1,
+			showClear: false,
+			showCaption: false,
+			hoverEnabled: false
+		});
+
+		$('#vote').click(function() {
+			$("#reservationID").val(this.name);
 		});
 	</script>
 </body>
