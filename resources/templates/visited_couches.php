@@ -1,6 +1,6 @@
 <?php
 $sql = "
-	SELECT c.id, c.title, c.description
+	SELECT DISTINCT c.id, c.title, c.description
 	FROM reservation r
 		JOIN couch c
 			ON c.id = r.couch_id
