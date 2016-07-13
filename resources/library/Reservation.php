@@ -46,11 +46,11 @@ class Reservation
 		$this->till			= new DateTime($row['till']);
 	}
 
-	public function isAccepted() {
+	public function wasAccepted() {
 		return $this->acceptedReservationDao->findBy('reservation_id', $this->id);
 	}
 
-	public function isDenied() {
+	public function wasDenied() {
 		return $this->deniedReservationDao->findBy('reservation_id', $this->id);
 	}
 
@@ -135,6 +135,21 @@ class Reservation
 			return $result->fetch_row()[0];
 		endif;
 		
+		return false;
+	}
+	
+	public function couchScore() {
+		$sql = "
+			SELECT score
+			FROM couch_score
+			WHERE reservation_id = $this->id
+		";
+		
+		$result = DataAccessObject::query($sql);
+		if ($result->num_rows):
+			return $result->fetch_row()[0];
+		endif;
+
 		return false;
 	}
 }

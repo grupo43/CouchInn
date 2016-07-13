@@ -36,16 +36,27 @@ $reservationsIds = $db->query($sql);
 		<td><?= $reservation->from->format('d/m/Y') ?><br />↓<br /><?= $reservation->till->format('d/m/Y') ?></td>
 		<td>
 			<?php
-			if ($reservation->isAccepted()):
-				echo "La reserva fue aceptada";
-			elseif ($reservation->isDenied()):
-				echo "La reserva fue rechazada";
-			elseif ($reservation->hasStarted()):
-				echo "La reserva fue rechazada automáticamente<br />(la fecha de inicio de la misma ya pasó)";
+			if ($reservation->wasAccepted()):
+				if ($reservation->hasEnded()):
+					if ($couchScore = $reservation->couchScore()):
+						echo "Le diste al couch un puntaje de " . $couchScore;
+					else: ?>
+						<button name="<?= $reservation->id ?>" class="vote btn btn-success" data-toggle="modal" data-target="#vote-couch-modal">Puntuar couch</button>
+						<?php
+					endif;
+				else:
+					echo "La reserva fue aceptada.<br />Podrá dejar un puntaje cuando esta finalice.";
+				endif;
 			else:
-				echo "La reserva aún no ha sido aceptada/rechazada";
-			endif;
-			?>
+				if (!$reservation->wasDenied() && $reservation->hasStarted()):
+					$reservation->deny();
+				endif;
+				if ($reservation->wasDenied()):
+					echo "La reserva fue rechazada";
+				else:
+					echo "La reserva aún no ha sido aceptada/rechazada";
+				endif;
+			endif; ?>
 		</td>
 	</tr>
 	<?php endwhile; ?>

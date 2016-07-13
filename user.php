@@ -122,8 +122,8 @@ $db = connect();
 			hoverEnabled: false
 		});
 
-		$('#vote').click(function() {
-			$("#reservationID").val(this.name);
+		$('.vote').click(function() {
+			$(".reservationID").val(this.name);
 		});
 	</script>
 </body>

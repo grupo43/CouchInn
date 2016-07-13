@@ -52,22 +52,22 @@ if ($reservationsIds->num_rows):
 		<td><?= $reservation->from->format('d/m/Y') ?><br />↓<br /><?= $reservation->till->format('d/m/Y') ?></td>
 		<td>
 			<?php
-			if ($reservation->isAccepted()):
+			if ($reservation->wasAccepted()):
 				if ($reservation->hasEnded()):
 					if ($guestScore = $reservation->guestScore()):
 						echo "Le diste al usuario un puntaje de " . $guestScore;
 					else: ?>
-						<button id="vote" name="<?= $reservation->id ?>" class="btn btn-success" data-toggle="modal" data-target="#give-score-modal">Puntuar usuario</button>
+						<button name="<?= $reservation->id ?>" class="vote btn btn-success" data-toggle="modal" data-target="#vote-guest-modal">Puntuar usuario</button>
 					<?php
 					endif;
 				else:
 					echo "La reserva fue aceptada.<br />Podrá dejar un puntaje cuando esta finalice.";
 				endif;
 			else:
-				if (!$reservation->isDenied() && $reservation->hasStarted()):
+				if (!$reservation->wasDenied() && $reservation->hasStarted()):
 					$reservation->deny();
-				endif;	
-				if ($reservation->isDenied()):
+				endif;
+				if ($reservation->wasDenied()):
 					echo "La reserva fue rechazada";
 				else: ?>
 					<button class="btn btn-success accept-reservation" name="reservationID" value="<?= $reservation->id ?>">Aceptar</button>

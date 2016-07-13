@@ -90,13 +90,13 @@ CREATE TABLE `guest_score` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
-DROP TABLE IF EXISTS `host_score`;
-CREATE TABLE `host_score` (
+DROP TABLE IF EXISTS couch_score;
+CREATE TABLE `couch_score` (
   `reservation_id` int(10) unsigned NOT NULL,
   `score` decimal(10,0) unsigned NOT NULL,
   `comment` varchar(255) COLLATE utf8_bin NOT NULL,
   KEY `reservation_id` (`reservation_id`),
-  CONSTRAINT `host_score_ibfk_1` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`)
+  CONSTRAINT `couch_score_ibfk_1` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 

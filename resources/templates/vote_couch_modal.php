@@ -1,10 +1,10 @@
-<div class="modal fade" id="vote-guest-modal" tabindex="-1" role="dialog">
+<div class="modal fade" id="vote-couch-modal" tabindex="-1" role="dialog">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
-			<form id="score-form" class="form-horizontal" role="form" action="/resources/library/vote_guest.php" method="post">
+			<form id="score-form" class="form-horizontal" role="form" action="/resources/library/vote_couch.php" method="post">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Puntuar huésped</h4>
+					<h4 class="modal-title">Puntuar couch</h4>
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
@@ -16,7 +16,7 @@
 					<div class="form-group">
 						<label for="input-comment" class="col-md-3 control-label">Comentario</label>
 						<div class="col-md-9">
-							<textarea name="input-comment" type="password" class="form-control" placeholder="Ingrese un comentario sobre su huésped .." required></textarea>
+							<textarea name="input-comment" type="password" class="form-control" placeholder="Ingrese un comentario sobre el couch .." required></textarea>
 						</div>
 					</div>
 					<input class="reservationID" name="reservationID" type="hidden" />

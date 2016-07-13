@@ -44,7 +44,7 @@ endif;
 $sql = "
 	SELECT AVG(score)
 	FROM
-		host_score hs JOIN reservation r
+		couch_score hs JOIN reservation r
 		ON hs.reservation_id = r.id
 	WHERE r.couch_id = $id
 ";
@@ -176,7 +176,7 @@ endif;
 	<script src="resources/library/script.js"></script>
 	<script src="resources/library/bootstrap-datepicker.js"></script>
 	<script src="resources/locales/bootstrap-datepicker.es.min.js"></script>
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBCql1Vi-1ioUhSLTzK5A9cOResP8JaCM&libraries=places"></script>
 	<script src="resources/library/moment-with-locales.js"></script>
 	<script src="resources/library/validator.js"></script>
 	<script src="resources/library/star-rating.js"></script>
