@@ -63,7 +63,7 @@ include 'resources/templates/includes.php';
 						</div>
 					</div>
 					<div class="col-md-3">
-						<input class="form-control" name="inputCapacity" type="number" min="1" placeholder="Capacidad mínima" />
+						<input class="form-control" name="inputCapacity" type="number" min="1" placeholder="Capacidad mínima" autocomplete="off" />
 					</div>
 				</div>
 				<div class="form-group">
