@@ -46,7 +46,7 @@ if ($reservationsIds->num_rows):
 		</td>
 		<td>
 			<?= $reservation->guest ?>
-			<input class="user-score" value="<?= $guestScore ?>">
+			<input class="display-only-score" value="<?= $guestScore ?>">
 		</td>
 		<td><?= $reservation->num_guests ?></td>
 		<td><?= $reservation->from->format('d/m/Y') ?><br />↓<br /><?= $reservation->till->format('d/m/Y') ?></td>
@@ -55,8 +55,9 @@ if ($reservationsIds->num_rows):
 			if ($reservation->wasAccepted()):
 				if ($reservation->hasEnded()):
 					if ($guestScore = $reservation->guestScore()):
-						echo "Le diste al usuario un puntaje de " . $guestScore;
-					else: ?>
+						echo "Puntuaste al usuario con"; ?>
+						<input class="display-only-score" value="<?= $guestScore ?>">
+					<?php else: ?>
 						<button name="<?= $reservation->id ?>" class="vote btn btn-success" data-toggle="modal" data-target="#vote-guest-modal">Puntuar usuario</button>
 					<?php
 					endif;

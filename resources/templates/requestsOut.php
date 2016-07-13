@@ -39,8 +39,9 @@ $reservationsIds = $db->query($sql);
 			if ($reservation->wasAccepted()):
 				if ($reservation->hasEnded()):
 					if ($couchScore = $reservation->couchScore()):
-						echo "Le diste al couch un puntaje de " . $couchScore;
-					else: ?>
+						echo "Puntuaste al couch con"; ?>
+						<input class="display-only-score" value="<?= $couchScore ?>">
+					<?php else: ?>
 						<button name="<?= $reservation->id ?>" class="vote btn btn-success" data-toggle="modal" data-target="#vote-couch-modal">Puntuar couch</button>
 						<?php
 					endif;

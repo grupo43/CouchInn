@@ -16,7 +16,7 @@ endif;
 	<div><img class="img-circle" src="https://placeholdit.imgix.net/~text?txtsize=24&txt=Foto de perfil&w=160&h=160" /></div>
 	<br />
 	<div>
-		<input class="user-score" value="<?php echo $userScore ?>">
+		<input class="display-only-score" value="<?php echo $userScore ?>">
 	</div>
 </div>
 <div class="col-md-4">
