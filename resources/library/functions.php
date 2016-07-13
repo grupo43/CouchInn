@@ -221,8 +221,7 @@ function emailReservationToHost($reservation, $host, $guest, $headers) {
 		
 		</html>
 	';
-	//mail($host['email'], $subject, $body, $headers);
-	mail('tanoabeleyra@gmail.com', $subject, $body, $headers);
+	mail($host['email'], $subject, $body, $headers);
 }
 
 function emailReservationToGuest($reservation, $host, $guest, $headers) {
@@ -261,8 +260,7 @@ function emailReservationToGuest($reservation, $host, $guest, $headers) {
 		
 		</html>
 	';
-	//mail($guest['email'], $subject, $body, $headers);
-	mail('tanoabeleyra@gmail.com', $subject, $body, $headers);
+	mail($guest['email'], $subject, $body, $headers);
 }
 
 function emailReservation($reservation) {
