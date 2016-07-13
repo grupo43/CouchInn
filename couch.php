@@ -46,7 +46,7 @@ $sql = "
 	FROM
 		host_score hs JOIN reservation r
 		ON hs.reservation_id = r.id
-	WHERE host_id = $id
+	WHERE r.couch_id = $id
 ";
 $couchScore = $db->query($sql)->fetch_row()[0];
 if ($couchScore):

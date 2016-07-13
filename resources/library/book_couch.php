@@ -6,49 +6,27 @@ endif;
 
 session_start();
 require_once 'resources/library/functions.php';
-$db = connect();
+require_once 'resources/library/Reservation.php';
 
-$from = implode('/', array_reverse(explode('/', $_POST['from'])));
-$till = implode('/', array_reverse(explode('/', $_POST['till'])));
+$from = implode('-', array_reverse(explode('/', $_POST['from'])));
+$till = implode('-', array_reverse(explode('/', $_POST['till'])));
+$data = array(
+	'couch_id'		=> $_POST['couchID'],
+	'guest'			=> $_SESSION['user'],
+	'num_guests'	=> $_POST['numOfGuests'],
+	'from'			=> $from,
+	'till'			=> $till
+);
+$reservation = new Reservation($data);
 
-$sql = "
-	SELECT *
-	FROM (
-		SELECT `from`, till
-		FROM
-			reservation r JOIN accepted_reservation ar
-			ON r.id = ar.reservation_id
-		WHERE `host_id` = '{$_POST['couchID']}'
-	) AS accepted
-	WHERE
-		('$from' BETWEEN accepted.from AND accepted.till) OR
-		('$till' BETWEEN accepted.from AND accepted.till) OR
-		('$from' < accepted.from AND '$till' > accepted.till)
-";
-
-if (!$db->query($sql)->num_rows):
-	$sql = "
-		INSERT INTO reservation
-			( `host_id`
-			, `guest`
-			, num_guests
-			, `from`
-			, till
-			)
-		VALUES
-			( {$_POST['couchID']}
-			, '{$_SESSION['user']}'
-			, {$_POST['numOfGuests']}
-			, DATE('{$from}')
-			, DATE('{$till}')
-			)
-	";
-	$db->query($sql);
+if (!$reservation->reservationsAcceptedInSameRange()):
 	$return = [
 		"success" => true,
 		"message" => "Se ha reservado el couch satisfactoriamente."
 	];
 else:
+	$reservationDao = new DataAccessObject('reservation');
+	$reservationDao->removeById($reservation->id);
 	$return = [
 		"success" => false,
 		"message" => "Lo sentimos, el couch no se encuentra disponible en esas fechas."
@@ -57,4 +35,3 @@ endif;
 
 header('Content-Type: application/json');
 echo json_encode($return);
-?>

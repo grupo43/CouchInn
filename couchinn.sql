@@ -129,16 +129,16 @@ CREATE TABLE `q&a` (
 DROP TABLE IF EXISTS `reservation`;
 CREATE TABLE `reservation` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `host_id` int(10) unsigned NOT NULL,
+  `couch_id` int(10) unsigned NOT NULL,
   `guest_id` varchar(255) COLLATE utf8_bin NOT NULL,
   `num_guests` tinyint(2) NOT NULL,
   `from` date NOT NULL,
   `till` date NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `couch_id` (`host_id`),
+  KEY `couch_id` (`couch_id`),
   KEY `user` (`guest_id`),
   CONSTRAINT `reservation_ibfk_3` FOREIGN KEY (`guest_id`) REFERENCES `user` (`email`) ON UPDATE CASCADE,
-  CONSTRAINT `reservation_ibfk_4` FOREIGN KEY (`host_id`) REFERENCES `couch` (`id`) ON UPDATE CASCADE
+  CONSTRAINT `reservation_ibfk_4` FOREIGN KEY (`couch_id`) REFERENCES `couch` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 

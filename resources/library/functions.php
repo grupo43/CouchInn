@@ -184,7 +184,9 @@ function isCouchEnabled($couchID) {
 }
 
 function emailReservationToHost($reservation, $host, $guest, $headers) {
-	$guestScore = userScore($reservation['guest'])?:'0 - nula';
+	$from = $reservation->from->format('Y-m-d');
+	$till = $reservation->till->format('Y-m-d');
+	$guestScore = userScore($reservation->guest)?:'0 - nula';
 	$subject = "Couch Inn - Datos de reserva";
 	$body = '
 		<html>
@@ -199,10 +201,10 @@ function emailReservationToHost($reservation, $host, $guest, $headers) {
 			</p>
 			<fieldset style="display: inline-block">
 				<legend><strong>Reserva</strong></legend>
-				<p>Couch: <a href="http://couchinn.com/couch?id='.$reservation['host_id'].'">Ver Couch</a></p>
-				<p>Huésped: <em>'.$reservation['guest'].'</em> (reputación: '.$guestScore.')</p>
-				<p>Cant. de huéspedes: '.$reservation['num_guests'].'</p>
-				<p>Fecha: '.$reservation['from'].' → '.$reservation['till'].'</p>
+				<p>Couch: <a href="http://couchinn.com/couch?id='.$reservation->couch_id.'">Ver Couch</a></p>
+				<p>Huésped: <em>'.$reservation->guest.'</em> (reputación: '.$guestScore.')</p>
+				<p>Cant. de huéspedes: '.$reservation->num_guests.'</p>
+				<p>Fecha: '.$from.' → '.$till.'</p>
 			</fieldset>
 			<fieldset style="display: inline-block">
 				<legend><strong>Datos del huésped</strong></legend>
@@ -219,10 +221,13 @@ function emailReservationToHost($reservation, $host, $guest, $headers) {
 		
 		</html>
 	';
-	mail($host['email'], $subject, $body, $headers);
+	//mail($host['email'], $subject, $body, $headers);
+	mail('tanoabeleyra@gmail.com', $subject, $body, $headers);
 }
 
 function emailReservationToGuest($reservation, $host, $guest, $headers) {
+	$from = $reservation->from->format('Y-m-d');
+	$till = $reservation->till->format('Y-m-d');
 	$subject = "Couch Inn - Reserva aceptada";
 	$body = '
 		<html>
@@ -237,9 +242,9 @@ function emailReservationToGuest($reservation, $host, $guest, $headers) {
 			</p>
 			<fieldset style="display: inline-block">
 				<legend><strong>Reserva</strong></legend>
-				<p>Couch: <a href="http://couchinn.com/couch?id='.$reservation['host_id'].'">Ver Couch</a></p>
-				<p>Cant. de huéspedes: '.$reservation['num_guests'].'</p>
-				<p>Fecha: '.$reservation['from'].' → '.$reservation['till'].'</p>
+				<p>Couch: <a href="http://couchinn.com/couch?id='.$reservation->couch_id.'">Ver Couch</a></p>
+				<p>Cant. de huéspedes: '.$reservation->num_guests.'</p>
+				<p>Fecha: '.$from.' → '.$till.'</p>
 			</fieldset>
 			<fieldset style="display: inline-block">
 				<legend><strong>Datos del anfitrión</strong></legend>
@@ -256,7 +261,8 @@ function emailReservationToGuest($reservation, $host, $guest, $headers) {
 		
 		</html>
 	';
-	mail($guest['email'], $subject, $body, $headers);
+	//mail($guest['email'], $subject, $body, $headers);
+	mail('tanoabeleyra@gmail.com', $subject, $body, $headers);
 }
 
 function emailReservation($reservation) {
@@ -264,7 +270,7 @@ function emailReservation($reservation) {
 	$sql = "
 		SELECT username, email, name, birthdate, phone_number
 		FROM user
-		WHERE username = '{$reservation['guest']}'
+		WHERE username = '{$reservation->guest}'
 	";
 	$guest = $db->query($sql)->fetch_assoc();
 	$sql = "
@@ -273,7 +279,7 @@ function emailReservation($reservation) {
 			JOIN user u
 				ON c.owner = u.username
 		WHERE
-			c.id = {$reservation['host_id']}
+			c.id = $reservation->couch_id
 		
 	";
 	$host = $db->query($sql)->fetch_assoc();

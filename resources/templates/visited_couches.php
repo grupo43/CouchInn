@@ -3,7 +3,7 @@ $sql = "
 	SELECT c.id, c.title, c.description
 	FROM reservation r
 		JOIN couch c
-			ON c.id = r.host_id
+			ON c.id = r.couch_id
 		JOIN accepted_reservation ar
 			ON r.id = ar.reservation_id
 	WHERE r.guest = '{$_SESSION['user']}' AND NOW() > r.till

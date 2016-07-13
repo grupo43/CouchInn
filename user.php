@@ -7,6 +7,7 @@ if (!isset($_SESSION['user'])):
 endif;
 
 require_once 'resources/library/functions.php';
+require_once 'resources/library/Reservation.php';
 include 'resources/templates/includes.php';
 $db = connect();
 ?>
