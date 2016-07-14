@@ -87,6 +87,7 @@ $db = connect();
 	<script>
 		$('#datepicker').datepicker({
 			maxViewMode: 2,
+			endDate: 'today',
 			language: "es"
 		});
 	</script>
