@@ -33,25 +33,20 @@
 			</thead>
 			<tbody>
 			<?php
-				$totalAmount = 0;
-				foreach ($sales as $sale):
-					$date = substr($sale['date'], 0, 10);
-					$date = implode('/', array_reverse(explode('-', $date)));
-					$time = substr($sale['date'], 10);
-					$amount = $sale['amount'];
-					if (substr($amount, -2) == "00"):
-						$amount = substr($amount, 0, -3);
-					endif;
-					$totalAmount += $sale['amount']; ?>
+			foreach ($sales as $sale):
+				$date = substr($sale['date'], 0, 10);
+				$date = implode('/', array_reverse(explode('-', $date)));
+				$time = substr($sale['date'], 10);
+			?>
 				<tr>
 					<td><?php echo $sale['user'] ?></td>
-					<td><?php echo '$'.$amount ?></td>
+					<td><?php echo '$'.round($sale['amount'], 2) ?></td>
 					<td><?php echo $date.$time ?></td>
 				</tr>
 				<?php endforeach; ?>
 				<tr>
 					<td><strong>Monto total recaudado:</strong></td>
-					<td><strong><?php echo '$'.$totalAmount ?></strong></td>
+					<td><strong><?php echo '$'.round(getTotalEarn(), 2); ?></strong></td>
 					<td></td>
 				</tr>
 			</tbody>

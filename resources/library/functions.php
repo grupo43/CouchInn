@@ -138,10 +138,7 @@ function getQuestions($couchID) {
 
 function getPremiumSales($from = "", $to = "") {
 	$db = connect();
-	$sql = "
-		SELECT *
-		FROM payment
-	";
+	$sql = "SELECT * FROM payment";
 	if ($from && $to):
 		$sql .= "WHERE `date` BETWEEN '$from' AND '$to'";
 	endif;
@@ -151,6 +148,12 @@ function getPremiumSales($from = "", $to = "") {
 		$sales[] = $sale;
 	endwhile;
 	return $sales;
+}
+
+function getTotalEarn() {
+	$db = connect();
+	$sql = "SELECT SUM(amount) FROM payment";
+	return $db->query($sql)->fetch_row()[0];
 }
 
 function getOwner($couchID) {
