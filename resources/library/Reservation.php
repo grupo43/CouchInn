@@ -61,7 +61,13 @@ class Reservation
 
 	public function hasEnded() {
 		$today = new DateTime();
-		return ($today > $this->till->modify('+1 day'));
+		return ($today >= $this->till->modify('+1 day'));
+	}
+
+	public function stillPending() {
+		$today = new DateTime();
+		$today = new DateTime($today->format('Y-m-d'));
+		return ($today <= $this->from);
 	}
 
 	public function isOnGoing() {

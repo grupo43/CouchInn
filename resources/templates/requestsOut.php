@@ -49,7 +49,7 @@ $reservationsIds = $db->query($sql);
 					echo "La reserva fue aceptada.<br />Podrá dejar un puntaje cuando esta finalice.";
 				endif;
 			else:
-				if (!$reservation->wasDenied() && $reservation->hasStarted()):
+				if (!$reservation->wasDenied() && !$reservation->stillPending()):
 					$reservation->deny();
 				endif;
 				if ($reservation->wasDenied()):
