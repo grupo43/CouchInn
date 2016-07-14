@@ -28,3 +28,8 @@ $bookForm.submit(function($e) {
 $('.modal').on('shown.bs.modal', function() {
 	$('#book-couch-form').validator('destroy').validator();
 });
+
+/* HIDE FEEDBACK WHEN MODAL IS CLOSED */
+$('.modal').on('hidden.bs.modal', function() {
+	$bookFormFeedback.hide();
+});
