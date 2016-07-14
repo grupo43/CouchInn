@@ -1,5 +1,5 @@
 $('#datepicker').datepicker({
-	startDate: "today",
+	startDate: "tomorrow",
 	maxViewMode: 2,
 	clearBtn: true,
 	language: "es"

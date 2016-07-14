@@ -1,7 +1,9 @@
 $('#datepicker').datepicker({
-	startDate: "today",
+	startDate: "tomorrow",
 	maxViewMode: 2,
 	language: "es"
+	// TODO: Disable not available dates
+	// datesDisabled: ['06/07/2016', '21/07/2016']
 });
 var $bookForm = $('#book-couch-form');
 var $bookFormFeedback = $bookForm.find('.feedback');
@@ -26,5 +28,5 @@ $bookForm.submit(function($e) {
 
 /* VALIDATOR MODAL WORKAROUND */
 $('.modal').on('shown.bs.modal', function() {
-	$('#book-couch-form').validator('destroy').validator();
+	$bookForm.validator('destroy').validator();
 });
