@@ -20,9 +20,18 @@ if (!$db->query($sql)->num_rows):
 		$result = ["success" => false, "message" => 'Email o contraseña incorrecta. Verifique los datos ingresados y vuelva a intentarlo.'];
 	endif;
 else:
-	$sql = "SELECT username
-			FROM $accessLevel
-			WHERE email = '$email' AND password = PASSWORD('$password')";
+	if ($accessLevel == 'admin'):
+		$sql = "
+			SELECT email
+			FROM admin
+		";
+	else:
+		$sql = "
+			SELECT username
+			FROM user
+		";
+	endif;
+	$sql .=	" WHERE email = '$email' AND password = PASSWORD('$password')";
 	$result = $db->query($sql);
 	if ($result->num_rows):
 		session_start();
