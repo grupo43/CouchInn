@@ -140,7 +140,7 @@ function getPremiumSales($from = "", $to = "") {
 	$db = connect();
 	$sql = "SELECT * FROM payment";
 	if ($from && $to):
-		$sql .= "WHERE `date` BETWEEN '$from' AND '$to'";
+		$sql .= " WHERE `date` BETWEEN '$from' AND '$to'";
 	endif;
 	$result = $db->query($sql);
 	$sales = array();
