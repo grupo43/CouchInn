@@ -1,9 +1,12 @@
-$('#datepicker').datepicker({
-	startDate: "today",
-	maxViewMode: 2,
-	clearBtn: true,
-	language: "es"
-});
+var updateDatePicker = function () {
+	$('#datepicker').datepicker('remove').datepicker({
+		startDate: "today",
+		maxViewMode: 2,
+		clearBtn: true,
+		language: "es"
+	});
+};
+updateDatePicker();
 
 var $couchesList = $('#couches-list');
 var $arrows = $('#arrows');
@@ -91,4 +94,5 @@ $('#reset-couches-list').click(function() {
 	$('#search-form').trigger('reset');
 	sql = "SELECT * FROM couch WHERE enabled = 1 ORDER BY publication_date DESC";
 	updateCouchList(sql);
+	updateDatePicker();
 });
