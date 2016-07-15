@@ -70,6 +70,7 @@ endif;
 	<link href="css/sticky-footer-navbar.css" rel="stylesheet">
 	<link href="css/star-rating.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
+	<link href="css/book-couch.css" rel="stylesheet">
 </head>
 <body>
 	<!-- HEADER -->

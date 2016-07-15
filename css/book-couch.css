@@ -1,0 +1,11 @@
+.day {
+	color: #0C0 !important;
+}
+
+.disabled, .new.day, .old.day {
+	color: gray !important;
+}
+
+.disabled-date {
+	color: #A20 !important;
+}

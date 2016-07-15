@@ -38,7 +38,7 @@
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 					<input type="submit" class="btn btn-primary" value="Aceptar" />
 				</div>
-				<input name="couchID" value="<?php echo $couch['id'] ?>" type="hidden" />
+				<input id="couchID" name="couchID" value="<?php echo $couch['id'] ?>" type="hidden" />
 			</form>
 		</div>
 	</div>

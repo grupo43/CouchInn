@@ -1,8 +1,16 @@
-$('#datepicker').datepicker({
-	startDate: "today",
-	maxViewMode: 2,
-	language: "es"
-});
+var updateDatePicker = function () {
+	$.get('resources/library/couch_not_available_date.php', {couchID: $('#couchID').val()}, function(dates) {
+		$('#datepicker').datepicker('remove').datepicker({
+			startDate: "today",
+			maxViewMode: 2,
+			language: "es",
+			datesDisabled: dates
+		});
+	});
+};
+
+updateDatePicker();
+
 var $bookForm = $('#book-couch-form');
 var $bookFormFeedback = $bookForm.find('.feedback');
 
@@ -29,7 +37,8 @@ $('.modal').on('shown.bs.modal', function() {
 	$('#book-couch-form').validator('destroy').validator();
 });
 
-/* HIDE FEEDBACK WHEN MODAL IS CLOSED */
+/* HIDE FEEDBACK AND CLEAR DATEPICKER WHEN MODAL IS CLOSED */
 $('.modal').on('hidden.bs.modal', function() {
 	$bookFormFeedback.hide();
+	updateDatePicker();
 });
