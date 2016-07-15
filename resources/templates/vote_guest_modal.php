@@ -4,7 +4,7 @@
 			<form id="score-form" class="form-horizontal" role="form" action="/resources/library/vote_guest.php" method="post">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Puntuar huésped</h4>
+					<h4 class="modal-title">Puntuar usuario</h4>
 				</div>
 				<div class="modal-body">
 					<div class="form-group">

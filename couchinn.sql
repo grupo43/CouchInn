@@ -16,7 +16,7 @@ CREATE TABLE `accepted_reservation` (
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `reservation_id` (`reservation_id`),
-  CONSTRAINT `accepted_reservation_ibfk_1` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`) ON DELETE CASCADE
+  CONSTRAINT `accepted_reservation_ibfk_5` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
@@ -44,7 +44,7 @@ CREATE TABLE `couch` (
   KEY `type` (`type`),
   KEY `city` (`city`),
   CONSTRAINT `couch_ibfk_2` FOREIGN KEY (`type`) REFERENCES `couch_type` (`name`) ON UPDATE CASCADE,
-  CONSTRAINT `couch_ibfk_4` FOREIGN KEY (`owner`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `couch_ibfk_4` FOREIGN KEY (`owner`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
@@ -57,7 +57,17 @@ CREATE TABLE `couch_picture` (
   `picture4` mediumblob,
   `picture5` mediumblob,
   PRIMARY KEY (`couch_id`),
-  CONSTRAINT `couch_picture_ibfk_3` FOREIGN KEY (`couch_id`) REFERENCES `couch` (`id`) ON DELETE CASCADE
+  CONSTRAINT `couch_picture_ibfk_1` FOREIGN KEY (`couch_id`) REFERENCES `couch` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+
+DROP TABLE IF EXISTS `couch_score`;
+CREATE TABLE `couch_score` (
+  `reservation_id` int(10) unsigned NOT NULL,
+  `score` decimal(10,0) unsigned NOT NULL,
+  `comment` varchar(255) COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`reservation_id`),
+  CONSTRAINT `couch_score_ibfk_2` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
@@ -76,7 +86,7 @@ CREATE TABLE `denied_reservation` (
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `reservation_id` (`reservation_id`),
-  CONSTRAINT `denied_reservation_ibfk_1` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`)
+  CONSTRAINT `denied_reservation_ibfk_2` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
@@ -85,28 +95,8 @@ CREATE TABLE `guest_score` (
   `reservation_id` int(10) unsigned NOT NULL,
   `score` decimal(10,0) unsigned NOT NULL,
   `comment` varchar(255) COLLATE utf8_bin NOT NULL,
-  KEY `reservation_id` (`reservation_id`),
-  CONSTRAINT `guest_score_ibfk_1` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
-
-DROP TABLE IF EXISTS couch_score;
-CREATE TABLE `couch_score` (
-  `reservation_id` int(10) unsigned NOT NULL,
-  `score` decimal(10,0) unsigned NOT NULL,
-  `comment` varchar(255) COLLATE utf8_bin NOT NULL,
-  KEY `reservation_id` (`reservation_id`),
-  CONSTRAINT `couch_score_ibfk_1` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
-
-DROP TABLE IF EXISTS `payment`;
-CREATE TABLE `payment` (
-  `user` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `amount` decimal(10,2) unsigned NOT NULL DEFAULT '150.00',
-  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE KEY `user` (`user`),
-  CONSTRAINT `payment_ibfk_2` FOREIGN KEY (`user`) REFERENCES `user` (`email`) ON DELETE SET NULL ON UPDATE CASCADE
+  PRIMARY KEY (`reservation_id`),
+  CONSTRAINT `guest_score_ibfk_2` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
@@ -121,8 +111,8 @@ CREATE TABLE `q&a` (
   PRIMARY KEY (`id`),
   KEY `user` (`user`),
   KEY `couch_id` (`couch_id`),
-  CONSTRAINT `q&a_ibfk_3` FOREIGN KEY (`user`) REFERENCES `user` (`email`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `q&a_ibfk_5` FOREIGN KEY (`couch_id`) REFERENCES `couch` (`id`) ON DELETE CASCADE
+  CONSTRAINT `q&a_ibfk_1` FOREIGN KEY (`user`) REFERENCES `user` (`username`) ON UPDATE CASCADE,
+  CONSTRAINT `q&a_ibfk_2` FOREIGN KEY (`couch_id`) REFERENCES `couch` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
@@ -130,27 +120,39 @@ DROP TABLE IF EXISTS `reservation`;
 CREATE TABLE `reservation` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `couch_id` int(10) unsigned NOT NULL,
-  `guest_id` varchar(255) COLLATE utf8_bin NOT NULL,
+  `guest` varchar(255) COLLATE utf8_bin NOT NULL,
   `num_guests` tinyint(2) NOT NULL,
   `from` date NOT NULL,
   `till` date NOT NULL,
   PRIMARY KEY (`id`),
   KEY `couch_id` (`couch_id`),
-  KEY `user` (`guest_id`),
-  CONSTRAINT `reservation_ibfk_3` FOREIGN KEY (`guest_id`) REFERENCES `user` (`email`) ON UPDATE CASCADE,
-  CONSTRAINT `reservation_ibfk_4` FOREIGN KEY (`couch_id`) REFERENCES `couch` (`id`) ON UPDATE CASCADE
+  KEY `user` (`guest`),
+  CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`guest`) REFERENCES `user` (`username`) ON UPDATE CASCADE,
+  CONSTRAINT `reservation_ibfk_3` FOREIGN KEY (`couch_id`) REFERENCES `couch` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+
+DROP TABLE IF EXISTS `sale`;
+CREATE TABLE `sale` (
+  `user` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `amount` decimal(10,2) unsigned NOT NULL DEFAULT '150.00',
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY `user` (`user`),
+  CONSTRAINT `sale_ibfk_1` FOREIGN KEY (`user`) REFERENCES `user` (`username`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
+  `username` varchar(255) COLLATE utf8_bin NOT NULL,
   `email` varchar(255) COLLATE utf8_bin NOT NULL,
   `password` varchar(255) COLLATE utf8_bin NOT NULL,
   `name` varchar(70) COLLATE utf8_bin NOT NULL,
   `birthdate` date NOT NULL,
   `phone_number` varchar(20) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`email`)
+  PRIMARY KEY (`username`),
+  KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 
--- 2016-07-08 18:03:39
+-- 2016-07-15 13:00:15

@@ -1,6 +1,6 @@
 <?php
 	$numRegisteredUsers = $db->query("SELECT username FROM user")->num_rows;
-	$payments = $db->query("SELECT user, SUM(amount) total FROM payment");
+	$payments = $db->query("SELECT user, SUM(amount) total FROM sale");
 	$numPayments = $payments->num_rows;
 	$totalEarns = $payments->fetch_assoc()['total'];
 ?>

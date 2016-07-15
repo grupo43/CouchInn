@@ -9,7 +9,7 @@ function connect($host = 'localhost', $user = 'root', $pass = '', $db_name = 'co
 function isPremium($user) {
 	$db = connect();
 	$sql = "
-		SELECT * FROM payment
+		SELECT * FROM sale
 		WHERE user = '$user'
 	";
 	return $db->query($sql)->num_rows;
@@ -138,7 +138,7 @@ function getQuestions($couchID) {
 
 function getPremiumSales($from = "", $to = "") {
 	$db = connect();
-	$sql = "SELECT * FROM payment";
+	$sql = "SELECT * FROM sale";
 	if ($from && $to):
 		$sql .= " WHERE `date` BETWEEN '$from' AND '$to'";
 	endif;
@@ -152,7 +152,7 @@ function getPremiumSales($from = "", $to = "") {
 
 function getTotalEarn() {
 	$db = connect();
-	$sql = "SELECT SUM(amount) FROM payment";
+	$sql = "SELECT SUM(amount) FROM sale";
 	return $db->query($sql)->fetch_row()[0];
 }
 
