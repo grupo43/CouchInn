@@ -151,7 +151,7 @@ endif;
 							<li>
 								<form class="answer-question" action="/resources/library/answer_question.php" method="POST">
 									<div class="col-md-10">
-										<input type="text" name="answer" class="form-control" placeholder="Escriba su respuesta.." />
+										<input type="text" name="answer" class="form-control" placeholder="Escriba su respuesta.." required />
 									</div>
 									<input name="questionID" value="<?php echo $question['id'] ?>" type="hidden">
 									<input name="couchID" value="<?php echo $couch['id'] ?>" type="hidden" />
