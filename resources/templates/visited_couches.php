@@ -6,7 +6,7 @@ $sql = "
 			ON c.id = r.couch_id
 		JOIN accepted_reservation ar
 			ON r.id = ar.reservation_id
-	WHERE r.guest = '{$_SESSION['user']}' AND NOW() > r.till
+	WHERE r.guest = '{$_SESSION['user']}' AND CURDATE() > r.till
 ";
 $couches = $db->query($sql);
 ?>
