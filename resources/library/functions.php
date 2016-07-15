@@ -142,6 +142,7 @@ function getPremiumSales($from = "", $to = "") {
 	if ($from && $to):
 		$sql .= " WHERE `date` BETWEEN '$from' AND '$to'";
 	endif;
+	$sql .= " ORDER BY `date` DESC";
 	$result = $db->query($sql);
 	$sales = array();
 	while ($sale = $result->fetch_assoc()):
