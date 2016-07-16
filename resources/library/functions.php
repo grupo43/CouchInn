@@ -188,8 +188,8 @@ function isCouchEnabled($couchID) {
 }
 
 function emailReservationToHost($reservation, $host, $guest, $headers) {
-	$from = $reservation->from->format('Y-m-d');
-	$till = $reservation->till->format('Y-m-d');
+	$from = $reservation->from->format('d-m-Y');
+	$till = $reservation->till->format('d-m-Y');
 	$guestScore = userScore($reservation->guest);
 	if ($guestScore):
 		$guestScore = round($guestScore, 2);
@@ -234,8 +234,8 @@ function emailReservationToHost($reservation, $host, $guest, $headers) {
 }
 
 function emailReservationToGuest($reservation, $host, $guest, $headers) {
-	$from = $reservation->from->format('Y-m-d');
-	$till = $reservation->till->format('Y-m-d');
+	$from = $reservation->from->format('d-m-Y');
+	$till = $reservation->till->format('d-m-Y');
 	$subject = "Couch Inn - Reserva aceptada";
 	$body = '
 		<html>
