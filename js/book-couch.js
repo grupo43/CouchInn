@@ -1,7 +1,9 @@
 var updateDatePicker = function () {
 	$.get('resources/library/couch_not_available_date.php', {couchID: $('#couchID').val()}, function(dates) {
+		var now = new Date();
+		var today = now.toLocaleDateString();
 		$('#datepicker').datepicker('remove').datepicker({
-			startDate: "today",
+			startDate: today,
 			maxViewMode: 2,
 			language: "es",
 			datesDisabled: dates

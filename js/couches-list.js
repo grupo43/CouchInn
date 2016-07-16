@@ -1,6 +1,8 @@
 var updateDatePicker = function () {
+	var now = new Date();
+	var today = now.toLocaleDateString();
 	$('#datepicker').datepicker('remove').datepicker({
-		startDate: "today",
+		startDate: today,
 		maxViewMode: 2,
 		clearBtn: true,
 		language: "es"
